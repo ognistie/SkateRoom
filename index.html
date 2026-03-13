@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkateSound — RAP 90s × Skate</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛹</text></svg>">
+</head>
+<body>
+<div class="vhs-line"></div>
+<div class="loader" id="loader"><div class="loader-text">SKATESOUND</div><div class="loader-bar"><div class="loader-bar-fill" id="loaderFill"></div></div><p class="loader-sub">Loading the beat...</p></div>
+<nav class="nav-bar"><a class="nav-logo" onclick="showPage('home')">SKATESOUND</a><ul class="nav-links" id="navLinks"><li><a class="active" data-page="home" onclick="showPage('home')">Home</a></li><li><a data-page="listen" onclick="showPage('listen')">Ouvir</a></li><li><a data-page="about" onclick="showPage('about')">Sobre</a></li><li><a data-page="news" onclick="showPage('news')">News</a></li></ul><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+<section class="hero"><div class="hero-bg"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
+<div class="sticker sticker--r" style="top:110px;left:4%;transform:rotate(-4deg)">🛹 SKATE OR DIE</div>
+<div class="sticker sticker--g" style="top:180px;right:5%;transform:rotate(3deg)">🎤 RAP 90s VIBES</div>
+<div class="sticker sticker--p" style="bottom:160px;left:8%;transform:rotate(-6deg)">🔊 LISTEN TOGETHER</div>
+<div class="hero-content"><h1 class="hero-title">SKATE<br>SOUND</h1><p class="hero-sub">// Rap 90s × Skate Culture //</p><p class="hero-desc">Escolha seu personagem, entre no bar virtual e escute a mesma música com seus amigos. Beats, shapes e a vibe da rua.</p><a class="btn-cta" onclick="showPage('listen')"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg> ENTRAR NO BAR</a></div></section>
+
+<section class="profile-showcase"><div style="position:relative">
+<div class="stat-badge" style="top:15px;left:-55px"><div class="num">5</div><div class="label">Players</div></div>
+<div class="stat-badge" style="top:15px;right:-55px"><div class="num">∞</div><div class="label">Salas</div></div>
+<div class="profile-card"><div class="profile-banner"><div class="profile-banner-inner"><div class="brand">🛹 skatesound</div><h2>Ouça Junto<br><span>No mesmo Beat</span></h2></div></div>
+<div class="profile-avatar-row"><div class="profile-avatar"><svg viewBox="0 0 80 80"><rect width="80" height="80" rx="40" fill="#1a1410"/><rect x="28" y="25" width="8" height="8" fill="#CC2936"/><rect x="44" y="25" width="8" height="8" fill="#CC2936"/><rect x="30" y="45" width="20" height="4" fill="#E8A317"/></svg></div></div>
+<div class="profile-body"><div class="profile-name">SkateSound</div><div class="profile-handle">@skatesound · Rap × Skate × Beats</div><div class="profile-bio">Personagens pixel art. Bar virtual. Spotify sync. Chat em tempo real.</div><div class="profile-tags"><span class="tag">Spotify</span><span class="tag">WebSocket</span><span class="tag">Pixel Art</span><span class="tag">90s Rap</span><span class="tag">Node.js</span><span class="tag">AWS</span></div></div></div></div></section>
+
+<section class="features"><h2 class="section-title">🔥 Como Funciona</h2><div class="features-grid">
+<div class="feature-card"><div class="icon">🎭</div><h3>Escolha seu Player</h3><p>Personagens pixel art estilo Habbo com a vibe do rap 90s.</p></div>
+<div class="feature-card"><div class="icon">🚪</div><h3>Crie ou Entre na Sala</h3><p>Gere um código ou cole o código do amigo pra entrar junto.</p></div>
+<div class="feature-card"><div class="icon">🎶</div><h3>Ouça no Mesmo Beat</h3><p>Spotify sincronizado. Todo mundo ouve a mesma faixa.</p></div>
+<div class="feature-card"><div class="icon">💬</div><h3>Chat no Bar</h3><p>Converse em tempo real enquanto curtem o som.</p></div>
+</div></section>
+
+<section class="char-section"><h2 class="section-title">🎭 Escolha seu Player</h2><p style="font-size:1.2rem;color:#555;margin-bottom:2rem">Pixel art characters — selecione antes de entrar</p><div class="char-grid" id="charGrid"></div></section>
+
+<section class="join-section"><div class="join-box"><h3>🚪 Entrar na Sala</h3><p>Cole o código do amigo ou crie uma nova sala</p><div class="join-input-row"><input type="text" class="join-input" id="joinCodeInput" placeholder="CÓDIGO DA SALA" maxlength="20"><button class="btn-cta" onclick="joinRoom()" style="font-size:.5rem;padding:.8rem 1.2rem">ENTRAR</button></div><div class="join-or">— ou —</div><button class="btn-cta btn-cta--gold" onclick="createRoom()" style="width:100%;justify-content:center">CRIAR NOVA SALA</button></div></section>
+
+<footer class="footer"><div class="footer-logo">SKATESOUND</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Ouvir</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">© 2026 SkateSound — Rap 90s × Skate Culture</p></footer>
+</div>
+
+<!-- LISTEN -->
+<div class="page" id="page-listen"><div class="listen-room"><div class="listen-bg"></div>
+<div class="bar-scene"><div class="bar-header"><div class="bar-neon">SKATESOUND BAR</div><div class="bar-room-code" id="barRoomCode">GRIND-7742</div></div>
+<div class="bar-main">
+<div class="bar-stage">
+<div class="boombox-wrap"><svg width="220" height="85" viewBox="0 0 250 100" style="display:block;margin:0 auto"><rect x="5" y="15" width="240" height="70" rx="12" fill="#1a1410" stroke="#CC2936" stroke-width="1.5"/><circle cx="55" cy="50" r="25" fill="#110e0a" stroke="#3a3530" stroke-width="1.5"/><circle cx="55" cy="50" r="12" fill="#1a1410" stroke="#CC2936" stroke-width=".5" opacity=".5"/><circle cx="195" cy="50" r="25" fill="#110e0a" stroke="#3a3530" stroke-width="1.5"/><circle cx="195" cy="50" r="12" fill="#1a1410" stroke="#CC2936" stroke-width=".5" opacity=".5"/><rect x="90" y="25" width="70" height="30" rx="3" fill="#1a0a08" stroke="#CC2936" stroke-width=".5"/><g id="boomboxViz" transform="translate(95,50)"><rect x="0" y="-15" width="4" height="15" fill="#CC2936" opacity=".8" class="bb-bar"/><rect x="6" y="-20" width="4" height="20" fill="#CC2936" opacity=".8" class="bb-bar"/><rect x="12" y="-10" width="4" height="10" fill="#CC2936" opacity=".8" class="bb-bar"/><rect x="18" y="-25" width="4" height="25" fill="#E8A317" opacity=".8" class="bb-bar"/><rect x="24" y="-12" width="4" height="12" fill="#CC2936" opacity=".8" class="bb-bar"/><rect x="30" y="-18" width="4" height="18" fill="#CC2936" opacity=".8" class="bb-bar"/><rect x="36" y="-22" width="4" height="22" fill="#E8A317" opacity=".8" class="bb-bar"/><rect x="42" y="-8" width="4" height="8" fill="#CC2936" opacity=".8" class="bb-bar"/><rect x="48" y="-16" width="4" height="16" fill="#CC2936" opacity=".8" class="bb-bar"/><rect x="54" y="-20" width="4" height="20" fill="#E8A317" opacity=".8" class="bb-bar"/></g><line x1="125" y1="15" x2="115" y2="0" stroke="#CC2936" stroke-width="1.5"/><circle cx="115" cy="0" r="2.5" fill="#E8A317"/><path d="M80 15 Q125 -5 170 15" fill="none" stroke="#3a3530" stroke-width="2"/></svg></div>
+<div class="track-info"><div class="track-name-display" id="trackNameDisplay">Esperando o beat...</div><div class="artist-display" id="artistDisplay"></div></div>
+<div class="ipod"><div class="ipod-screen"><span class="np-label">♪ NOW PLAYING ♪</span><span class="track" id="ipodTrack">---</span><span class="artist" id="ipodArtist">Conecte o Spotify</span><div class="viz" id="ipodViz"><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div><div class="viz-bar"></div></div></div>
+<div class="wheel"><button class="whl-btn whl-btn--t" onclick="menuAction()">MENU</button><button class="whl-btn whl-btn--l" onclick="prevTrack()">◄◄</button><button class="whl-btn whl-btn--r" onclick="nextTrack()">►►</button><button class="whl-btn whl-btn--b" onclick="playTrack()">▶‖</button><div class="wheel-center" onclick="playTrack()"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="#CC2936"/></svg></div></div></div>
+<div class="dance-area"><div class="dancer" id="dancerChar"></div></div>
+<button class="spotify-btn" id="spotifyBtn" onclick="connectSpotify()">🎵 Conectar Spotify</button>
+</div>
+<div class="bar-chat"><div class="chat-header">💬 Chat do Bar</div><div class="chat-messages" id="chatMessages"><div class="chat-msg system"><div class="msg-user">SISTEMA</div><div class="msg-text">Bem-vindo ao SkateSound Bar! 🛹</div></div><div class="chat-msg system"><div class="msg-user">SISTEMA</div><div class="msg-text">Conecte o Spotify e aperte PLAY.</div></div></div><div class="chat-input-row"><input type="text" class="chat-input" id="chatInput" placeholder="Digite aqui..." onkeydown="handleChatKey(event)"><button class="chat-send" onclick="sendChat()">→</button></div></div>
+</div></div>
+<div class="room-info"><div class="room-code">SALA: <span id="roomCode">GRIND-7742</span></div><p style="font-size:.85rem;color:#444">Compartilhe o código com seus amigos</p></div>
+</div></div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about"><div class="about-page">
+<div class="about-hero"><div class="about-text"><h2>🛹 Sobre o SkateSound</h2><p>Plataforma de escuta compartilhada inspirada no rap 90s e cultura skate. Escolha um personagem pixel art, entre no bar e escute junto.</p><p>Inspirado por Wu-Tang, Tupac, Thrasher Magazine e os bares underground de NY nos anos 90.</p></div>
+<div style="text-align:center"><svg width="240" height="240" viewBox="0 0 280 280" style="filter:drop-shadow(0 0 20px rgba(204,41,54,.2))"><rect x="40" y="180" width="200" height="20" rx="10" fill="#CC2936" stroke="#E8A317" stroke-width="1"/><circle cx="80" cy="210" r="12" fill="#222" stroke="#CC2936" stroke-width="1.5"/><circle cx="200" cy="210" r="12" fill="#222" stroke="#CC2936" stroke-width="1.5"/><rect x="75" y="120" width="130" height="60" rx="8" fill="#1a1410" stroke="#CC2936" stroke-width="1.5"/><circle cx="110" cy="150" r="18" fill="#110e0a" stroke="#CC2936" stroke-width="1"/><circle cx="170" cy="150" r="18" fill="#110e0a" stroke="#CC2936" stroke-width="1"/><text x="130" y="110" fill="#E8A317" font-size="24" font-family="serif">♪</text><text x="155" y="95" fill="#CC2936" font-size="20" font-family="serif">♫</text></svg></div></div>
+<div class="about-aesthetic"><h3>🎨 A Estética</h3><p>Neon vermelho, madeira e concreto, grafite, pixel art. Bar underground em LA, 1995.</p></div>
+<div class="tech-stack"><h2 class="section-title">⚙️ Stack</h2><div class="tech-grid">
+<div class="tech-item"><div class="ticon">🌐</div><h4>HTML/CSS/JS</h4><p>Frontend puro</p></div>
+<div class="tech-item"><div class="ticon">🟢</div><h4>Node+Socket.io</h4><p>Sync tempo real</p></div>
+<div class="tech-item"><div class="ticon">🎵</div><h4>Spotify API</h4><p>Player integrado</p></div>
+<div class="tech-item"><div class="ticon">☁️</div><h4>AWS EC2+S3</h4><p>Infraestrutura</p></div>
+<div class="tech-item"><div class="ticon">🐳</div><h4>Docker</h4><p>Containerizado</p></div>
+<div class="tech-item"><div class="ticon">🎨</div><h4>SVG Pixel Art</h4><p>Habbo-style</p></div>
+</div></div>
+<div class="portfolio-box"><div class="portfolio-header"><img src="img/avatar.jpg" alt="Guilherme" class="portfolio-avatar"><div class="portfolio-info"><h3>Guilherme Moraes Franco</h3><p>@ognistie · Cloud · DevOps · Automação</p><p class="bio">12+ certificações. Cloud, automação e projetos que conectam pessoas.</p></div></div><div class="portfolio-tags"><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">DevOps</span><span class="tag">Docker</span><span class="tag">Terraform</span><span class="tag">CI/CD</span></div><a href="https://github.com/ognistie" target="_blank" class="gh-link">→ github.com/ognistie</a></div>
+</div><footer class="footer"><div class="footer-logo">SKATESOUND</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Ouvir</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">© 2026 SkateSound</p></footer></div>
+
+<!-- NEWS -->
+<div class="page" id="page-news"><div class="news-page">
+<div class="news-header"><h1>📡 TECH NEWS</h1><p class="news-date">Semana de 7-13 Março 2026</p></div>
+<div class="news-ticker"><span class="ticker-inner">🔥 NVIDIA $2B NEBIUS • YANN LECUN $1B AMI LABS • GOOGLE CXL • ANTHROPIC CODE REVIEW • CHINA IA • APPLE MACBOOK NEO • RAM SHORTAGE 🔥</span></div>
+<article class="news-card"><span class="news-tag">💰 INVESTIMENTO</span><h3>Nvidia investe $2B na Nebius</h3><p>8.3% de participação. 5GW+ de data center até 2030.</p><span class="news-source">TechStartups — 12 Mar 2026</span></article>
+<article class="news-card"><span class="news-tag" style="background:var(--purple-haze)">🧠 IA</span><h3>Yann LeCun levanta $1B+ para AMI Labs</h3><p>Maior seed round da Europa. World models.</p><span class="news-source">Financial Times — 10 Mar 2026</span></article>
+<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🔧 HW</span><h3>Google e Nvidia apostam em CXL</h3><p>Tecnologia alternativa para gargalo de memória IA.</p><span class="news-source">The Information — 12 Mar 2026</span></article>
+<article class="news-card"><span class="news-tag" style="background:var(--purple-haze)">🛡️ DEV</span><h3>Anthropic lança Code Review</h3><p>Inspeciona código IA antes da produção.</p><span class="news-source">TechCrunch — 10 Mar 2026</span></article>
+<article class="news-card"><span class="news-tag">🌏 GEO</span><h3>China: IA no plano quinquenal</h3><p>IA, robótica, quantum e 6G como pilares nacionais.</p><span class="news-source">Reuters — 9 Mar 2026</span></article>
+<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🤖 DEAL</span><h3>Mira Murati × Nvidia: chips Vera Rubin</h3><p>Thinking Machines garante 1GW+ de computação.</p><span class="news-source">Bloomberg — 11 Mar 2026</span></article>
+<article class="news-card"><span class="news-tag">📱 PROD</span><h3>Apple MacBook Neo</h3><p>Chip de iPhone, preço acessível, educação.</p><span class="news-source">TechRadar — Mar 2026</span></article>
+<article class="news-card"><span class="news-tag" style="background:var(--gold);color:#000">⚠️ SUPPLY</span><h3>Escassez de RAM 2026</h3><p>Data centers IA vs eletrônicos de consumo.</p><span class="news-source">The Verge — Mar 2026</span></article>
+</div><footer class="footer"><div class="footer-logo">SKATESOUND</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Ouvir</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">© 2026 SkateSound</p></footer></div>
+
+<script src="js/characters.js"></script>
+<script src="js/app.js"></script>
+</body></html>
