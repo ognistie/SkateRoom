@@ -1,18 +1,66 @@
-let selectedCharacter=null,isPlaying=false,spotifyToken=null,spotifyPlayer=null,vizInterval=null,currentRoomCode=null,socket=null,refreshToken=null,deviceId=null;
+// ========================================
+// SKATESOUND v3.2 — YOUTUBE TELÃO
+// Vídeos de skate 90s no telão da crew room
+// ========================================
 
-// CONFIG — mude para a URL do seu servidor em produção
-const BACKEND_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : window.location.origin;
+let selectedCharacter=null,isPlaying=false,vizInterval=null,currentRoomCode=null,socket=null;
+let ytPlayer=null,playerReady=false;
 
-const DEMO_TRACKS=[{name:'Juicy',artist:'The Notorious B.I.G.'},{name:'C.R.E.A.M.',artist:'Wu-Tang Clan'},{name:'California Love',artist:'2Pac ft. Dr. Dre'},{name:'Shook Ones Pt. II',artist:'Mobb Deep'},{name:"Nuthin' but a G Thang",artist:'Dr. Dre'},{name:'Sabotage',artist:'Beastie Boys'},{name:'Superman',artist:'Goldfinger'},{name:'Guerrilla Radio',artist:'RATM'},{name:"Gangsta's Paradise",artist:'Coolio'},{name:'N.Y. State of Mind',artist:'Nas'}];
+const BACKEND_URL=window.location.origin;
 
 // ====== INIT ======
 window.addEventListener('load',()=>{
   const f=document.getElementById('loaderFill');let p=0;
   const iv=setInterval(()=>{p+=Math.random()*20+5;if(p>=100){p=100;clearInterval(iv);setTimeout(()=>document.getElementById('loader').classList.add('hidden'),400)}f.style.width=p+'%'},130);
   renderCharacters();
-  checkSpotifyToken();
   loadSocketIO();
 });
+
+// ====== YOUTUBE PLAYER ======
+function initYouTube(){
+  const tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+}
+
+window.onYouTubeIframeAPIReady=function(){
+  ytPlayer=new YT.Player('ytPlayer',{
+    width:'100%',height:'100%',
+    playerVars:{
+      listType:'playlist',
+      list:DEFAULT_PLAYLIST_ID,
+      autoplay:0,
+      controls:1,
+      modestbranding:1,
+      rel:0,
+      showinfo:0,
+      iv_load_policy:3,
+      loop:1,
+      origin:window.location.origin
+    },
+    events:{
+      onReady:function(e){
+        playerReady=true;
+        addSystemMsg('Telão pronto! Aperte PLAY 🎬');
+      },
+      onStateChange:function(e){
+        if(e.data===YT.PlayerState.PLAYING){
+          isPlaying=true;updatePlayState();startBoomboxViz();
+          try{
+            const vi=ytPlayer.getVideoData();
+            if(vi&&vi.title){setText('trackNameDisplay',vi.title);setText('artistDisplay','YouTube')}
+          }catch(ex){}
+        }else if(e.data===YT.PlayerState.PAUSED){
+          isPlaying=false;updatePlayState();
+        }
+      },
+      onError:function(e){
+        addSystemMsg('⚠ Vídeo indisponível — próximo...');
+        setTimeout(()=>{try{ytPlayer.nextVideo()}catch(ex){}},1500);
+      }
+    }
+  });
+};
 
 // ====== SOCKET.IO ======
 function loadSocketIO(){
@@ -20,34 +68,37 @@ function loadSocketIO(){
   s.src=BACKEND_URL+'/socket.io/socket.io.js';
   s.onload=()=>{
     socket=io(BACKEND_URL,{transports:['websocket','polling']});
-    socket.on('connect',()=>{console.log('🛹 Conectado ao server!');addSystemMsg('Conectado ao servidor!')});
-    socket.on('disconnect',()=>{console.log('❌ Desconectado');addSystemMsg('Desconectado do servidor')});
-    socket.on('room-update',(data)=>{
-      console.log('Room update:',data.users.length,'users');
-      updateUserList(data.users);
-    });
-    socket.on('sync-play',(data)=>{
-      setText('ipodTrack',data.name);setText('ipodArtist',data.artist);
-      setText('trackNameDisplay',data.name);setText('artistDisplay',data.artist);
-      isPlaying=true;updatePlayState();
-      if(spotifyPlayer&&data.trackUri){
-        spotifyPlayUri(data.trackUri,data.position||0);
-      }
-    });
-    socket.on('sync-pause',()=>{isPlaying=false;updatePlayState();if(spotifyPlayer)spotifyPlayer.pause()});
-    socket.on('sync-seek',(data)=>{if(spotifyPlayer)spotifyPlayer.seek(data.position)});
-    socket.on('chat-message',(msg)=>{
-      if(msg.system)addSystemMsg(msg.message);
-      else addChatMsg(msg.username,msg.message);
-    });
+    socket.on('connect',()=>addSystemMsg('Conectado ao servidor!'));
+    socket.on('disconnect',()=>addSystemMsg('Desconectado...'));
+    socket.on('room-update',data=>updateUserList(data.users));
+    socket.on('sync-play',data=>{if(ytPlayer&&playerReady){try{ytPlayer.playVideo()}catch(e){}}});
+    socket.on('sync-pause',()=>{if(ytPlayer&&playerReady){try{ytPlayer.pauseVideo()}catch(e){}}});
+    socket.on('chat-message',msg=>{if(msg.system)addSystemMsg(msg.message);else addChatMsg(msg.username,msg.message)});
   };
-  s.onerror=()=>{console.warn('Socket.io não carregou — modo offline');addSystemMsg('Servidor offline — modo demo ativo')};
+  s.onerror=()=>addSystemMsg('Servidor offline — modo local');
   document.head.appendChild(s);
 }
 
 function updateUserList(users){
-  const el=document.getElementById('userCount');
-  if(el)el.textContent=users.length+' no bar';
+  const g=document.getElementById('crewCharacters');
+  if(g){
+    const P=[{x:60,y:280},{x:135,y:280},{x:210,y:280},{x:700,y:295},{x:770,y:295},{x:500,y:350},{x:400,y:360},{x:600,y:350}];
+    g.innerHTML='';
+    users.forEach((u,i)=>{
+      const pos=P[i%P.length];
+      const ch=CHARACTERS.find(c=>c.id===u.character)||CHARACTERS[0];
+      const svg=(ch.danceSvg||ch.svg).replace(/<\/?svg[^>]*>/g,'');
+      const el=document.createElementNS('http://www.w3.org/2000/svg','g');
+      el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale(1.8)');
+      el.innerHTML=svg;
+      const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+      lbl.setAttribute('x','16');lbl.setAttribute('y','-5');lbl.setAttribute('fill','#E8A317');
+      lbl.setAttribute('font-family',"'Press Start 2P',cursive");lbl.setAttribute('font-size','4');
+      lbl.setAttribute('text-anchor','middle');lbl.textContent=u.username;
+      el.appendChild(lbl);g.appendChild(el);
+    });
+  }
+  const c=document.getElementById('userCount');if(c)c.textContent=users.length;
 }
 
 // ====== PAGES ======
@@ -58,7 +109,22 @@ function showPage(id){
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.page===id));
   document.getElementById('navLinks').classList.remove('open');
   window.scrollTo({top:0,behavior:'smooth'});
-  if(id==='listen'){setupDancer();startBoomboxViz()}else{stopBoomboxViz()}
+  if(id==='listen'){startBoomboxViz();renderPlaylist();if(!ytPlayer)initYouTube()}else{stopBoomboxViz()}
+}
+
+function renderPlaylist(){
+  const el=document.getElementById('playlistContainer');if(!el)return;
+  el.innerHTML=PLAYLIST.map((t,i)=>'<div class="pl-item" data-idx="'+i+'" onclick="playFromPlaylist('+i+')"><div class="pl-num">'+(i+1)+'</div><div class="pl-info"><div class="pl-name">'+t.name+'</div><div class="pl-artist">'+(t.artist||t.style)+'</div></div><div class="pl-style">'+t.style+'</div></div>').join('');
+}
+
+function playFromPlaylist(index){
+  if(!ytPlayer||!playerReady)return;
+  const t=PLAYLIST[index];
+  try{ytPlayer.loadVideoById(t.ytId)}catch(e){}
+  setText('trackNameDisplay',t.name);
+  setText('artistDisplay',t.artist||t.style);
+  document.querySelectorAll('.pl-item').forEach((el,i)=>el.classList.toggle('active',i===index));
+  addSystemMsg('▶ '+t.name);
 }
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
 
@@ -68,168 +134,46 @@ function renderCharacters(){
   g.innerHTML=CHARACTERS.map(c=>'<div class="char-card" data-id="'+c.id+'" onclick="selectCharacter(\''+c.id+'\')">'+c.svg+'<div class="char-name">'+c.name+'</div><div class="char-style">'+c.style+'</div></div>').join('');
 }
 function selectCharacter(id){selectedCharacter=CHARACTERS.find(c=>c.id===id);document.querySelectorAll('.char-card').forEach(card=>card.classList.toggle('selected',card.dataset.id===id))}
-function setupDancer(){
-  const el=document.getElementById('dancerChar');if(!el)return;
-  const ch=selectedCharacter||CHARACTERS[0];el.innerHTML=ch.danceSvg||ch.svg;
-  const svg=el.querySelector('svg');if(svg){svg.style.width='100px';svg.style.height='auto'}
-  el.classList.toggle('paused',!isPlaying);
-}
 
-// ====== BOOMBOX VIZ ======
+// ====== VISUALIZER ======
 function startBoomboxViz(){if(vizInterval)return;const bars=document.querySelectorAll('.bb-bar');vizInterval=setInterval(()=>{if(!isPlaying)return;bars.forEach(b=>{const h=Math.random()*25+3;b.setAttribute('height',h);b.setAttribute('y',-h)})},100)}
 function stopBoomboxViz(){if(vizInterval){clearInterval(vizInterval);vizInterval=null}}
 
 // ====== ROOMS ======
-function generateRoomCode(){const w=['GRIND','OLLIE','THRASHER','KICKFLIP','HEELFLIP','HALFPIPE','VERT','DECK'];return w[Math.floor(Math.random()*w.length)]+'-'+(Math.floor(Math.random()*9000)+1000)}
-
+function generateRoomCode(){const w=['GRIND','OLLIE','THRASHER','KICKFLIP','HALFPIPE','VERT','DECK'];return w[Math.floor(Math.random()*w.length)]+'-'+(Math.floor(Math.random()*9000)+1000)}
 function joinServerRoom(code){
-  currentRoomCode=code;
-  setText('roomCode',code);setText('barRoomCode',code);
-  if(socket&&socket.connected){
-    socket.emit('join-room',{roomCode:code,character:selectedCharacter?selectedCharacter.id:'mc-red',username:selectedCharacter?selectedCharacter.name:'Player'});
-  }
+  currentRoomCode=code;setText('roomCode',code);setText('barRoomCode',code);
+  if(socket&&socket.connected){socket.emit('join-room',{roomCode:code,character:selectedCharacter?selectedCharacter.id:'mc-red',username:selectedCharacter?selectedCharacter.name:'Player'})}
 }
+function createRoom(){joinServerRoom(generateRoomCode());showPage('listen')}
+function joinRoom(){const input=document.getElementById('joinCodeInput');if(!input||!input.value.trim())return;joinServerRoom(input.value.trim().toUpperCase());showPage('listen')}
 
-function createRoom(){
-  const code=generateRoomCode();
-  joinServerRoom(code);
-  showPage('listen');
+// ====== PLAYER CONTROLS ======
+function playTrack(){
+  if(!ytPlayer||!playerReady)return;
+  try{
+    const state=ytPlayer.getPlayerState();
+    if(state===YT.PlayerState.PLAYING){ytPlayer.pauseVideo();if(socket&&currentRoomCode)socket.emit('pause-track',{roomCode:currentRoomCode})}
+    else{ytPlayer.playVideo();if(socket&&currentRoomCode)socket.emit('play-track',{roomCode:currentRoomCode})}
+  }catch(e){console.log('Player error:',e)}
 }
-function joinRoom(){
-  const input=document.getElementById('joinCodeInput');
-  if(!input||!input.value.trim())return;
-  joinServerRoom(input.value.trim().toUpperCase());
-  showPage('listen');
-}
+function nextTrack(){if(ytPlayer&&playerReady){try{ytPlayer.nextVideo()}catch(e){}}}
+function prevTrack(){if(ytPlayer&&playerReady){try{ytPlayer.previousVideo()}catch(e){}}}
+function menuAction(){showPage('home')}
 
 // ====== CHAT ======
 function addSystemMsg(text){const box=document.getElementById('chatMessages');if(!box)return;const d=document.createElement('div');d.className='chat-msg system';d.innerHTML='<div class="msg-user">SISTEMA</div><div class="msg-text">'+text+'</div>';box.appendChild(d);box.scrollTop=box.scrollHeight}
 function addChatMsg(user,text){const box=document.getElementById('chatMessages');if(!box)return;const d=document.createElement('div');d.className='chat-msg';d.innerHTML='<div class="msg-user">'+user+'</div><div class="msg-text">'+text+'</div>';box.appendChild(d);box.scrollTop=box.scrollHeight}
-function sendChat(){
-  const i=document.getElementById('chatInput');if(!i||!i.value.trim())return;
-  const name=selectedCharacter?selectedCharacter.name:'Player';
-  if(socket&&socket.connected&&currentRoomCode){socket.emit('chat-message',{roomCode:currentRoomCode,message:i.value.trim(),username:name})}
-  else{addChatMsg(name,i.value.trim())}
-  i.value='';
-}
+function sendChat(){const i=document.getElementById('chatInput');if(!i||!i.value.trim())return;const name=selectedCharacter?selectedCharacter.name:'Player';if(socket&&socket.connected&&currentRoomCode){socket.emit('chat-message',{roomCode:currentRoomCode,message:i.value.trim(),username:name})}else{addChatMsg(name,i.value.trim())}i.value=''}
 function handleChatKey(e){if(e.key==='Enter')sendChat()}
 
-// ====== SPOTIFY ======
-function checkSpotifyToken(){
-  const params=new URLSearchParams(window.location.search);
-  const token=params.get('spotify_token');
-  const refresh=params.get('refresh_token');
-  if(token){
-    spotifyToken=token;
-    refreshToken=refresh;
-    window.history.replaceState({},document.title,window.location.pathname);
-    initSpotifyPlayer();
-    const btn=document.getElementById('spotifyBtn');
-    if(btn){btn.textContent='✅ SPOTIFY ON';btn.style.background='#1DB954'}
-  }
-}
-
-function connectSpotify(){
-  // Redireciona para o backend que faz o OAuth
-  window.location.href=BACKEND_URL+'/auth/spotify';
-}
-
-function initSpotifyPlayer(){
-  const s=document.createElement('script');s.src='https://sdk.scdn.co/spotify-player.js';document.body.appendChild(s);
-  window.onSpotifyWebPlaybackSDKReady=()=>{
-    spotifyPlayer=new Spotify.Player({name:'SkateSound',getOAuthToken:cb=>cb(spotifyToken),volume:0.8});
-    spotifyPlayer.addListener('ready',({device_id:did})=>{
-      deviceId=did;console.log('🎵 Spotify ready, device:',did);
-      transferPlayback(did);
-      addSystemMsg('Spotify conectado! Aperte PLAY 🎵');
-    });
-    spotifyPlayer.addListener('not_ready',()=>console.warn('Spotify device offline'));
-    spotifyPlayer.addListener('player_state_changed',state=>{
-      if(!state)return;
-      const t=state.track_window.current_track;
-      if(t){setText('ipodTrack',t.name);setText('ipodArtist',t.artists.map(a=>a.name).join(', '));setText('trackNameDisplay',t.name);setText('artistDisplay',t.artists.map(a=>a.name).join(', '))}
-      isPlaying=!state.paused;updatePlayState();
-    });
-    spotifyPlayer.addListener('initialization_error',({message})=>console.error('Init error:',message));
-    spotifyPlayer.addListener('authentication_error',({message})=>{console.error('Auth error:',message);tryRefreshToken()});
-    spotifyPlayer.connect();
-  };
-}
-
-async function transferPlayback(did){
-  try{await fetch('https://api.spotify.com/v1/me/player',{method:'PUT',headers:{'Authorization':'Bearer '+spotifyToken,'Content-Type':'application/json'},body:JSON.stringify({device_ids:[did],play:false})})}catch(e){console.error('Transfer error:',e)}
-}
-
-async function spotifyPlayUri(uri,posMs){
-  if(!deviceId||!spotifyToken)return;
-  try{await fetch('https://api.spotify.com/v1/me/player/play?device_id='+deviceId,{method:'PUT',headers:{'Authorization':'Bearer '+spotifyToken,'Content-Type':'application/json'},body:JSON.stringify({uris:[uri],position_ms:posMs||0})})}catch(e){console.error('Play error:',e)}
-}
-
-async function tryRefreshToken(){
-  if(!refreshToken)return;
-  try{
-    const res=await fetch(BACKEND_URL+'/auth/refresh',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({refresh_token:refreshToken})});
-    const data=await res.json();
-    if(data.access_token){spotifyToken=data.access_token;console.log('Token refreshed')}
-  }catch(e){console.error('Refresh failed:',e)}
-}
-
+// ====== UTILS ======
 function setText(id,t){const e=document.getElementById(id);if(e)e.textContent=t}
-function updatePlayState(){const d=document.getElementById('dancerChar'),v=document.getElementById('ipodViz');if(isPlaying){d?.classList.remove('paused');v?.classList.remove('paused')}else{d?.classList.add('paused');v?.classList.add('paused')}}
-
-// ====== PLAYER CONTROLS ======
-async function playTrack(){
-  if(spotifyPlayer){
-    await spotifyPlayer.togglePlay();
-    // Broadcast para a sala
-    if(socket&&currentRoomCode){
-      const state=await spotifyPlayer.getCurrentState();
-      if(state&&state.track_window.current_track){
-        const t=state.track_window.current_track;
-        if(!state.paused){
-          socket.emit('play-track',{roomCode:currentRoomCode,trackUri:t.uri,position:state.position,name:t.name,artist:t.artists.map(a=>a.name).join(', ')});
-        }else{
-          socket.emit('pause-track',{roomCode:currentRoomCode});
-        }
-      }
-    }
-  }else{
-    isPlaying=!isPlaying;if(isPlaying)showDemoTrack();updatePlayState();
-  }
-}
-async function nextTrack(){
-  if(spotifyPlayer){
-    await spotifyPlayer.nextTrack();
-    setTimeout(async()=>{
-      const state=await spotifyPlayer.getCurrentState();
-      if(state&&state.track_window.current_track&&socket&&currentRoomCode){
-        const t=state.track_window.current_track;
-        socket.emit('next-track',{roomCode:currentRoomCode,trackUri:t.uri,name:t.name,artist:t.artists.map(a=>a.name).join(', ')});
-      }
-    },500);
-  }else{showDemoTrack()}
-}
-function prevTrack(){if(spotifyPlayer)spotifyPlayer.previousTrack()}
-function menuAction(){showPage('home')}
-
-function showDemoTrack(){
-  const t=DEMO_TRACKS[Math.floor(Math.random()*DEMO_TRACKS.length)];
-  setText('ipodTrack',t.name);setText('ipodArtist',t.artist);
-  setText('trackNameDisplay',t.name);setText('artistDisplay',t.artist);
-  isPlaying=true;updatePlayState();
-  if(socket&&currentRoomCode){socket.emit('play-track',{roomCode:currentRoomCode,name:t.name,artist:t.artist})}
-}
+function updatePlayState(){const btn=document.getElementById('playBtn');if(btn){btn.textContent=isPlaying?'⏸':'▶'}}
+function switchTab(tab){document.querySelectorAll('.panel-tab').forEach(t=>t.classList.toggle('active',t.textContent.toLowerCase().includes(tab)));document.querySelectorAll('.panel-content').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+tab).classList.add('active')}
 
 // ====== INIT ======
-document.addEventListener('DOMContentLoaded',()=>{
-  const code=generateRoomCode();
-  setText('roomCode',code);setText('barRoomCode',code);
-});
-
+document.addEventListener('DOMContentLoaded',()=>{const code=generateRoomCode();setText('roomCode',code);setText('barRoomCode',code)});
 document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.code==='Space'){e.preventDefault();playTrack()}if(e.code==='ArrowRight')nextTrack();if(e.code==='ArrowLeft')prevTrack()});
-
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0) translateX(0)'}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-setTimeout(()=>{document.querySelectorAll('.news-card').forEach(c=>{c.style.opacity='0';c.style.transform='translateX(-25px)';c.style.transition='all .5s ease-out';obs.observe(c)});document.querySelectorAll('.feature-card,.tech-item').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(25px)';c.style.transition='all .5s ease-out '+(i*.08)+'s';obs.observe(c)})},600);
-
-console.log('%c🛹 SKATESOUND v2.1','color:#CC2936;font-size:20px;font-weight:bold');
-console.log('%cRap 90s × Skate Culture\nby @ognistie','color:#E8A317;font-size:12px');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0) translateX(0)'}})},{threshold:0.1});
+setTimeout(()=>{document.querySelectorAll('.news-card,.feature-card,.tech-item').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(20px)';c.style.transition='all .5s ease-out '+(i*.06)+'s';obs.observe(c)})},600);

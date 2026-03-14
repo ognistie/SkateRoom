@@ -1,21 +1,9 @@
 {
   "name": "skatesound-server",
-  "version": "2.1.0",
-  "description": "SkateSound — Backend com Socket.io + Spotify Auth",
+  "version": "3.0.0",
+  "description": "SkateSound — Beats royalty-free + Socket.io sync",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "socket.io": "^4.7.4"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  },
-  "author": "Guilherme Moraes Franco (@ognistie)",
-  "license": "MIT"
-}
+  "scripts": { "start": "node index.js", "dev": "nodemon index.js" },
+  "dependencies": { "cors": "^2.8.5", "express": "^4.18.2", "socket.io": "^4.7.4" },
+  "devDependencies": { "nodemon": "^3.0.2" }
+} 
