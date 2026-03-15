@@ -99,30 +99,95 @@ function loadSocketIO(){
 
 function updateUserList(users){
   const g=document.getElementById('crewCharacters');
-  if(g){
-    // Positions ON THE SOFA — sofa x=290 to x=710, sit at y=330
-    const P=[
-      {x:305,y:328},{x:355,y:328},{x:405,y:328},{x:455,y:328},{x:505,y:328},
-      {x:555,y:328},{x:605,y:328},{x:655,y:328},
-      {x:330,y:328},{x:430,y:328},{x:530,y:328},{x:630,y:328},
-      {x:380,y:328},{x:480,y:328},{x:580,y:328}
-    ];
-    g.innerHTML='';
-    users.forEach((u,i)=>{
-      const pos=P[i%P.length];
-      const ch=CHARACTERS.find(c=>c.id===u.character)||CHARACTERS[0];
-      const svg=(ch.danceSvg||ch.svg).replace(/<\/?svg[^>]*>/g,'');
-      const el=document.createElementNS('http://www.w3.org/2000/svg','g');
-      el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale(1.4)');
-      el.innerHTML=svg;
-      const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
-      lbl.setAttribute('x','16');lbl.setAttribute('y','-4');lbl.setAttribute('fill','#E8A317');
-      lbl.setAttribute('font-family',"'Bebas Neue',sans-serif");lbl.setAttribute('font-size','5');
-      lbl.setAttribute('text-anchor','middle');lbl.textContent=u.username;
-      el.appendChild(lbl);g.appendChild(el);
-    });
-  }
+  if(!g)return;
+  // Sofa positions (viewBox 1000x520)
+  const SOFA=[
+    {x:255,y:310},{x:310,y:310},{x:365,y:310},{x:420,y:310},{x:475,y:310},
+    {x:530,y:310},{x:585,y:310},{x:640,y:310},{x:695,y:310},{x:745,y:310},
+    {x:280,y:310},{x:340,y:310},{x:450,y:310},{x:560,y:310},{x:670,y:310}
+  ];
+  // Check which users are new (not already rendered)
+  const existing=new Set();
+  g.querySelectorAll('[data-uid]').forEach(el=>existing.add(el.getAttribute('data-uid')));
+  const newUsers=users.filter(u=>!existing.has(u.id));
+  // Remove users who left
+  g.querySelectorAll('[data-uid]').forEach(el=>{
+    if(!users.find(u=>u.id===el.getAttribute('data-uid')))el.remove();
+  });
+  // Place existing users at sofa (no animation)
+  users.forEach((u,i)=>{
+    if(existing.has(u.id)){
+      const el=g.querySelector('[data-uid="'+u.id+'"]');
+      if(el){const pos=SOFA[i%SOFA.length];el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale(1.4)')}
+    }
+  });
+  // Animate new users walking to sofa
+  newUsers.forEach(u=>{
+    const idx=users.indexOf(u);
+    const pos=SOFA[idx%SOFA.length];
+    const ch=CHARACTERS.find(c=>c.id===u.character)||CHARACTERS[0];
+    walkToSofa(g,u,ch,pos);
+  });
   const c=document.getElementById('userCount');if(c)c.textContent=users.length;
+}
+
+function walkToSofa(container,user,char,target){
+  const el=document.createElementNS('http://www.w3.org/2000/svg','g');
+  el.setAttribute('data-uid',user.id);
+  // Start position: bottom center of room
+  const startX=500;const startY=480;
+  let curX=startX,curY=startY;
+  let frame=0;
+  el.setAttribute('transform','translate('+curX+','+curY+') scale(1.4)');
+  // Walk frames
+  const walkSVG0=(char.walkFrames&&char.walkFrames[0]||char.svg).replace(/<\/?svg[^>]*>/g,'');
+  const walkSVG1=(char.walkFrames&&char.walkFrames[1]||char.danceSvg||char.svg).replace(/<\/?svg[^>]*>/g,'');
+  const sitSVG=(char.svg).replace(/<\/?svg[^>]*>/g,'');
+  el.innerHTML=walkSVG0;
+  // Name label
+  const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+  lbl.setAttribute('x','16');lbl.setAttribute('y','-4');lbl.setAttribute('fill',char.highlight?'#FFD700':'#E8A317');
+  lbl.setAttribute('font-family',"'Bebas Neue',sans-serif");lbl.setAttribute('font-size',char.highlight?'6':'5');
+  lbl.setAttribute('text-anchor','middle');lbl.textContent=user.username;
+  el.appendChild(lbl);
+  // Highlight glow for Nistie/Sinamotta
+  if(char.highlight){
+    const glow=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    glow.setAttribute('x','-2');glow.setAttribute('y','-6');glow.setAttribute('width','36');glow.setAttribute('height','56');
+    glow.setAttribute('fill','none');glow.setAttribute('stroke','#FFD700');glow.setAttribute('stroke-width','.5');glow.setAttribute('opacity','.3');glow.setAttribute('rx','2');
+    el.insertBefore(glow,el.firstChild);
+  }
+  container.appendChild(el);
+  // Animate walking
+  const dx=target.x-startX;const dy=target.y-startY;
+  const steps=30; // ~30 frames = 0.5 seconds at 60fps
+  let step=0;
+  function animate(){
+    step++;
+    const t=Math.min(step/steps,1);
+    const ease=t<0.5?2*t*t:(1-Math.pow(-2*t+2,2)/2); // easeInOutQuad
+    curX=startX+dx*ease;
+    curY=startY+dy*ease;
+    el.setAttribute('transform','translate('+curX.toFixed(0)+','+curY.toFixed(0)+') scale(1.4)');
+    // Swap walk frames
+    frame++;
+    const innerSVG=frame%8<4?walkSVG0:walkSVG1;
+    // Keep the label
+    const label=el.querySelector('text');
+    const glowEl=el.querySelector('rect[stroke="#FFD700"]');
+    el.innerHTML=innerSVG;
+    if(glowEl)el.insertBefore(glowEl.cloneNode(),el.firstChild);
+    el.appendChild(label);
+    if(t<1){requestAnimationFrame(animate)}
+    else{
+      // Arrived at sofa — switch to sitting pose
+      el.innerHTML=sitSVG;
+      if(glowEl)el.insertBefore(glowEl.cloneNode(),el.firstChild);
+      el.appendChild(label);
+      el.setAttribute('transform','translate('+target.x+','+target.y+') scale(1.4)');
+    }
+  }
+  requestAnimationFrame(animate);
 }
 
 function showPage(id){
@@ -153,7 +218,7 @@ function playFromPlaylist(index){
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
 function renderCharacters(){
   const g=document.getElementById('charGrid');if(!g)return;
-  g.innerHTML=CHARACTERS.map(c=>'<div class="char-card" data-id="'+c.id+'" onclick="selectCharacter(\''+c.id+'\')">'+c.svg+'<div class="char-name">'+c.name+'</div><div class="char-style">'+c.style+'</div></div>').join('');
+  g.innerHTML=CHARACTERS.map(c=>'<div class="char-card'+(c.highlight?' highlight':'')+'" data-id="'+c.id+'" onclick="selectCharacter(\''+c.id+'\')">'+c.svg+'<div class="char-name">'+c.name+'</div><div class="char-style">'+c.style+'</div></div>').join('');
 }
 function selectCharacter(id){selectedCharacter=CHARACTERS.find(c=>c.id===id);document.querySelectorAll('.char-card').forEach(card=>card.classList.toggle('selected',card.dataset.id===id))}
 function generateRoomCode(){const w=['GRIND','OLLIE','THRASHER','KICKFLIP','HALFPIPE','VERT','DECK','NOLLIE','HEELFLIP','DARKSLIDE'];return w[Math.floor(Math.random()*w.length)]+'-'+(Math.floor(Math.random()*9000)+1000)}

@@ -32,24 +32,45 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,3rem);text-align:center;margin-bottom:2rem;color:var(--amber);letter-spacing:5px}
 .features{padding:4rem 2rem;background:var(--bar-dark)}.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;max-width:1000px;margin:0 auto}.feature-card{background:var(--concrete);border:1px solid var(--grit);padding:1.4rem;position:relative;transition:all .3s}.feature-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--blood-red)}.feature-card:hover{border-color:var(--blood-red);transform:translateY(-3px)}.feature-card .icon{font-size:1.6rem;margin-bottom:.5rem}.feature-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--neon-red);letter-spacing:2px}.feature-card p{font-size:.95rem;color:#666;line-height:1.4}
 .char-section{padding:4rem 2rem;background:var(--dark-bg);text-align:center}
-.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:.8rem;max-width:950px;margin:0 auto 1.5rem}
-.char-card{background:var(--concrete);border:2px solid var(--grit);padding:.6rem;cursor:pointer;transition:all .3s;image-rendering:pixelated;position:relative}.char-card:hover{border-color:var(--amber);transform:scale(1.04)}.char-card.selected{border-color:var(--neon-red);box-shadow:0 0 15px rgba(255,46,46,.2)}.char-card.selected::after{content:'✓';position:absolute;top:-7px;right:-7px;background:var(--neon-red);color:white;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:.55rem}
-.char-card svg{width:55px;height:70px;display:block;margin:0 auto .2rem;image-rendering:pixelated}.char-name{font-family:'Bebas Neue',sans-serif;font-size:.75rem;color:var(--amber);letter-spacing:1px}.char-style{font-size:.65rem;color:#555}
-.join-section{padding:3rem 2rem;background:var(--bar-dark);text-align:center}.join-box{max-width:420px;margin:0 auto;background:var(--concrete);border:2px solid var(--grit);padding:2rem;position:relative}.join-box h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--amber);letter-spacing:3px;margin-bottom:.6rem}.join-box p{font-size:1rem;color:#666;margin-bottom:1rem}.join-input-row{display:flex;gap:.4rem;margin-bottom:.8rem}.join-input{flex:1;font-family:'VT323',monospace;font-size:1rem;background:var(--dark-bg);color:var(--amber);border:2px solid var(--grit);padding:.6rem;text-transform:uppercase;letter-spacing:2px;outline:none}.join-input:focus{border-color:var(--blood-red)}.join-or{font-family:'Permanent Marker',cursive;font-size:1rem;color:#444;margin:.8rem 0}
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:.6rem;max-width:1100px;margin:0 auto 1.5rem}
+.char-card{background:var(--concrete);border:2px solid var(--grit);padding:.5rem;cursor:pointer;transition:all .3s;image-rendering:pixelated;position:relative;text-align:center}.char-card:hover{border-color:var(--amber);transform:scale(1.04)}.char-card.selected{border-color:var(--neon-red);box-shadow:0 0 15px rgba(255,46,46,.2)}.char-card.selected::after{content:'✓';position:absolute;top:-7px;right:-7px;background:var(--neon-red);color:white;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:.55rem}
+.char-card.highlight{border-color:rgba(255,215,0,.3);background:linear-gradient(135deg,var(--concrete),rgba(255,215,0,.03))}.char-card.highlight:hover{border-color:#FFD700;box-shadow:0 0 15px rgba(255,215,0,.2)}
+.char-card svg{width:50px;height:65px;display:block;margin:0 auto .2rem;image-rendering:pixelated}.char-name{font-family:'Bebas Neue',sans-serif;font-size:.7rem;color:var(--amber);letter-spacing:1px}.char-card.highlight .char-name{color:#FFD700}.char-style{font-size:.6rem;color:#555}
+.join-section{padding:0;background:#0e0b08}
+.join-gate{position:relative;overflow:hidden}
+.join-scene{display:block;width:100%;height:200px}
+.join-card{position:relative;max-width:480px;margin:-60px auto 0;z-index:2;background:rgba(14,11,8,.95);border:1px solid rgba(204,41,54,.15);border-radius:14px;overflow:hidden;backdrop-filter:blur(10px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.join-card-top{text-align:center;padding:1.5rem 1.5rem .8rem;background:linear-gradient(180deg,rgba(204,41,54,.06),transparent);border-bottom:1px solid rgba(204,41,54,.08)}
+.join-neon-icon{margin-bottom:.5rem}
+.join-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--neon-red);letter-spacing:5px;text-shadow:0 0 20px rgba(255,46,46,.15)}
+.join-subtitle{font-family:'VT323',monospace;color:#555;font-size:.95rem;margin-top:.2rem}
+.join-card-body{padding:1.5rem}
+.join-input-group{display:flex;gap:.5rem;margin-bottom:1rem}
+.join-input-wrap{flex:1;display:flex;align-items:center;background:rgba(255,255,255,.03);border:1px solid var(--grit);border-radius:8px;overflow:hidden;transition:border-color .2s}
+.join-input-wrap:focus-within{border-color:var(--blood-red)}
+.join-input-icon{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#444;padding:0 .6rem}
+.join-input{flex:1;font-family:'VT323',monospace;font-size:1.05rem;background:transparent;color:var(--amber);border:none;padding:.7rem .5rem .7rem 0;outline:none;text-transform:uppercase;letter-spacing:2px}
+.join-input::placeholder{color:#333}
+.join-btn-enter{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:#fff;background:var(--blood-red);border:none;padding:.7rem 1.2rem;border-radius:8px;cursor:pointer;letter-spacing:3px;transition:all .2s;white-space:nowrap}
+.join-btn-enter:hover{background:var(--neon-red);box-shadow:0 0 20px rgba(255,46,46,.3);transform:translateY(-1px)}
+.join-divider{text-align:center;margin:1rem 0;position:relative}
+.join-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--grit)}
+.join-divider span{position:relative;background:rgba(14,11,8,.95);padding:0 1rem;font-family:'VT323',monospace;font-size:.85rem;color:#444}
+.join-btn-create{width:100%;display:flex;align-items:center;justify-content:center;gap:.6rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--dark-bg);background:linear-gradient(135deg,var(--amber),#D4960F);border:none;padding:.75rem;border-radius:8px;cursor:pointer;letter-spacing:3px;transition:all .2s}
+.join-btn-create:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(232,163,23,.25)}
+.join-btn-create-icon{width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:bold}
+.join-hints{display:flex;justify-content:center;gap:1.2rem;margin-top:1.2rem;flex-wrap:wrap}
+.join-hints span{font-family:'VT323',monospace;font-size:.75rem;color:#444}
 
 /* ====== CREW ROOM — TV IN THE ROOM LAYOUT ====== */
 .room-page{display:grid;grid-template-columns:1fr 300px;height:calc(100vh - 50px);margin-top:50px}
-.room-main{position:relative;overflow:hidden;background:#0e0b08}
-/* The SVG room fills the entire left area */
+.room-main{position:relative;overflow:hidden;background:#1a1612}
 .room-svg{position:absolute;inset:0;width:100%;height:100%}
-.room-svg svg{width:100%;height:100%;display:block}
-/* YouTube iframe positioned exactly over the TV in the SVG */
-/* TV area in SVG viewBox 1000x600: x=310 y=72 w=380 h=214 */
-/* As % of viewBox: left=31% top=12% width=38% height=35.7% */
-.yt-overlay{position:absolute;z-index:5;left:36.4%;top:10.17%;width:27.2%;height:35.67%;background:#000;border-radius:2px;overflow:hidden}
+.room-svg svg{width:100%;height:100%;display:block;background:#1a1612}
+/* YouTube overlay — TV screen: x=330 y=60 w=340 h=240 in viewBox 1000x520 */
+.yt-overlay{position:absolute;z-index:5;left:33%;top:11.5%;width:34%;height:46.2%;background:#000;overflow:hidden}
 .yt-overlay iframe,.yt-overlay #ytPlayer{width:100%!important;height:100%!important}
-/* Controls bar floating at bottom of room */
-.room-controls{position:absolute;z-index:10;bottom:0;left:0;right:0;display:flex;align-items:center;gap:1rem;padding:.5rem 1rem;background:linear-gradient(0deg,rgba(8,6,4,.95) 0%,rgba(8,6,4,.7) 70%,transparent 100%)}
+.room-controls{position:absolute;z-index:10;bottom:0;left:0;right:0;display:flex;align-items:center;gap:1rem;padding:.6rem 1rem;background:linear-gradient(0deg,rgba(26,22,18,.98) 0%,rgba(26,22,18,.8) 60%,transparent 100%)}
 .room-controls .np-info{flex:1;min-width:0}.room-controls .track-name{font-size:1rem;color:var(--neon-red);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.room-controls .track-artist{font-size:.8rem;color:#555}
 .room-controls .np-btns{display:flex;align-items:center;gap:.5rem}
 .ctrl-btn{background:none;border:none;color:var(--cream);font-size:1.2rem;cursor:pointer;transition:all .2s;font-family:'VT323',monospace}.ctrl-btn:hover{color:var(--neon-red)}
@@ -167,3 +188,126 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .social-feed{padding:1rem}
 }
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* === SKATE 3 STYLE BUILDER === */
+.sk3-layout{display:grid;grid-template-columns:280px 1fr;margin-top:50px;height:calc(100vh - 50px)}
+.sk3-panel{background:linear-gradient(180deg,rgba(10,8,6,.98) 0%,rgba(14,12,10,.95) 100%);border-right:1px solid rgba(204,41,54,.15);padding:1.2rem;overflow-y:auto;backdrop-filter:blur(10px)}
+.sk3-panel-header{padding-bottom:1rem;border-bottom:1px solid var(--grit);margin-bottom:1rem}
+.sk3-panel-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--neon-red);letter-spacing:4px;text-shadow:0 0 20px rgba(255,46,46,.2)}
+.sk3-panel-header p{font-family:'VT323',monospace;font-size:.85rem;color:#555}
+.sk3-section{margin-bottom:1rem}
+.sk3-section h4{font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--amber);letter-spacing:2px;margin-bottom:.5rem;opacity:.7}
+.sk3-colors{display:flex;gap:5px;flex-wrap:wrap}
+.sk3-color{width:26px;height:26px;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:all .15s}
+.sk3-color:hover{border-color:var(--amber);transform:scale(1.15)}
+.sk3-color.active{border-color:var(--neon-red);box-shadow:0 0 8px rgba(255,46,46,.3)}
+.sk3-graphics{display:flex;gap:4px;flex-wrap:wrap}
+.sk3-opt{font-family:'VT323',monospace;font-size:.8rem;padding:.25rem .5rem;background:rgba(255,255,255,.03);color:#666;border:1px solid var(--grit);cursor:pointer;transition:all .15s;border-radius:3px}
+.sk3-opt:hover{border-color:var(--amber);color:var(--cream)}
+.sk3-opt.active{border-color:var(--neon-red);color:var(--neon-red);background:rgba(204,41,54,.08)}
+.sk3-input{width:100%;font-family:'VT323',monospace;font-size:1rem;background:rgba(255,255,255,.03);color:var(--amber);border:1px solid var(--grit);padding:.4rem .6rem;outline:none;border-radius:3px;text-transform:uppercase;letter-spacing:2px}
+.sk3-input:focus{border-color:var(--neon-red)}
+.sk3-actions{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--grit)}
+.sk3-btn{font-family:'Bebas Neue',sans-serif;font-size:.9rem;padding:.45rem 1rem;background:rgba(255,255,255,.05);color:var(--cream);border:1px solid var(--grit);cursor:pointer;letter-spacing:2px;border-radius:4px;transition:all .2s;text-align:center}
+.sk3-btn:hover{border-color:var(--amber);background:rgba(255,255,255,.08);transform:translateY(-1px)}
+.sk3-btn.gold{background:rgba(232,163,23,.1);border-color:var(--amber);color:var(--amber)}
+.sk3-btn.gold:hover{background:rgba(232,163,23,.2);box-shadow:0 0 15px rgba(232,163,23,.15)}
+.sk3-btn.red{background:rgba(204,41,54,.1);border-color:var(--blood-red);color:var(--neon-red)}
+.sk3-btn.red:hover{background:rgba(204,41,54,.2);box-shadow:0 0 15px rgba(204,41,54,.15)}
+
+.sk3-preview{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#141210 0%,#0a0806 100%);padding:2rem;position:relative;overflow:hidden}
+.sk3-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,255,255,.02) 0%,transparent 70%)}
+.sk3-preview-bg{position:relative}
+.sk3-preview-bg canvas{max-width:100%;max-height:calc(100vh - 180px);border-radius:6px}
+.sk3-preview-actions{display:flex;gap:.8rem;margin-top:1.2rem;position:relative;z-index:1}
+
+/* Badge Modal */
+.sk3-badge-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.sk3-badge-content{background:linear-gradient(180deg,#141210,#0a0806);border:1px solid var(--grit);border-radius:12px;padding:2rem;text-align:center;max-width:440px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.sk3-badge-close{position:absolute;top:12px;right:16px;background:none;border:none;color:#555;font-size:1.2rem;cursor:pointer}
+.sk3-badge-close:hover{color:var(--neon-red)}
+.sk3-badge-content h3{font-family:'Bebas Neue',sans-serif;color:var(--amber);font-size:1.5rem;letter-spacing:3px;margin-bottom:1rem}
+.sk3-badge-content canvas{max-width:100%;border-radius:8px;margin-bottom:.8rem}
+.sk3-badge-name{font-family:'Bebas Neue',sans-serif;color:var(--neon-red);font-size:1.3rem;letter-spacing:2px}
+.sk3-badge-desc{font-family:'VT323',monospace;color:#555;font-size:.9rem;margin:.3rem 0 1rem}
+.sk3-badge-actions{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+
+@media(max-width:900px){
+  .sk3-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;height:auto;min-height:calc(100vh - 50px)}
+  .sk3-panel{border-right:none;border-bottom:1px solid var(--grit);padding-top:60px}
+  .sk3-preview{min-height:50vh}
+}
+
+
+/* === MURAL DO BONDE === */
+.mural-page{padding:60px 1.5rem 2rem;max-width:1100px;margin:0 auto}
+.mural-header{text-align:center;margin-bottom:1.5rem}
+.mural-title-row{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.mural-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--neon-red);letter-spacing:5px}
+.mural-count{font-family:'VT323',monospace;font-size:.9rem;color:#555;background:rgba(204,41,54,.08);border:1px solid rgba(204,41,54,.15);padding:.15rem .6rem;border-radius:3px}
+.mural-sub{color:#555;font-size:1rem;margin-top:.3rem}
+
+.mural-composer{max-width:600px;margin:0 auto 2rem}
+.mural-compose-card{background:var(--concrete);border:2px solid var(--grit);border-radius:10px;padding:1rem;transition:border-color .2s}
+.mural-compose-card:focus-within{border-color:var(--blood-red)}
+.mural-input-name{width:100%;font-family:'Bebas Neue',sans-serif;font-size:1rem;background:transparent;color:var(--amber);border:none;border-bottom:1px solid var(--grit);padding:.3rem 0;margin-bottom:.6rem;outline:none;letter-spacing:2px}
+.mural-input-name::placeholder{color:#333;letter-spacing:1px}
+.mural-input-name:focus{border-bottom-color:var(--amber)}
+.mural-input-msg{width:100%;font-family:'VT323',monospace;font-size:1.05rem;background:transparent;color:var(--cream);border:none;outline:none;resize:none;line-height:1.5}
+.mural-input-msg::placeholder{color:#333}
+.mural-compose-footer{display:flex;align-items:center;gap:.6rem;margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--grit)}
+.mural-color-picks{display:flex;gap:4px}
+.mural-cpick{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s}
+.mural-cpick:hover{transform:scale(1.2)}
+.mural-cpick.active{border-color:#fff;box-shadow:0 0 6px rgba(255,255,255,.2)}
+.mural-charcount{font-family:'VT323',monospace;font-size:.8rem;color:#333;margin-left:auto}
+.mural-post-btn{font-family:'Bebas Neue',sans-serif;font-size:.9rem;background:var(--blood-red);color:#fff;border:none;padding:.4rem 1rem;border-radius:6px;cursor:pointer;letter-spacing:2px;transition:all .15s;white-space:nowrap}
+.mural-post-btn:hover{background:var(--neon-red);transform:translateY(-1px);box-shadow:0 4px 12px rgba(204,41,54,.3)}
+
+/* Sticker Board */
+.mural-board{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;padding:.5rem 0 3rem}
+
+.sticker{background:var(--concrete);border:1px solid var(--grit);border-radius:8px;padding:1rem;position:relative;transform:rotate(var(--rot,0deg));transition:all .25s;cursor:default;border-left:4px solid var(--color,#CC2936)}
+.sticker:hover{transform:rotate(0deg) scale(1.03);box-shadow:0 8px 25px rgba(0,0,0,.4);border-color:var(--color);z-index:2}
+.sticker-pin{position:absolute;top:-6px;right:12px;font-size:.7rem;opacity:.4}
+.sticker-pin::before{content:'📌'}
+.sticker-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.sticker-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.6rem;color:#fff;flex-shrink:0}
+.sticker-name{font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--cream);letter-spacing:.5px}
+.sticker-msg{font-family:'VT323',monospace;font-size:.95rem;color:#bbb;line-height:1.5;margin-bottom:.6rem;word-wrap:break-word}
+.sticker-foot{display:flex;align-items:center;justify-content:space-between}
+.sticker-time{font-family:'VT323',monospace;font-size:.7rem;color:#333}
+.sticker-like{background:rgba(255,255,255,.04);border:1px solid var(--grit);color:#888;font-family:'VT323',monospace;font-size:.8rem;padding:.15rem .5rem;border-radius:4px;cursor:pointer;transition:all .15s}
+.sticker-like:hover{border-color:var(--neon-red);color:var(--neon-red);background:rgba(204,41,54,.08)}
+
+@media(max-width:600px){
+  .mural-board{grid-template-columns:1fr}
+  .sticker{transform:none!important}
+}
+
+/* === TECH FAIR === */
+.techfair{background:linear-gradient(180deg,#060610 0%,#0a0a1a 30%,var(--dark-bg) 100%);min-height:100vh;padding-top:50px}
+.techfair-scene{overflow:hidden}
+.techfair-header{text-align:center;padding:1.5rem 2rem .5rem;position:relative}
+.techfair-badge{display:inline-block;font-family:'VT323',monospace;font-size:.8rem;color:#0af;background:rgba(0,170,255,.06);border:1px solid rgba(0,170,255,.15);padding:.15rem .8rem;border-radius:3px;letter-spacing:2px;margin-bottom:.5rem}
+.techfair-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:8px;color:#fff;line-height:1}
+.techfair-title span{color:#0af;text-shadow:0 0 30px rgba(0,170,255,.3)}
+.techfair-sub{font-family:'VT323',monospace;color:#555;font-size:1rem;margin-top:.3rem}
+.techfair-ticker{overflow:hidden;margin:1rem auto;max-width:800px;background:rgba(0,170,255,.04);border:1px solid rgba(0,170,255,.08);border-radius:4px;padding:.3rem 0}
+.techfair-ticker-inner{display:inline-block;white-space:nowrap;font-family:'VT323',monospace;font-size:.85rem;color:#0af;animation:ticker 35s linear infinite}
+@keyframes ticker{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+
+.techfair-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;padding:1.5rem 2rem 3rem;max-width:1100px;margin:0 auto}
+.tf-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:1rem;position:relative;overflow:hidden;transition:all .25s;cursor:default}
+.tf-card:hover{border-color:var(--accent,#0af);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.tf-card-glow{position:absolute;top:-30px;right:-30px;width:80px;height:80px;border-radius:50%;background:var(--accent,#0af);opacity:.03;filter:blur(20px);transition:opacity .3s}
+.tf-card:hover .tf-card-glow{opacity:.08}
+.tf-avatar{width:42px;height:42px;border-radius:8px;overflow:hidden;margin-bottom:.6rem;image-rendering:pixelated;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05)}
+.tf-avatar svg{width:100%;height:100%;display:block}
+.tf-tag{display:inline-block;font-family:'VT323',monospace;font-size:.7rem;color:#fff;padding:.1rem .5rem;border-radius:3px;margin-bottom:.4rem;letter-spacing:1px}
+.tf-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:#fff;letter-spacing:1px;line-height:1.2;margin-bottom:.3rem}
+.tf-card p{font-family:'VT323',monospace;font-size:.85rem;color:#666;line-height:1.4}
+.tf-link{display:inline-block;font-family:'VT323',monospace;font-size:.8rem;color:var(--accent,#0af);text-decoration:none;margin-top:.5rem;transition:all .15s;opacity:.6}
+.tf-link:hover{opacity:1;text-shadow:0 0 8px var(--accent,#0af)}
+
+@media(max-width:600px){.techfair-grid{grid-template-columns:1fr;padding:1rem}}

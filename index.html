@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SkateRoom — Bonde Room</title>
+<title>SkateRoom</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛹</text></svg>">
 </head>
@@ -18,19 +18,69 @@
 <div class="hero-content">
 <div class="hero-badge">EST. 2026 · GUETO PESTANA</div>
 <h1 class="hero-title">SKATE<span class="hero-title-alt">ROOM</span></h1>
-<div class="hero-tagline">BONDE ROOM</div>
+<div class="hero-tagline"></div>
 <p class="hero-desc">Reúna o bonde, entre na sala e assistam juntos.<br>Como nos anos 90 — som alto, amigos por perto, rimas no ar.</p>
 <div class="hero-buttons"><a class="btn-cta" onclick="showPage('listen')">🎧 ENTRAR NA SALA</a><a class="btn-cta btn-cta--outline" onclick="showPage('about')">SOBRE</a></div>
 <div class="hero-icons"><span>🛹</span><span>🎤</span><span>🎧</span><span>📼</span><span>🔊</span></div>
 </div></section>
 <section class="features"><h2 class="section-title">🔥 Como Funciona</h2><div class="features-grid">
-<div class="feature-card"><div class="icon">🎭</div><h3>Escolha seu Player</h3><p>21 personagens pixel art — skatistas, rappers, b-boys, graffiteiros.</p></div>
+<div class="feature-card"><div class="icon">🎭</div><h3>Escolha seu Player</h3><p>12 personagens pixel art — skatistas, rappers, b-boys, graffiteiros.</p></div>
 <div class="feature-card"><div class="icon">🚪</div><h3>Entre na Sala</h3><p>Crie uma sala ou entre com o código do amigo.</p></div>
 <div class="feature-card"><div class="icon">📺</div><h3>Assistam Juntos</h3><p>Vídeos de skate passando na TV — sincronizados.</p></div>
 <div class="feature-card"><div class="icon">💬</div><h3>Chat do Bonde</h3><p>Conversa em tempo real enquanto curtem.</p></div>
 </div></section>
 <section class="char-section"><h2 class="section-title">🎭 Escolha seu Player</h2><p style="font-size:1.1rem;color:#555;margin-bottom:1.5rem">Selecione antes de entrar na sala</p><div class="char-grid" id="charGrid"></div></section>
-<section class="join-section"><div class="join-box"><h3>🚪 Entrar na Sala</h3><p>Cole o código do amigo ou crie uma nova</p><div class="join-input-row"><input type="text" class="join-input" id="joinCodeInput" placeholder="CÓDIGO DA SALA" maxlength="20"><button class="btn-cta" onclick="joinRoom()" style="font-size:.9rem;padding:.6rem 1.2rem">ENTRAR</button></div><div class="join-or">— ou —</div><button class="btn-cta btn-cta--gold" onclick="createRoom()" style="width:100%;justify-content:center">CRIAR NOVA SALA</button></div></section>
+<section class="join-section">
+<div class="join-gate">
+  <!-- SVG background scene — skate park entrance -->
+  <svg class="join-scene" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <defs><linearGradient id="jFlr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1612"/><stop offset="100%" stop-color="#0e0b08"/></linearGradient>
+    <filter id="jgl"><feGaussianBlur stdDeviation="6"/></filter></defs>
+    <rect width="600" height="200" fill="#0e0b08"/>
+    <!-- Concrete floor --><rect y="120" width="600" height="80" fill="url(#jFlr)"/>
+    <!-- Graffiti wall --><rect width="600" height="120" fill="#1e1812"/>
+    <text x="30" y="60" fill="#CC2936" font-family="'Permanent Marker',cursive" font-size="32" opacity=".08">SKATEROOM</text>
+    <text x="200" y="100" fill="#E8A317" font-family="'Permanent Marker',cursive" font-size="22" opacity=".06">GUETO PESTANA</text>
+    <!-- Neon arrow --><g opacity=".15" filter="url(#jgl)"><path d="M280,30 L300,15 L300,22 L340,22 L340,38 L300,38 L300,45Z" fill="#CC2936"/></g>
+    <g opacity=".15" filter="url(#jgl)"><path d="M280,30 L300,15 L300,22 L340,22 L340,38 L300,38 L300,45Z" fill="#FF2E2E"><animate attributeName="opacity" values=".05;.2;.05" dur="1.5s" repeatCount="indefinite"/></path></g>
+    <!-- Skaters --><g transform="translate(50,70) scale(1.5)"><rect x="10" y="3" width="12" height="10" fill="#D4A574"/><rect x="8" y="0" width="16" height="5" fill="#CC2936"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#111"/><rect x="8" y="23" width="6" height="8" fill="#2A3A5C"/><rect x="16" y="23" width="6" height="8" fill="#2A3A5C"/></g>
+    <g transform="translate(480,68) scale(1.5)"><rect x="10" y="3" width="12" height="10" fill="#8B6F4E"/><rect x="8" y="1" width="16" height="5" fill="#E8A317"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#E8A317"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/></g>
+    <!-- Skateboard --><rect x="100" y="145" width="40" height="6" rx="3" fill="#CC2936"/><ellipse cx="110" cy="153" rx="3" ry="2.5" fill="#333"/><ellipse cx="132" cy="153" rx="3" ry="2.5" fill="#333"/>
+    <rect x="440" y="148" width="40" height="6" rx="3" fill="#6B2D8B"/><ellipse cx="450" cy="156" rx="3" ry="2.5" fill="#333"/><ellipse cx="472" cy="156" rx="3" ry="2.5" fill="#333"/>
+    <!-- Neon strip --><rect x="0" y="118" width="600" height="3" fill="#CC2936" opacity=".15" filter="url(#jgl)"/>
+  </svg>
+
+  <!-- Entry card -->
+  <div class="join-card">
+    <div class="join-card-top">
+      <div class="join-neon-icon">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect x="12" y="5" width="16" height="30" rx="2" fill="none" stroke="#CC2936" stroke-width="2"/><rect x="18" y="8" width="4" height="4" rx="1" fill="#CC2936" opacity=".5"/><rect x="14" y="32" width="12" height="3" fill="#CC2936" opacity=".3"/><circle cx="20" cy="20" r="3" fill="#CC2936" opacity=".4"><animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/></circle></svg>
+      </div>
+      <h3 class="join-title">ENTRAR NO BONDE</h3>
+      <p class="join-subtitle">Cole o código ou crie sua sala</p>
+    </div>
+    <div class="join-card-body">
+      <div class="join-input-group">
+        <div class="join-input-wrap">
+          <span class="join-input-icon">#</span>
+          <input type="text" class="join-input" id="joinCodeInput" placeholder="CÓDIGO DA SALA" maxlength="20">
+        </div>
+        <button class="join-btn-enter" onclick="joinRoom()">ENTRAR →</button>
+      </div>
+      <div class="join-divider"><span>ou crie uma nova</span></div>
+      <button class="join-btn-create" onclick="createRoom()">
+        <span class="join-btn-create-icon">+</span>
+        CRIAR SALA
+      </button>
+      <div class="join-hints">
+        <span>🛹 Escolha seu personagem acima</span>
+        <span>👥 Convide o bonde com o código</span>
+        <span>📺 Assistam juntos na TV</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 <footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom</p></footer>
 </div>
 
@@ -39,111 +89,102 @@
 <div class="room-page">
 <div class="room-main">
   <div class="room-svg">
-    <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <defs>
-      <pattern id="brick" width="28" height="14" patternUnits="userSpaceOnUse"><rect width="28" height="14" fill="#2a1e16"/><rect x="0" y="0" width="13" height="6" fill="#30221a" rx=".4"/><rect x="15" y="0" width="13" height="6" fill="#2d1f17" rx=".4"/><rect x="7" y="8" width="13" height="6" fill="#30221a" rx=".4"/><rect x="22" y="8" width="6" height="6" fill="#2d1f17" rx=".4"/><rect x="0" y="8" width="5" height="6" fill="#2d1f17" rx=".4"/></pattern>
+      <pattern id="wood" width="100" height="16" patternUnits="userSpaceOnUse"><rect width="100" height="16" fill="#1e1a14"/><rect x="0" y="0" width="48" height="15" fill="#201c16" rx=".3"/><rect x="52" y="0" width="48" height="15" fill="#1c1812" rx=".3"/></pattern>
       <filter id="gl"><feGaussianBlur stdDeviation="5" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
-      <linearGradient id="flr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#181410"/><stop offset="100%" stop-color="#0a0806"/></linearGradient>
-      <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#1a1028"/></linearGradient>
+      <filter id="sh"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity=".5"/></filter>
+      <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1612"/><stop offset="100%" stop-color="#141210"/></linearGradient>
+      <linearGradient id="flrG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e1a14"/><stop offset="100%" stop-color="#141210"/></linearGradient>
+      <linearGradient id="sofaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a3828"/><stop offset="100%" stop-color="#2e2016"/></linearGradient>
     </defs>
 
-    <!-- WALL --><rect width="1000" height="310" fill="#2a1e16"/><rect width="1000" height="310" fill="url(#brick)"/>
-    <!-- FLOOR --><rect y="310" width="1000" height="290" fill="url(#flr)"/><rect y="310" width="1000" height="1.5" fill="#3a3020" opacity=".3"/>
-    <line x1="0" y1="370" x2="1000" y2="370" stroke="#1a1510" stroke-width=".5" opacity=".1"/><line x1="0" y1="430" x2="1000" y2="430" stroke="#1a1510" stroke-width=".5" opacity=".08"/><line x1="0" y1="490" x2="1000" y2="490" stroke="#1a1510" stroke-width=".5" opacity=".06"/>
-    <!-- Carpet --><rect x="260" y="370" width="480" height="170" rx="4" fill="#1e1410" opacity=".3"/><rect x="263" y="373" width="474" height="164" rx="3" fill="none" stroke="#CC2936" stroke-width=".5" opacity=".07"/>
-
-    <!-- === WINDOWS with night city view === -->
-    <!-- Left window --><rect x="20" y="30" width="100" height="140" rx="2" fill="#1a1612" stroke="#3a3020" stroke-width="2.5"/>
-    <rect x="25" y="35" width="90" height="130" rx="1" fill="url(#nightSky)"/>
-    <!-- Window cross bars --><line x1="70" y1="35" x2="70" y2="165" stroke="#3a3020" stroke-width="2"/><line x1="25" y1="100" x2="115" y2="100" stroke="#3a3020" stroke-width="2"/>
-    <!-- Moon --><circle cx="50" cy="55" r="6" fill="#E8D9A0" opacity=".6"/>
-    <!-- Stars --><circle cx="38" cy="45" r="1" fill="#fff" opacity=".4"/><circle cx="90" cy="50" r="1" fill="#fff" opacity=".3"/><circle cx="100" cy="70" r=".8" fill="#fff" opacity=".35"/><circle cx="60" cy="80" r=".8" fill="#fff" opacity=".25"/>
-    <!-- City silhouette --><rect x="25" y="120" width="12" height="45" fill="#151020" opacity=".7"/><rect x="40" y="110" width="8" height="55" fill="#151020" opacity=".6"/><rect x="52" y="125" width="15" height="40" fill="#151020" opacity=".7"/><rect x="75" y="115" width="10" height="50" fill="#151020" opacity=".6"/><rect x="90" y="130" width="14" height="35" fill="#151020" opacity=".7"/>
-    <!-- Tiny window lights --><rect x="28" y="125" width="2" height="2" fill="#E8A317" opacity=".4"/><rect x="32" y="132" width="2" height="2" fill="#E8A317" opacity=".3"/><rect x="43" y="118" width="2" height="2" fill="#FFD700" opacity=".4"/><rect x="78" y="120" width="2" height="2" fill="#E8A317" opacity=".35"/><rect x="93" y="135" width="2" height="2" fill="#FFD700" opacity=".3"/>
-
-    <!-- Right window --><rect x="880" y="30" width="100" height="140" rx="2" fill="#1a1612" stroke="#3a3020" stroke-width="2.5"/>
-    <rect x="885" y="35" width="90" height="130" rx="1" fill="url(#nightSky)"/>
-    <line x1="930" y1="35" x2="930" y2="165" stroke="#3a3020" stroke-width="2"/><line x1="885" y1="100" x2="975" y2="100" stroke="#3a3020" stroke-width="2"/>
-    <circle cx="960" cy="55" r="4" fill="#E8D9A0" opacity=".3"/>
-    <circle cx="900" cy="48" r="1" fill="#fff" opacity=".3"/><circle cx="950" cy="65" r=".8" fill="#fff" opacity=".25"/>
-    <rect x="885" y="120" width="10" height="45" fill="#151020" opacity=".7"/><rect x="900" y="108" width="12" height="57" fill="#151020" opacity=".6"/><rect x="918" y="122" width="14" height="43" fill="#151020" opacity=".7"/><rect x="940" y="115" width="8" height="50" fill="#151020" opacity=".6"/><rect x="955" y="128" width="16" height="37" fill="#151020" opacity=".7"/>
-    <rect x="903" y="115" width="2" height="2" fill="#E8A317" opacity=".35"/><rect x="922" y="128" width="2" height="2" fill="#FFD700" opacity=".3"/><rect x="958" y="133" width="2" height="2" fill="#E8A317" opacity=".4"/>
-
-    <!-- === CEILING LIGHTS === -->
-    <!-- Hanging bulb left --><line x1="200" y1="0" x2="200" y2="18" stroke="#444" stroke-width="1"/><circle cx="200" cy="22" r="5" fill="#E8A317" opacity=".25" filter="url(#gl)"/><circle cx="200" cy="22" r="3" fill="#FFD700" opacity=".4"/>
-    <!-- Hanging bulb center --><line x1="500" y1="0" x2="500" y2="14" stroke="#444" stroke-width="1"/><circle cx="500" cy="18" r="6" fill="#CC2936" opacity=".2" filter="url(#gl)"/><circle cx="500" cy="18" r="3.5" fill="#FF2E2E" opacity=".35"/>
-    <!-- Hanging bulb right --><line x1="800" y1="0" x2="800" y2="18" stroke="#444" stroke-width="1"/><circle cx="800" cy="22" r="5" fill="#6B2D8B" opacity=".2" filter="url(#gl)"/><circle cx="800" cy="22" r="3" fill="#9B4DCA" opacity=".35"/>
-    <!-- Neon tube --><rect x="300" y="4" width="400" height="3" rx="1.5" fill="#CC2936" opacity=".25" filter="url(#gl)"/><rect x="300" y="4" width="400" height="3" rx="1.5" fill="#FF2E2E" opacity=".06"><animate attributeName="opacity" values=".03;.1;.03" dur="3s" repeatCount="indefinite"/></rect>
-    <!-- Light cones on floor --><ellipse cx="200" cy="310" rx="80" ry="15" fill="#E8A317" opacity=".012"/><ellipse cx="500" cy="310" rx="100" ry="18" fill="#CC2936" opacity=".01"/><ellipse cx="800" cy="310" rx="80" ry="15" fill="#6B2D8B" opacity=".01"/>
-
-    <!-- === GRAFFITI WILDSTYLE left wall === -->
-    <g transform="translate(135,40)" opacity=".55">
-      <path d="M5,75 L15,50 Q20,35 30,45 L25,60 Q20,70 10,65Z" fill="#CC2936" opacity=".7"/>
-      <path d="M30,75 L38,35 L52,50 L48,35 L58,30 L42,75Z" fill="#E8A317" opacity=".7"/>
-      <path d="M55,75 L68,30 L80,75 L72,55 L62,55Z" fill="#6B2D8B" opacity=".7"/>
-      <path d="M82,35 L100,35 L98,43 L92,43 L90,75 L85,75 L83,43 L78,43Z" fill="#CC2936" opacity=".6"/>
-      <path d="M103,35 L122,35 L120,43 L112,43 L111,50 L120,50 L118,58 L110,58 L108,67 L125,67 L123,75 L100,75Z" fill="#E8A317" opacity=".6"/>
-      <line x1="15" y1="75" x2="15" y2="90" stroke="#CC2936" stroke-width="1.5" opacity=".35" stroke-linecap="round"/>
-      <line x1="68" y1="75" x2="68" y2="88" stroke="#6B2D8B" stroke-width="1.5" opacity=".35" stroke-linecap="round"/>
-      <line x1="115" y1="75" x2="115" y2="85" stroke="#E8A317" stroke-width="1.2" opacity=".3" stroke-linecap="round"/>
-      <text x="130" y="40" fill="#FFD700" font-size="9" opacity=".35">★</text>
+    <!-- === WALL — graffiti mural background === -->
+    <rect width="1000" height="280" fill="#181410"/>
+    <!-- Big colorful graffiti wall -->
+    <g opacity=".12">
+      <rect x="0" y="0" width="1000" height="280" fill="#1a1612"/>
+      <!-- Giant "GUETO PESTANA" graffiti wildstyle -->
+      <text x="50" y="180" fill="#CC2936" font-family="'Permanent Marker',cursive" font-size="80" opacity=".4" transform="rotate(-3 50 180)">GUETO</text>
+      <text x="280" y="260" fill="#E8A317" font-family="'Permanent Marker',cursive" font-size="70" opacity=".35" transform="rotate(2 280 260)">PESTANA</text>
+      <!-- Splashes and drips -->
+      <circle cx="120" cy="100" r="40" fill="#CC2936" opacity=".3"/><circle cx="400" cy="60" r="30" fill="#6B2D8B" opacity=".25"/><circle cx="700" cy="80" r="35" fill="#E8A317" opacity=".2"/><circle cx="850" cy="120" r="28" fill="#CC2936" opacity=".25"/>
+      <circle cx="200" cy="200" r="25" fill="#E84393" opacity=".2"/><circle cx="600" cy="150" r="45" fill="#6B2D8B" opacity=".15"/><circle cx="900" cy="200" r="30" fill="#E8A317" opacity=".2"/>
+      <!-- Drip lines --><line x1="120" y1="140" x2="120" y2="200" stroke="#CC2936" stroke-width="4" opacity=".3" stroke-linecap="round"/><line x1="400" y1="90" x2="400" y2="140" stroke="#6B2D8B" stroke-width="3" opacity=".25" stroke-linecap="round"/><line x1="700" y1="115" x2="700" y2="170" stroke="#E8A317" stroke-width="3" opacity=".2" stroke-linecap="round"/><line x1="850" y1="148" x2="850" y2="195" stroke="#CC2936" stroke-width="3" opacity=".2" stroke-linecap="round"/>
+      <!-- Stars and tags --><text x="30" y="50" fill="#FFD700" font-size="20" opacity=".3">★</text><text x="550" y="40" fill="#CC2936" font-size="16" opacity=".3">★</text><text x="950" y="50" fill="#6B2D8B" font-size="18" opacity=".3">★</text>
+      <text x="50" y="270" fill="#6B2D8B" font-family="'Permanent Marker',cursive" font-size="14" opacity=".3">WEST SIDE</text>
+      <text x="800" y="270" fill="#CC2936" font-family="'Permanent Marker',cursive" font-size="12" opacity=".3">EST. 2026</text>
     </g>
-    <text x="140" y="185" fill="#E8A317" font-family="'Permanent Marker',cursive" font-size="16" opacity=".1" transform="rotate(-1 140 185)">COMPTON</text>
+    <!-- Baseboard --><rect y="276" width="1000" height="6" fill="#1a1610"/>
+    <!-- FLOOR --><rect y="280" width="1000" height="240" fill="url(#flrG)"/><rect y="280" width="1000" height="240" fill="url(#wood)" opacity=".15"/>
 
-    <!-- N.W.A throw-up right --><g transform="translate(762,45)" opacity=".4">
-      <ellipse cx="18" cy="22" rx="18" ry="20" fill="#CC2936" opacity=".3" stroke="#CC2936" stroke-width="1.2"/>
-      <ellipse cx="50" cy="22" rx="18" ry="20" fill="#E8A317" opacity=".3" stroke="#E8A317" stroke-width="1.2"/>
-      <ellipse cx="82" cy="22" rx="18" ry="20" fill="#6B2D8B" opacity=".3" stroke="#6B2D8B" stroke-width="1.2"/>
-      <text x="5" y="28" fill="#fff" font-family="'Bangers',cursive" font-size="15" opacity=".55" letter-spacing="3">N.W.A</text>
-    </g>
+    <!-- NEON STRIP --><rect x="200" y="3" width="600" height="3" rx="1.5" fill="#CC2936" opacity=".2" filter="url(#gl)"/>
+    <!-- LIGHTS --><line x1="250" y1="0" x2="250" y2="18" stroke="#333" stroke-width="1"/><circle cx="250" cy="22" r="4" fill="#E8A317" opacity=".35"/>
+    <line x1="500" y1="0" x2="500" y2="14" stroke="#333" stroke-width="1"/><circle cx="500" cy="18" r="4" fill="#CC2936" opacity=".3"/>
+    <line x1="750" y1="0" x2="750" y2="18" stroke="#333" stroke-width="1"/><circle cx="750" cy="22" r="4" fill="#6B2D8B" opacity=".3"/>
 
-    <!-- === ALBUM POSTERS (framed) === -->
-    <g transform="translate(140,195)"><rect x="-2" y="-2" width="40" height="52" fill="#333" rx="1"/><rect width="36" height="48" fill="#CC2936" rx="1"/><rect x="2" y="2" width="32" height="44" fill="#1a0a08"/><rect x="8" y="6" width="20" height="16" fill="#8B6F4E"/><rect x="11" y="11" width="3" height="2" fill="#111"/><rect x="18" y="11" width="3" height="2" fill="#111"/><rect x="12" y="22" width="10" height="1.5" fill="#FFD700"/><text x="18" y="38" fill="#CC2936" font-family="'Bangers',cursive" font-size="6" text-anchor="middle">2PAC</text></g>
-    <g transform="translate(195,200)"><rect x="-2" y="-2" width="40" height="50" fill="#333" rx="1"/><rect width="36" height="46" fill="#E8A317" rx="1"/><rect x="2" y="2" width="32" height="42" fill="#0a0806"/><rect x="8" y="4" width="20" height="16" fill="#5C3D2E"/><rect x="10" y="3" width="14" height="4" fill="#FFD700"/><text x="18" y="34" fill="#E8A317" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">B.I.G.</text></g>
-    <g transform="translate(250,197)"><rect x="-2" y="-2" width="38" height="50" fill="#333" rx="1"/><rect width="34" height="46" fill="#2A3A5C" rx="1"/><rect x="2" y="2" width="30" height="42" fill="#0a0a14"/><rect x="6" y="6" width="22" height="16" fill="#6B4423"/><rect x="10" y="12" width="3" height="2" fill="#111"/><rect x="17" y="12" width="3" height="2" fill="#111"/><text x="17" y="36" fill="#E8A317" font-family="'Bangers',cursive" font-size="7" text-anchor="middle">NAS</text></g>
+    <!-- ============ LEFT SIDE — DJ STAGE ============ -->
+    <!-- Stage platform --><rect x="10" y="260" width="200" height="22" rx="3" fill="#1e1812" filter="url(#sh)"/><rect x="14" y="262" width="192" height="3" fill="#CC2936" opacity=".3"/>
+    <!-- DJ Table --><rect x="60" y="218" width="100" height="42" rx="3" fill="#1a1410" stroke="#2a2218" stroke-width="1" filter="url(#sh)"/>
+    <!-- Turntables --><circle cx="90" cy="235" r="14" fill="#0a0806" stroke="#2a2218" stroke-width=".6"/><circle cx="90" cy="235" r="5" fill="#141210"/><circle cx="90" cy="235" r="1.5" fill="#CC2936"/>
+    <circle cx="130" cy="235" r="12" fill="#0a0806" stroke="#2a2218" stroke-width=".6"/><circle cx="130" cy="235" r="4" fill="#141210"/><circle cx="130" cy="235" r="1.2" fill="#E8A317"/>
+    <!-- Tonearm --><line x1="100" y1="224" x2="93" y2="232" stroke="#888" stroke-width="1" stroke-linecap="round"/>
+    <!-- Mixer --><rect x="105" y="228" width="14" height="12" rx="1" fill="#1e1812" stroke="#333" stroke-width=".3"/>
+    <!-- DJ character --><g transform="translate(85,170) scale(1.1)"><rect x="8" y="0" width="16" height="5" fill="#222"/><rect x="6" y="2" width="20" height="6" fill="#222"/><rect x="6" y="3" width="3" height="5" fill="#FFD700"/><rect x="23" y="3" width="3" height="5" fill="#FFD700"/><rect x="10" y="6" width="12" height="10" fill="#6B4423"/><rect x="12" y="9" width="2" height="2" fill="#111"/><rect x="18" y="9" width="2" height="2" fill="#111"/><rect x="8" y="16" width="16" height="12" fill="#111"/><rect x="4" y="18" width="4" height="10" fill="#111"/><rect x="24" y="18" width="4" height="10" fill="#111"/><rect x="10" y="28" width="5" height="8" fill="#2A3A5C"/><rect x="17" y="28" width="5" height="8" fill="#2A3A5C"/></g>
+    <!-- Speakers --><rect x="20" y="230" width="30" height="30" rx="2" fill="#111" stroke="#222" stroke-width="1"/><circle cx="35" cy="248" r="8" fill="#1a1a1a" stroke="#333" stroke-width=".5"/><circle cx="35" cy="248" r="3" fill="#222"/>
+    <rect x="170" y="232" width="28" height="28" rx="2" fill="#111" stroke="#222" stroke-width="1"/><circle cx="184" cy="249" r="7" fill="#1a1a1a" stroke="#333" stroke-width=".5"/><circle cx="184" cy="249" r="2.5" fill="#222"/>
+    <!-- Neon "LIVE DJ" sign --><rect x="75" y="155" width="70" height="14" rx="3" fill="#111" opacity=".6"/><text x="110" y="165" fill="#CC2936" font-family="'Bebas Neue',sans-serif" font-size="10" text-anchor="middle" letter-spacing="3" filter="url(#gl)">LIVE DJ</text>
+    <!-- People near DJ -->
+    <g transform="translate(20,285) scale(.85)"><rect x="10" y="3" width="12" height="10" fill="#8B6F4E"/><rect x="8" y="0" width="16" height="5" fill="#CC2936"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#CC2936"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/></g>
+    <g transform="translate(55,290) scale(.8)"><rect x="10" y="3" width="12" height="10" fill="#D4A574"/><rect x="6" y="0" width="20" height="7" fill="#E84393"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#6B2D8B"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/></g>
+    <g transform="translate(120,287) scale(.85)"><rect x="10" y="3" width="12" height="10" fill="#6B4423"/><rect x="8" y="2" width="16" height="4" fill="#E8A317"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#E8A317"/><rect x="8" y="23" width="6" height="8" fill="#2A3A5C"/><rect x="16" y="23" width="6" height="8" fill="#2A3A5C"/></g>
+    <!-- Red cups --><rect x="28" y="316" width="4" height="6" rx="1" fill="#CC2936"/><rect x="75" y="318" width="4" height="6" rx="1" fill="#CC2936"/><rect x="145" y="316" width="4" height="6" rx="1" fill="#CC2936"/>
+    <!-- Dance floor lights --><ellipse cx="110" cy="290" rx="80" ry="10" fill="#CC2936" opacity=".015"/>
 
-    <!-- Skate decks on nails --><g transform="translate(300,180)"><circle cx="4" cy="0" r="1.5" fill="#777"/><rect x="0" y="2" width="8" height="45" rx="4" fill="#CC2936"/><rect x="2" y="10" width="4" height="13" fill="#E8A317" opacity=".5"/><circle cx="4" cy="5" r="2" fill="#333"/><circle cx="4" cy="43" r="2" fill="#333"/></g>
-    <g transform="translate(318,184)"><circle cx="4" cy="0" r="1.5" fill="#777"/><rect x="0" y="2" width="8" height="42" rx="4" fill="#6B2D8B"/><circle cx="4" cy="5" r="2" fill="#333"/><circle cx="4" cy="40" r="2" fill="#333"/></g>
-    <g transform="translate(336,182)"><circle cx="4" cy="0" r="1.5" fill="#777"/><rect x="0" y="2" width="8" height="43" rx="4" fill="#111"/><rect x="3" y="5" width="2" height="34" fill="#E8A317" opacity=".4"/><circle cx="4" cy="5" r="2" fill="#333"/><circle cx="4" cy="41" r="2" fill="#333"/></g>
+    <!-- ============ RIGHT SIDE — SKATE SHOP / CONVENIENCE ============ -->
+    <!-- Counter --><rect x="800" y="260" width="185" height="22" rx="3" fill="#2a1f14" filter="url(#sh)"/><rect x="804" y="262" width="177" height="3" fill="#E8A317" opacity=".3"/>
+    <!-- Shelves on wall --><rect x="810" y="170" width="170" height="4" fill="#2a1f14"/><rect x="810" y="210" width="170" height="4" fill="#2a1f14"/>
+    <!-- Products on shelves --><rect x="818" y="158" width="10" height="12" rx="1" fill="#CC2936" opacity=".6"/><rect x="834" y="160" width="10" height="10" rx="1" fill="#E8A317" opacity=".6"/><rect x="850" y="157" width="10" height="13" rx="1" fill="#6B2D8B" opacity=".6"/><rect x="866" y="159" width="10" height="11" rx="1" fill="#fff" opacity=".4"/><rect x="882" y="158" width="10" height="12" rx="1" fill="#CC2936" opacity=".5"/><rect x="898" y="160" width="10" height="10" rx="1" fill="#556B2F" opacity=".5"/>
+    <rect x="820" y="198" width="8" height="12" rx="1" fill="#E84393" opacity=".5"/><rect x="834" y="200" width="8" height="10" rx="1" fill="#E8A317" opacity=".5"/><rect x="848" y="197" width="8" height="13" rx="1" fill="#CC2936" opacity=".5"/><rect x="862" y="199" width="8" height="11" rx="1" fill="#2A3A5C" opacity=".5"/><rect x="876" y="198" width="8" height="12" rx="1" fill="#fff" opacity=".4"/>
+    <!-- Sign --><rect x="835" y="140" width="110" height="18" rx="2" fill="#111" opacity=".5"/><text x="890" y="153" fill="#E8A317" font-family="'Bebas Neue',sans-serif" font-size="10" text-anchor="middle" letter-spacing="2">SKATE SHOP</text>
+    <!-- Decks display --><rect x="920" y="155" width="6" height="40" rx="3" fill="#CC2936" opacity=".6"/><rect x="932" y="158" width="6" height="37" rx="3" fill="#6B2D8B" opacity=".6"/><rect x="944" y="156" width="6" height="39" rx="3" fill="#E8A317" opacity=".6"/><rect x="956" y="157" width="6" height="38" rx="3" fill="#111" opacity=".6"/>
+    <!-- Cash register --><rect x="930" y="245" width="20" height="15" rx="2" fill="#333"/><rect x="932" y="248" width="16" height="6" rx="1" fill="#1a1a1a"/>
+    <!-- Snack display --><rect x="810" y="248" width="14" height="12" rx="1.5" fill="#CC2936" opacity=".6"/><rect x="828" y="249" width="14" height="11" rx="1.5" fill="#E8A317" opacity=".6"/><rect x="846" y="248" width="14" height="12" rx="1.5" fill="#556B2F" opacity=".6"/>
+    <!-- People at tables -->
+    <!-- Table --><rect x="820" y="310" width="45" height="5" rx="1" fill="#2a1f14"/><rect x="825" y="315" width="3" height="18" fill="#1e1812"/><rect x="857" y="315" width="3" height="18" fill="#1e1812"/>
+    <!-- Food/drinks --><rect x="828" y="305" width="6" height="5" rx="1" fill="#CC2936"/><rect x="838" y="304" width="8" height="6" rx="1" fill="#E8A317" opacity=".6"/><rect x="852" y="305" width="5" height="5" rx="1" fill="#556B2F"/>
+    <!-- Person eating 1 --><g transform="translate(810,284) scale(.8)"><rect x="10" y="3" width="12" height="10" fill="#DEBA9C"/><rect x="8" y="1" width="16" height="5" fill="#E8A317"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#fff"/><rect x="10" y="15" width="12" height="4" fill="#CC2936"/><rect x="8" y="23" width="6" height="8" fill="#2A3A5C"/><rect x="16" y="23" width="6" height="8" fill="#2A3A5C"/></g>
+    <!-- Person eating 2 --><g transform="translate(855,286) scale(.8)"><rect x="10" y="3" width="12" height="10" fill="#8B6F4E"/><rect x="8" y="0" width="16" height="6" fill="#111"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#6B2D8B"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/></g>
+    <!-- Second table --><rect x="900" y="340" width="40" height="5" rx="1" fill="#2a1f14"/><rect x="905" y="345" width="3" height="16" fill="#1e1812"/><rect x="932" y="345" width="3" height="16" fill="#1e1812"/>
+    <rect x="908" y="335" width="6" height="5" rx="1" fill="#CC2936"/><rect x="920" y="334" width="8" height="6" rx="1" fill="#E8A317" opacity=".5"/>
+    <g transform="translate(895,314) scale(.75)"><rect x="10" y="3" width="12" height="10" fill="#D4A574"/><rect x="8" y="2" width="16" height="4" fill="#E84393"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#E84393"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/></g>
+    <g transform="translate(935,316) scale(.75)"><rect x="10" y="3" width="12" height="10" fill="#6B4423"/><rect x="8" y="1" width="16" height="5" fill="#2A3A5C"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#2A3A5C"/><rect x="8" y="23" width="6" height="8" fill="#333"/><rect x="16" y="23" width="6" height="8" fill="#333"/></g>
 
-    <!-- Right wall posters --><g transform="translate(680,195)"><rect x="-2" y="-2" width="40" height="52" fill="#333" rx="1"/><rect width="36" height="48" fill="#E8A317" rx="1"/><rect x="2" y="2" width="32" height="44" fill="#111"/><rect x="7" y="8" width="4" height="14" fill="#E8A317"/><rect x="13" y="12" width="4" height="10" fill="#E8A317"/><rect x="19" y="8" width="4" height="14" fill="#E8A317"/><rect x="25" y="12" width="4" height="10" fill="#E8A317"/><rect x="9" y="22" width="18" height="2" fill="#E8A317"/><text x="18" y="40" fill="#E8A317" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">WU-TANG</text></g>
-    <g transform="translate(735,198)"><rect x="-2" y="-2" width="38" height="48" fill="#333" rx="1"/><rect width="34" height="44" fill="#111" rx="1" stroke="#E8A317" stroke-width=".5"/><rect x="2" y="2" width="30" height="40" fill="#0a0806"/><rect x="7" y="6" width="20" height="16" fill="#6B4423"/><path d="M5,9 C5,4 29,4 29,9" fill="none" stroke="#222" stroke-width="2"/><rect x="3" y="7" width="4" height="5" rx="1" fill="#222"/><rect x="27" y="7" width="4" height="5" rx="1" fill="#222"/><text x="17" y="34" fill="#CC2936" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">DR. DRE</text></g>
+    <!-- ============ CENTER — TV + SOFA ============ -->
+    <!-- Shelf --><rect x="350" y="42" width="300" height="4" fill="#2a1f14" filter="url(#sh)"/>
+    <circle cx="368" cy="34" r="7" fill="#111" stroke="#2a2218" stroke-width=".5"/><circle cx="386" cy="33" r="7" fill="#111" stroke="#2a2218" stroke-width=".5"/>
+    <rect x="408" y="30" width="6" height="11" rx="2.5" fill="#CC2936"/><rect x="418" y="31" width="6" height="10" rx="2.5" fill="#E8A317"/><rect x="428" y="30" width="6" height="11" rx="2.5" fill="#6B2D8B"/>
+    <rect x="450" y="28" width="32" height="14" rx="2.5" fill="#1a1410" stroke="#2a2218" stroke-width=".3"/><circle cx="460" cy="35" r="4.5" fill="#0a0806"/><circle cx="474" cy="35" r="4.5" fill="#0a0806"/>
+    <rect x="500" y="33" width="8" height="5" rx="1" fill="#E8A317" opacity=".4"/><rect x="514" y="33" width="8" height="5" rx="1" fill="#CC2936" opacity=".4"/>
+    <rect x="538" y="26" width="14" height="18" rx="1" fill="#2a2218"/><rect x="560" y="28" width="12" height="16" rx="1" fill="#2a2218"/>
+    <rect x="588" y="32" width="8" height="10" rx="2.5" fill="#3a2a1e"/><ellipse cx="592" cy="28" rx="6" ry="5" fill="#2d6a1e" opacity=".5"/>
 
-    <!-- Small "THRASHER" poster frame --><g transform="translate(660,45)"><rect x="-1" y="-1" width="30" height="38" fill="#333" rx="1"/><rect width="28" height="36" fill="#CC2936" rx="1"/><rect x="2" y="2" width="24" height="32" fill="#1a0a08"/><text x="14" y="16" fill="#CC2936" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">THRASHER</text><text x="14" y="26" fill="#E8A317" font-family="'VT323',monospace" font-size="4" text-anchor="middle">MAG</text></g>
-    <!-- Small "SKATEROOM" poster --><g transform="translate(700,48)"><rect x="-1" y="-1" width="30" height="36" fill="#333" rx="1"/><rect width="28" height="34" fill="#6B2D8B" rx="1"/><rect x="2" y="2" width="24" height="30" fill="#1a0a18"/><text x="14" y="16" fill="#CC2936" font-family="'Rubik Glitch',cursive" font-size="4" text-anchor="middle">SKATE</text><text x="14" y="24" fill="#E8A317" font-family="'Rubik Glitch',cursive" font-size="4" text-anchor="middle">ROOM</text></g>
+    <!-- LIVE --><text x="660" y="28" fill="#FF2E2E" font-family="'Bebas Neue',sans-serif" font-size="13" opacity=".3" letter-spacing="2" filter="url(#gl)">● LIVE</text>
 
-    <!-- LIVE neon --><g filter="url(#gl)"><text x="740" y="32" fill="#FF2E2E" font-family="'Rubik Glitch',cursive" font-size="13" opacity=".4">● LIVE</text><text x="740" y="32" fill="#FF2E2E" font-family="'Rubik Glitch',cursive" font-size="13" opacity=".1"><animate attributeName="opacity" values=".04;.25;.04" dur="1.5s" repeatCount="indefinite"/></text></g>
+    <!-- TV --><rect x="320" y="50" width="360" height="252" rx="6" fill="#111" filter="url(#sh)"/><rect x="322" y="52" width="356" height="248" rx="5" fill="#0e0e0e"/>
+    <rect x="330" y="60" width="340" height="240" rx="2" fill="#000"/>
+    <circle cx="648" cy="296" r="2" fill="#CC2936" opacity=".6"><animate attributeName="opacity" values=".3;.8;.3" dur="2s" repeatCount="indefinite"/></circle>
+    <rect x="380" y="302" width="240" height="10" rx="3" fill="#1e1812" filter="url(#sh)"/><rect x="420" y="310" width="50" height="10" rx="2" fill="#181410"/><rect x="530" y="310" width="50" height="10" rx="2" fill="#181410"/>
 
-    <!-- Shelf above TV --><rect x="370" y="50" width="260" height="4" fill="#2a1f14"/><rect x="370" y="50" width="260" height="1.5" fill="#3a2f24"/>
-    <circle cx="385" cy="42" r="7" fill="#111" stroke="#333" stroke-width=".5"/><circle cx="385" cy="42" r="2.5" fill="#1a0a08"/>
-    <circle cx="403" cy="41" r="7" fill="#111" stroke="#333" stroke-width=".5"/><circle cx="403" cy="41" r="2.5" fill="#CC2936" opacity=".15"/>
-    <rect x="425" y="39" width="6" height="10" rx="2" fill="#CC2936"/><rect x="435" y="40" width="6" height="9" rx="2" fill="#E8A317"/><rect x="445" y="39" width="6" height="10" rx="2" fill="#6B2D8B"/>
-    <rect x="465" y="36" width="30" height="13" rx="2.5" fill="#1a1410" stroke="#333" stroke-width=".3"/><circle cx="475" cy="43" r="4.5" fill="#0a0806" stroke="#CC2936" stroke-width=".3"/><circle cx="489" cy="43" r="4.5" fill="#0a0806" stroke="#CC2936" stroke-width=".3"/>
-    <rect x="510" y="41" width="7" height="5" rx="1" fill="#E8A317" opacity=".4"/><rect x="522" y="41" width="7" height="5" rx="1" fill="#CC2936" opacity=".4"/><rect x="534" y="41" width="7" height="5" rx="1" fill="#6B2D8B" opacity=".4"/>
-    <!-- Framed photo on shelf --><rect x="560" y="32" width="16" height="20" rx="1" fill="#333"/><rect x="562" y="34" width="12" height="16" fill="#2A3A5C" opacity=".5"/>
-    <rect x="585" y="34" width="14" height="18" rx="1" fill="#333"/><rect x="587" y="36" width="10" height="14" fill="#CC2936" opacity=".3"/>
-    <!-- Plant --><rect x="612" y="40" width="8" height="10" rx="2" fill="#3a2a1e"/><rect x="614" y="30" width="2" height="12" fill="#2d5a1e"/><ellipse cx="615" cy="28" rx="5" ry="4" fill="#2d5a1e" opacity=".6"/><ellipse cx="618" cy="32" rx="4" ry="3" fill="#3a7a2e" opacity=".5"/>
+    <!-- SOFA --><path d="M240 345 Q500 332 760 345 L765 378 Q500 388 235 378Z" fill="url(#sofaG)" filter="url(#sh)"/>
+    <path d="M244 374 Q500 382 756 374 L760 420 Q500 430 240 420Z" fill="#3a2a1e"/>
+    <rect x="248" y="377" width="124" height="40" rx="4" fill="#4a3828"/><rect x="378" y="377" width="124" height="40" rx="4" fill="#42301e"/><rect x="508" y="377" width="124" height="40" rx="4" fill="#4a3828"/><rect x="636" y="377" width="118" height="40" rx="4" fill="#42301e"/>
+    <rect x="228" y="348" width="14" height="72" rx="5" fill="#3a2a1e" filter="url(#sh)"/><rect x="762" y="348" width="14" height="72" rx="5" fill="#3a2a1e" filter="url(#sh)"/>
+    <rect x="258" y="350" width="18" height="14" rx="3" fill="#CC2936" opacity=".35" transform="rotate(-6 267 357)"/>
+    <rect x="720" y="350" width="18" height="14" rx="3" fill="#6B2D8B" opacity=".35" transform="rotate(6 729 357)"/>
 
-    <!-- ====== BIGGER TV ====== -->
-    <!-- TV Cabinet --><rect x="355" y="278" width="290" height="14" rx="3" fill="#2a1f14"/><rect x="400" y="290" width="60" height="14" rx="2" fill="#1e1812"/><rect x="540" y="290" width="60" height="14" rx="2" fill="#1e1812"/>
-    <!-- TV frame (bigger: 280x230) --><rect x="358" y="55" width="284" height="226" rx="6" fill="#1a1612" stroke="#2a2420" stroke-width="3"/>
-    <!-- TV screen --><rect x="364" y="61" width="272" height="214" rx="3" fill="#000"/>
-    <!-- LED --><circle cx="610" cy="272" r="2.5" fill="#CC2936" opacity=".7"><animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/></circle>
-    <text x="500" y="288" fill="#333" font-family="'VT323',monospace" font-size="6" text-anchor="middle">TRINITRON</text>
-    <!-- Glow --><ellipse cx="500" cy="160" rx="160" ry="60" fill="#2A3A5C" opacity=".02"><animate attributeName="opacity" values=".01;.035;.01" dur="5s" repeatCount="indefinite"/></ellipse>
+    <!-- Skateboard --><rect x="430" y="440" width="48" height="7" rx="3.5" fill="#E8A317" filter="url(#sh)"/><ellipse cx="442" cy="449" rx="3.5" ry="3" fill="#333"/><ellipse cx="470" cy="449" rx="3.5" ry="3" fill="#333"/>
 
-    <!-- ====== BIG SOFA centered facing TV ====== -->
-    <rect x="290" y="385" width="420" height="65" rx="10" fill="#3a2a1e"/>
-    <rect x="298" y="366" width="404" height="24" rx="7" fill="#4a3828"/>
-    <rect x="304" y="390" width="98" height="55" rx="6" fill="#4a3828"/><rect x="408" y="390" width="98" height="55" rx="6" fill="#42301e"/><rect x="512" y="390" width="98" height="55" rx="6" fill="#4a3828"/><rect x="614" y="390" width="90" height="55" rx="6" fill="#42301e"/>
-    <rect x="280" y="372" width="16" height="78" rx="5" fill="#3a2a1e"/><rect x="710" y="372" width="16" height="78" rx="5" fill="#3a2a1e"/>
-    <!-- Throw pillows --><rect x="312" y="374" width="20" height="15" rx="4" fill="#CC2936" opacity=".45"/><rect x="672" y="374" width="20" height="15" rx="4" fill="#6B2D8B" opacity=".45"/><rect x="492" y="374" width="18" height="13" rx="3" fill="#E8A317" opacity=".3"/>
-
-    <!-- Skateboard on floor --><rect x="470" y="470" width="50" height="8" rx="4" fill="#E8A317"/><circle cx="482" cy="480" r="3.5" fill="#333" stroke="#555" stroke-width=".4"/><circle cx="512" cy="480" r="3.5" fill="#333" stroke="#555" stroke-width=".4"/>
-
-    <!-- Smoke/haze --><g opacity=".02"><ellipse cx="300" cy="340" rx="60" ry="18" fill="#888"/><ellipse cx="700" cy="330" rx="50" ry="15" fill="#888"/></g>
-
-    <!-- Crew Characters sit here (JS places them on sofa) -->
     <g id="crewCharacters"></g>
     </svg>
   </div>
@@ -229,7 +270,7 @@
 <img src="img/avatar.jpg" alt="Guilherme" style="width:90px;height:90px;border-radius:50%;border:3px solid var(--blood-red);object-fit:cover">
 <div>
 <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--neon-red);letter-spacing:2px">@ognistie</h3>
-<p style="color:var(--amber);font-size:1rem">Cloud Engineer · DevOps · Automação</p>
+<p style="color:var(--amber);font-size:1rem">Cloud · IA · Automação</p>
 <p style="color:#666;font-size:.9rem;margin-top:.3rem">Estagiário de TI na IT Universe · Estudante de Ciência da Computação</p>
 </div>
 </div>
@@ -245,11 +286,11 @@
 <span class="tag">☁ AWS</span><span class="tag">☁ Azure</span><span class="tag">🐧 Linux</span><span class="tag">🐍 Python</span><span class="tag">⚙ DevOps</span><span class="tag">🐳 Docker</span><span class="tag">🔷 Terraform</span><span class="tag">🔄 CI/CD</span><span class="tag">🟢 Node.js</span><span class="tag">🔌 Socket.io</span><span class="tag">⚡ JavaScript</span><span class="tag">🌐 HTML/CSS</span><span class="tag">🖥 Help Desk</span>
 </div>
 
-<!-- Certifications --><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);font-size:1rem;letter-spacing:2px;margin-bottom:.6rem">CERTIFICAÇÕES ACADEMICAS</h4>
+<!-- Certifications --><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);font-size:1rem;letter-spacing:2px;margin-bottom:.6rem">CERTIFICAÇÕES</h4>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:1.2rem">
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔷 AZ-900 — Azure Fundamentals</div>
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ AWS Cloud Practitioner - AWS Skill Build</div>
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">⚙ DevOps — Alura x Santander</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔷 AZ-900 — Azure Fundamentals & Senai</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ AWS Cloud Practitioner - AWS Skill Build & Senai</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">⚙ DevOps — Alura x Santander Academy</div>
 <div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🐧 Linux Config — Senai</div>
 <div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🐍 Python 3 Avançado — Udemy</div>
 <div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ IBM Cloud Fundamentals - IBM Skill Build</div>
@@ -267,314 +308,375 @@
 </div>
 
 </div><footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom · Guilherme Moraes Franco · @ognistie</p></footer></div>
-<!-- NEWS --><div class="page" id="page-news"><div class="news-page" style="max-width:900px">
-<div class="news-header"><h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3rem);color:var(--neon-red);letter-spacing:6px">📡 TECH NEWS</h1><p style="font-size:1.1rem;color:var(--amber);margin-top:.4rem">Março 2026 — O que está rolando no mundo da tecnologia</p></div>
-<div style="background:var(--blood-red);color:var(--white);padding:.35rem;overflow:hidden;white-space:nowrap;margin-bottom:1.5rem;font-family:'VT323',monospace;font-size:.85rem"><span style="display:inline-block;animation:ticker 40s linear infinite">🔥 NVIDIA GTC 2026 • OPENAI $25B RECEITA • GOOGLE GEMINI 3.1 • APPLE SIRI IA 2026 • DEEPSEEK • AMD TURIN • ANTHROPIC WASHINGTON • META CUSTOM SILICON • SAMSUNG AI • ORACLE AI CLOUD 🔥</span></div>
+<!-- NEWS — TECH FAIR --><div class="page" id="page-news">
+<div class="techfair">
+<!-- Hero SVG Scene — Fair floor with characters -->
+<div class="techfair-scene">
+  <svg viewBox="0 0 1200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:200px;display:block">
+    <defs><linearGradient id="fairFlr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#060610"/></linearGradient>
+    <filter id="ngl"><feGaussianBlur stdDeviation="8"/></filter></defs>
+    <rect width="1200" height="200" fill="url(#fairFlr)"/>
+    <!-- Grid floor lines --><g opacity=".06"><line x1="0" y1="100" x2="1200" y2="100" stroke="#0af" stroke-width=".5"/><line x1="0" y1="140" x2="1200" y2="140" stroke="#0af" stroke-width=".5"/><line x1="0" y1="170" x2="1200" y2="170" stroke="#0af" stroke-width=".5"/>
+    <line x1="100" y1="80" x2="100" y2="200" stroke="#0af" stroke-width=".3"/><line x1="300" y1="80" x2="300" y2="200" stroke="#0af" stroke-width=".3"/><line x1="500" y1="80" x2="500" y2="200" stroke="#0af" stroke-width=".3"/><line x1="700" y1="80" x2="700" y2="200" stroke="#0af" stroke-width=".3"/><line x1="900" y1="80" x2="900" y2="200" stroke="#0af" stroke-width=".3"/><line x1="1100" y1="80" x2="1100" y2="200" stroke="#0af" stroke-width=".3"/></g>
+    <!-- Neon glows --><ellipse cx="200" cy="90" rx="60" ry="20" fill="#CC2936" opacity=".04" filter="url(#ngl)"/><ellipse cx="600" cy="85" rx="80" ry="25" fill="#0af" opacity=".03" filter="url(#ngl)"/><ellipse cx="1000" cy="90" rx="60" ry="20" fill="#6B2D8B" opacity=".04" filter="url(#ngl)"/>
+    <!-- Characters presenting -->
+    <g transform="translate(140,85) scale(1.8)"><rect x="10" y="3" width="12" height="10" fill="#5C3D2E"/><rect x="8" y="0" width="16" height="5" fill="#111"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#0a2a3a"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/><rect x="26" y="8" width="4" height="12" fill="#0a2a3a"/></g>
+    <g transform="translate(420,88) scale(1.7)"><rect x="10" y="3" width="12" height="10" fill="#D4A574"/><rect x="8" y="1" width="16" height="4" fill="#CC2936"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#1a1a2e"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/></g>
+    <g transform="translate(700,86) scale(1.8)"><rect x="10" y="3" width="12" height="10" fill="#8B6F4E"/><rect x="6" y="0" width="20" height="6" fill="#6B2D8B"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#6B2D8B"/><rect x="8" y="23" width="6" height="8" fill="#222"/><rect x="16" y="23" width="6" height="8" fill="#222"/></g>
+    <g transform="translate(980,87) scale(1.7)"><rect x="10" y="3" width="12" height="10" fill="#6B4423"/><rect x="8" y="2" width="16" height="4" fill="#E8A317"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#E8A317"/><rect x="8" y="23" width="6" height="8" fill="#333"/><rect x="16" y="23" width="6" height="8" fill="#333"/></g>
+    <!-- Hologram lines from characters --><line x1="170" y1="85" x2="170" y2="20" stroke="#0af" stroke-width=".5" opacity=".2"/><line x1="450" y1="88" x2="450" y2="25" stroke="#CC2936" stroke-width=".5" opacity=".2"/><line x1="730" y1="86" x2="730" y2="22" stroke="#6B2D8B" stroke-width=".5" opacity=".2"/><line x1="1010" y1="87" x2="1010" y2="24" stroke="#E8A317" stroke-width=".5" opacity=".2"/>
+    <!-- Hologram dots --><circle cx="170" cy="18" r="3" fill="#0af" opacity=".3"><animate attributeName="opacity" values=".1;.4;.1" dur="2s" repeatCount="indefinite"/></circle><circle cx="450" cy="23" r="3" fill="#CC2936" opacity=".3"><animate attributeName="opacity" values=".1;.4;.1" dur="2.5s" repeatCount="indefinite"/></circle><circle cx="730" cy="20" r="3" fill="#6B2D8B" opacity=".3"><animate attributeName="opacity" values=".1;.4;.1" dur="1.8s" repeatCount="indefinite"/></circle><circle cx="1010" cy="22" r="3" fill="#E8A317" opacity=".3"><animate attributeName="opacity" values=".1;.4;.1" dur="2.2s" repeatCount="indefinite"/></circle>
+  </svg>
+</div>
 
-<article class="news-card"><span class="news-tag">🎮 NVIDIA</span><h3>Nvidia GTC 2026 — Jensen Huang apresenta o futuro da IA</h3><p>Conferência anual de 16 a 19 de março em San Jose. Anúncios sobre inferência, chips Vera Rubin, robótica e AI agents.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Analytics Insight — Mar 2026 · <a href="https://www.analyticsinsight.net/news/nvidia-gtc-2026-keynote-major-announcements-on-ai-gaming-cpus-and-computing" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+<!-- Header -->
+<div class="techfair-header">
+  <div class="techfair-badge">MARÇO 2026</div>
+  <h1 class="techfair-title">TECH<span>FAIR</span></h1>
+  <p class="techfair-sub">As novidades que estão moldando o futuro</p>
+  <div class="techfair-ticker"><div class="techfair-ticker-inner">🔥 NVIDIA GTC 2026 • OPENAI $25B • GEMINI 3.1 • APPLE SIRI IA • DEEPSEEK • AMD TURIN • ANTHROPIC • META SILICON • SAMSUNG AI • ORACLE CLOUD 🔥</div></div>
+</div>
 
-<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">💰 RECEITA</span><h3>OpenAI ultrapassa $25B em receita anualizada</h3><p>Planeja IPO para final de 2026. Anthropic se aproxima de $19B. O mercado de IA é o setor de crescimento mais rápido da indústria.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Tech Startups — Mar 2026 · <a href="https://techstartups.com/2026/03/13/top-tech-news-today-march-13-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+<!-- News Grid with character avatars -->
+<div class="techfair-grid">
+  <div class="tf-card" style="--accent:#0af"><div class="tf-card-glow"></div><div class="tf-avatar"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="3" width="12" height="10" fill="#5C3D2E"/><rect x="8" y="0" width="16" height="5" fill="#111"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#0a2a3a"/><rect x="8" y="23" width="6" height="6" fill="#222"/><rect x="16" y="23" width="6" height="6" fill="#222"/></svg></div><span class="tf-tag" style="background:#0af;color:#000">🎮 NVIDIA</span><h3>Nvidia GTC 2026 — Jensen Huang</h3><p>Conferência 16-19 março. Inferência, Vera Rubin, robótica, AI agents.</p><a href="https://www.analyticsinsight.net/news/nvidia-gtc-2026-keynote-major-announcements-on-ai-gaming-cpus-and-computing" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag" style="background:var(--purple)">🧠 GOOGLE</span><h3>Google lança Gemini 3.1 Flash-Lite — 2.5x mais rápido</h3><p>Novo modelo: 2.5x mais rápido, $0.25/milhão de tokens. Corrida por IA acessível se intensifica.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Tech Startups — Mar 2026 · <a href="https://techstartups.com/2026/03/12/top-tech-news-today-march-12-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#CC2936"><div class="tf-card-glow"></div><div class="tf-avatar"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="3" width="12" height="10" fill="#D4A574"/><rect x="8" y="1" width="16" height="4" fill="#CC2936"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#1a1a2e"/><rect x="8" y="23" width="6" height="6" fill="#222"/><rect x="16" y="23" width="6" height="6" fill="#222"/></svg></div><span class="tf-tag" style="background:#CC2936">💰 RECEITA</span><h3>OpenAI ultrapassa $25B</h3><p>IPO para 2026. Anthropic $19B. Crescimento explosivo.</p><a href="https://techstartups.com/2026/03/13/top-tech-news-today-march-13-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag">🍎 APPLE</span><h3>Apple anuncia nova Siri com IA — parceria com Google Gemini</h3><p>Siri reimaginada com modelo Gemini de 1.2T parâmetros, rodando no Apple Private Cloud. Lançamento com iOS 26.4.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Tech Startups — Mar 2026 · <a href="https://www.crescendo.ai/news/latest-ai-news-and-updates" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#6B2D8B"><div class="tf-card-glow"></div><div class="tf-avatar"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="3" width="12" height="10" fill="#8B6F4E"/><rect x="6" y="0" width="20" height="6" fill="#6B2D8B"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#6B2D8B"/><rect x="8" y="23" width="6" height="6" fill="#222"/><rect x="16" y="23" width="6" height="6" fill="#222"/></svg></div><span class="tf-tag" style="background:#6B2D8B">🧠 GOOGLE</span><h3>Gemini 3.1 Flash-Lite</h3><p>2.5x mais rápido, $0.25/M tokens.</p><a href="https://techstartups.com/2026/03/12/top-tech-news-today-march-12-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🤖 NVIDIA</span><h3>Nvidia investe $2B na Nebius — expansão de data centers</h3><p>US$2 bilhões, 8.3% de participação. Plano de 5+ GW de data center até 2030.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Bloomberg — Mar 2026 · <a href="https://techstartups.com/2026/03/12/top-tech-news-today-march-12-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#E8A317"><div class="tf-card-glow"></div><div class="tf-avatar"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="3" width="12" height="10" fill="#6B4423"/><rect x="8" y="2" width="16" height="4" fill="#E8A317"/><rect x="12" y="8" width="2" height="2" fill="#0af"/><rect x="16" y="8" width="2" height="2" fill="#0af"/><rect x="6" y="13" width="20" height="10" fill="#E8A317"/><rect x="8" y="23" width="6" height="6" fill="#333"/><rect x="16" y="23" width="6" height="6" fill="#333"/></svg></div><span class="tf-tag" style="background:#E8A317;color:#000">🍎 APPLE</span><h3>Siri + Gemini 1.2T</h3><p>Siri reimaginada com IA. iOS 26.4.</p><a href="https://www.crescendo.ai/news/latest-ai-news-and-updates" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag" style="background:var(--purple)">🔬 STARTUP</span><h3>AMI Labs de Yann LeCun levanta $1B+ — maior seed da Europa</h3><p>Foco em "world models" — IA que entende o mundo físico. Maior rodada seed da história europeia.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Financial Times — Mar 2026 · <a href="https://techstartups.com/2026/03/10/top-tech-news-today-march-10-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#0af"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#0af;color:#000">🤖 NVIDIA</span><h3>$2B na Nebius</h3><p>8.3% de participação. 5+ GW data center 2030.</p><a href="https://techstartups.com/2026/03/12/top-tech-news-today-march-12-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag">🏭 MURATI</span><h3>Mira Murati fecha deal com Nvidia — chips Vera Rubin</h3><p>Thinking Machines: acordo multianual com acesso a 1+ GW de chips de próxima geração.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Reuters — Mar 2026 · <a href="https://techstartups.com/2026/03/11/top-tech-news-today-march-11-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#E84393"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#E84393">🔬 STARTUP</span><h3>AMI Labs $1B+ Seed</h3><p>Yann LeCun. World models. Maior seed da Europa.</p><a href="https://techstartups.com/2026/03/10/top-tech-news-today-march-10-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🇨🇳 CHINA</span><h3>China coloca IA no centro do plano quinquenal</h3><p>IA, robótica, quantum, biotech e 6G como pilares. Tratada como infraestrutura nacional.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Reuters — Mar 2026 · <a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#CC2936"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#CC2936">🏭 MURATI</span><h3>Vera Rubin Chips</h3><p>Mira Murati + Nvidia. 1+ GW próxima geração.</p><a href="https://techstartups.com/2026/03/11/top-tech-news-today-march-11-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag" style="background:var(--purple)">🛡️ SEGURANÇA</span><h3>OpenAI adquire Promptfoo — segurança de AI agents</h3><p>Segurança de IA no stack enterprise. Superfície de ataque cresce com agents autônomos.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">TechCrunch — Mar 2026 · <a href="https://techstartups.com/2026/03/10/top-tech-news-today-march-10-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#E8A317"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#E8A317;color:#000">🇨🇳 CHINA</span><h3>IA no Plano Quinquenal</h3><p>Robótica, quantum, biotech, 6G. Infraestrutura nacional.</p><a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag">📊 ORACLE</span><h3>Oracle: demanda por IA sustenta crescimento até 2027</h3><p>Infraestrutura de IA gerando receita real. Oracle converte demanda de AI training e inference em bookings.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Reuters — Mar 2026 · <a href="https://techstartups.com/2026/03/11/top-tech-news-today-march-11-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#6B2D8B"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#6B2D8B">🛡️ SEGURANÇA</span><h3>Promptfoo + OpenAI</h3><p>Segurança de AI agents enterprise.</p><a href="https://techstartups.com/2026/03/10/top-tech-news-today-march-10-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag" style="background:#CC2936">🔒 ZERO-DAY</span><h3>Google: metade dos zero-days de 2025 miraram empresas</h3><p>Hackers cada vez mais atacando sistemas enterprise internos. Uma vulnerabilidade pode comprometer toda organização.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">TechCrunch — Mar 2026 · <a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#0af"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#0af;color:#000">📊 ORACLE</span><h3>AI Cloud até 2027</h3><p>Infraestrutura de IA gerando receita real.</p><a href="https://techstartups.com/2026/03/11/top-tech-news-today-march-11-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">📱 SAMSUNG</span><h3>Samsung busca parcerias com OpenAI e Perplexity para Galaxy</h3><p>Multi-modelo para se diferenciar. Guerra dos smartphones migrou de specs para experiência de IA.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Financial Times — Mar 2026 · <a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+  <div class="tf-card" style="--accent:#CC2936"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#CC2936">🔒 ZERO-DAY</span><h3>50% miram empresas</h3><p>Enterprise é o novo alvo dos hackers.</p><a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
 
-</div><footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom</p></footer></div>
+  <div class="tf-card" style="--accent:#E8A317"><div class="tf-card-glow"></div><span class="tf-tag" style="background:#E8A317;color:#000">📱 SAMSUNG</span><h3>Galaxy + OpenAI</h3><p>Multi-modelo. Experiência de IA no mobile.</p><a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" class="tf-link">Ler mais →</a></div>
+</div>
+</div>
+<footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom</p></footer></div>
 
-<!-- ==================== SKATE BUILDER ==================== -->
+<!-- ==================== SKATE CUSTOMIZER — SKATE 3 STYLE ==================== -->
 <div class="page" id="page-skatebuilder">
-<div style="padding:70px 2rem 3rem;max-width:900px;margin:0 auto">
-<h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3rem);color:var(--neon-red);text-align:center;letter-spacing:5px;margin-bottom:.5rem">🛹 SKATE BUILDER</h1>
-<p style="text-align:center;color:#555;margin-bottom:2rem;font-size:1.1rem">Customize seu shape. Salve como badge e poste nas redes.</p>
-
-<div style="display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start" id="builderGrid">
-<!-- Preview -->
-<div style="text-align:center;background:var(--concrete);border:1px solid var(--grit);padding:2rem;position:relative">
-<div style="position:absolute;top:-12px;left:16px;font-family:'Bebas Neue',sans-serif;font-size:.8rem;background:var(--blood-red);color:white;padding:2px 12px;letter-spacing:2px">PREVIEW</div>
-<canvas id="skateCanvas" width="400" height="500" style="max-width:100%;background:#0e0b08;border-radius:4px"></canvas>
-<div style="margin-top:1rem;display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
-<button class="btn-cta" onclick="downloadSkate()" style="font-size:.85rem;padding:.5rem 1.5rem">📸 SALVAR IMAGEM</button>
-<button class="btn-cta btn-cta--outline" onclick="shareSkate()" style="font-size:.85rem;padding:.5rem 1.5rem">📲 TIRE PRINT E POSTE NAS REDES</button>
-</div>
-</div>
-
-<!-- Controls -->
-<div style="display:flex;flex-direction:column;gap:1rem">
-<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🎨 Cor do Shape</h4><div id="deckColors" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
-
-<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🔴 Cor das Rodas</h4><div id="wheelColors" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
-
-<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🎯 Grip Tape</h4><div id="gripColors" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
-
-<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🖼️ Graphic</h4><div id="graphicBtns" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
-
-<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">✏️ Seu Nome</h4><input type="text" id="skaterName" placeholder="SEU NOME" maxlength="20" oninput="renderSkate()" style="width:100%;font-family:'VT323',monospace;font-size:1rem;background:var(--dark-bg);color:var(--amber);border:2px solid var(--grit);padding:.5rem;text-transform:uppercase;letter-spacing:2px;outline:none"></div>
-
-<button class="btn-cta btn-cta--gold" onclick="randomSkate()" style="width:100%;justify-content:center;font-size:.9rem">🎲 ALEATÓRIO</button>
-</div>
-</div>
-</div>
-<footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom</p></footer>
+<div class="sk3-layout">
+<!-- LEFT PANEL — Skate 3 style menu -->
+<div class="sk3-panel">
+  <div class="sk3-panel-header">
+    <h2>FREE SKATE</h2>
+    <p>Custom Deck Builder</p>
+  </div>
+  <div class="sk3-section"><h4>DECK</h4><div id="deckColors" class="sk3-colors"></div></div>
+  <div class="sk3-section"><h4>WHEELS</h4><div id="wheelColors" class="sk3-colors"></div></div>
+  <div class="sk3-section"><h4>GRIP TAPE</h4><div id="gripColors" class="sk3-colors"></div></div>
+  <div class="sk3-section"><h4>GRAPHIC</h4><div id="graphicBtns" class="sk3-graphics"></div></div>
+  <div class="sk3-section"><h4>STICKERS</h4><div id="stickerBtns" class="sk3-graphics"></div></div>
+  <div class="sk3-section"><h4>YOUR TAG</h4><input type="text" id="skaterName" placeholder="seu nome" maxlength="20" oninput="renderSkate()" class="sk3-input"></div>
+  <div class="sk3-actions">
+    <button class="sk3-btn" onclick="randomSkate()">🎲 RANDOM</button>
+    <button class="sk3-btn gold" onclick="generateBadge()">🏆 GERAR INSÍGNIA</button>
+  </div>
 </div>
 
-<!-- ==================== BONDE COMMUNITY — SOCIAL NETWORK ==================== -->
+<!-- RIGHT — Preview area (Skate 3 style concrete wall bg) -->
+<div class="sk3-preview">
+  <div class="sk3-preview-bg">
+    <canvas id="skateCanvas" width="500" height="600"></canvas>
+  </div>
+  <div class="sk3-preview-actions">
+    <button class="sk3-btn" onclick="downloadSkate()">📸 SALVAR PNG</button>
+    <button class="sk3-btn red" onclick="shareSkate()">📲 COMPARTILHAR</button>
+  </div>
+  <!-- Badge modal -->
+  <div class="sk3-badge-modal" id="badgeModal" style="display:none">
+    <div class="sk3-badge-content">
+      <button class="sk3-badge-close" onclick="document.getElementById('badgeModal').style.display='none'">✕</button>
+      <h3>🏆 INSÍGNIA DESBLOQUEADA</h3>
+      <canvas id="badgeCanvas" width="400" height="400"></canvas>
+      <p class="sk3-badge-name" id="badgeName">DECK MASTER</p>
+      <p class="sk3-badge-desc">Você customizou seu primeiro shape no SkateRoom!</p>
+      <div class="sk3-badge-actions">
+        <button class="sk3-btn gold" onclick="downloadBadge()">📥 BAIXAR INSÍGNIA</button>
+        <button class="sk3-btn red" onclick="shareBadge()">📲 TIRE PRINT E POSTE</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ==================== BONDE — MURAL INTERATIVO ==================== -->
 <div class="page" id="page-community">
-<div class="social-layout">
-<!-- LEFT SIDEBAR -->
-<aside class="social-sidebar">
-  <div class="social-profile-card">
-    <div class="social-avatar" id="socialAvatar">🛹</div>
-    <input type="text" id="communityName" placeholder="Seu nome..." maxlength="25" class="social-name-input">
-    <span class="social-badge">MEMBRO DO BONDE</span>
-  </div>
-  <nav class="social-nav">
-    <a class="social-nav-item active" onclick="filterFeed('all',this)">🏠 Todos</a>
-    <a class="social-nav-item" onclick="filterFeed('💡 Sugestão',this)">💡 Sugestões</a>
-    <a class="social-nav-item" onclick="filterFeed('🔥 Feedback',this)">🔥 Feedbacks</a>
-    <a class="social-nav-item" onclick="filterFeed('🎨 Ideia',this)">🎨 Ideias</a>
-    <a class="social-nav-item" onclick="filterFeed('🐛 Bug',this)">🐛 Bugs</a>
-    <a class="social-nav-item" onclick="filterFeed('🛹 Geral',this)">🛹 Geral</a>
-  </nav>
-  <div class="social-stats">
-    <div class="social-stat"><span class="social-stat-num" id="totalPosts">4</span><span class="social-stat-label">Posts</span></div>
-    <div class="social-stat"><span class="social-stat-num" id="totalLikes">85</span><span class="social-stat-label">Likes</span></div>
-    <div class="social-stat"><span class="social-stat-num" id="totalComments">24</span><span class="social-stat-label">Comments</span></div>
-  </div>
-</aside>
-
-<!-- MAIN FEED -->
-<main class="social-feed">
-  <div class="social-header">
-    <h1>💬 BONDE</h1>
-    <p>A comunidade do SkateRoom</p>
-  </div>
-
-  <!-- Composer -->
-  <div class="social-composer">
-    <div class="composer-top">
-      <div class="composer-avatar">🛹</div>
-      <textarea id="communityMsg" placeholder="No que você tá pensando, parça?" rows="2" class="composer-input"></textarea>
+<div class="mural-page">
+  <!-- Header -->
+  <div class="mural-header">
+    <div class="mural-title-row">
+      <h1 class="mural-title">🛹 MURAL DO BONDE</h1>
+      <div class="mural-count"><span id="muralCount">0</span> recados</div>
     </div>
-    <div class="composer-bottom">
-      <div class="composer-tags">
-        <button class="stag active" onclick="setCommunityTag(this,'💡 Sugestão')">💡 Sugestão</button>
-        <button class="stag" onclick="setCommunityTag(this,'🔥 Feedback')">🔥 Feedback</button>
-        <button class="stag" onclick="setCommunityTag(this,'🎨 Ideia')">🎨 Ideia</button>
-        <button class="stag" onclick="setCommunityTag(this,'🐛 Bug')">🐛 Bug</button>
-        <button class="stag" onclick="setCommunityTag(this,'🛹 Geral')">🛹 Geral</button>
+    <p class="mural-sub">Cole seu recado no mural. Todo mundo vê!</p>
+  </div>
+
+  <!-- Composer sticky note -->
+  <div class="mural-composer">
+    <div class="mural-compose-card">
+      <input type="text" id="muralName" placeholder="Seu nome..." maxlength="20" class="mural-input-name">
+      <textarea id="muralMsg" placeholder="Escreva seu recado pro bonde..." maxlength="280" rows="3" class="mural-input-msg"></textarea>
+      <div class="mural-compose-footer">
+        <div class="mural-color-picks" id="muralColors"></div>
+        <span class="mural-charcount" id="muralCharCount">280</span>
+        <button class="mural-post-btn" onclick="postSticker()">COLAR NO MURAL 📌</button>
       </div>
-      <button class="composer-btn" onclick="postCommunity()">POSTAR</button>
     </div>
   </div>
 
-  <!-- Feed Posts -->
-  <div id="communityFeed">
-
-    <!-- POST 1 -->
-    <div class="spost" data-tag="💡 Sugestão">
-      <div class="spost-header">
-        <div class="spost-avatar" style="background:#CC2936">MR</div>
-        <div class="spost-meta"><span class="spost-name">MC Red</span><span class="spost-time">2h atrás</span></div>
-        <span class="spost-tag">💡 Sugestão</span>
-      </div>
-      <p class="spost-body">Seria massa poder trocar a playlist por uma própria, tipo colar link do YouTube e tocar pro bonde todo! Imagina cada um podendo adicionar um vídeo na fila.</p>
-      <div class="spost-actions">
-        <button class="sact" onclick="toggleLike(this)">🔥 <span>12</span></button>
-        <button class="sact" onclick="toggleComments(this)">💬 <span>2</span></button>
-        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
-      </div>
-      <div class="spost-comments" style="display:none">
-        <div class="scomment"><div class="scomment-avatar" style="background:#E8A317">DG</div><div class="scomment-content"><span class="scomment-name">DJ Gold</span><p>Isso ia ser brabo! Tipo um sistema de fila onde cada um coloca um vídeo</p><span class="scomment-time">1h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button><div class="scomment-replies"><div class="scomment reply"><div class="scomment-avatar" style="background:#6B2D8B;width:22px;height:22px;font-size:.5rem">BB</div><div class="scomment-content"><span class="scomment-name">B-Boy</span><p>Sim mano, tipo watch2gether mas com a vibe da sala</p><span class="scomment-time">45min atrás</span></div></div></div></div></div>
-        <div class="scomment"><div class="scomment-avatar" style="background:#E84393">SG</div><div class="scomment-content"><span class="scomment-name">SK8 Girl</span><p>Apoio total! 🔥</p><span class="scomment-time">30min atrás</span></div></div>
-        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
-      </div>
-    </div>
-
-    <!-- POST 2 -->
-    <div class="spost" data-tag="🔥 Feedback">
-      <div class="spost-header">
-        <div class="spost-avatar" style="background:#E84393">SG</div>
-        <div class="spost-meta"><span class="spost-name">SK8 Girl</span><span class="spost-time">5h atrás</span></div>
-        <span class="spost-tag">🔥 Feedback</span>
-      </div>
-      <p class="spost-body">A vibe da sala tá PERFEITA, parece que estou numa garagem em Compton nos anos 90. O chat sincronizado é muito bom! Todo mundo assistindo junto, é outra experiência. Parabéns pelo projeto 👏</p>
-      <div class="spost-actions">
-        <button class="sact" onclick="toggleLike(this)">🔥 <span>24</span></button>
-        <button class="sact" onclick="toggleComments(this)">💬 <span>3</span></button>
-        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
-      </div>
-      <div class="spost-comments" style="display:none">
-        <div class="scomment"><div class="scomment-avatar" style="background:#CC2936">MR</div><div class="scomment-content"><span class="scomment-name">MC Red</span><p>Tmj! A sala ficou braba mesmo 🔥</p><span class="scomment-time">4h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div></div>
-        <div class="scomment"><div class="scomment-avatar" style="background:#556B2F">SP</div><div class="scomment-content"><span class="scomment-name">Spray</span><p>Os grafites na parede são detalhados demais, amei</p><span class="scomment-time">3h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div></div>
-        <div class="scomment"><div class="scomment-avatar" style="background:#2A3A5C">LC</div><div class="scomment-content"><span class="scomment-name">Lil Chronic</span><p>West side vibes 💜</p><span class="scomment-time">2h atrás</span></div></div>
-        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
-      </div>
-    </div>
-
-    <!-- POST 3 -->
-    <div class="spost" data-tag="🎨 Ideia">
-      <div class="spost-header">
-        <div class="spost-avatar" style="background:#111;border:1px solid #CC2936">TH</div>
-        <div class="spost-meta"><span class="spost-name">Thrasher</span><span class="spost-time">8h atrás</span></div>
-        <span class="spost-tag">🎨 Ideia</span>
-      </div>
-      <p class="spost-body">Bota uma opção de emoji reactions nos vídeos! Tipo quando rola um trick insano todo mundo manda 🔥🔥🔥 e aparece flutuando na tela. Ia ser muito louco pro hype do bonde.</p>
-      <div class="spost-actions">
-        <button class="sact" onclick="toggleLike(this)">🔥 <span>18</span></button>
-        <button class="sact" onclick="toggleComments(this)">💬 <span>1</span></button>
-        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
-      </div>
-      <div class="spost-comments" style="display:none">
-        <div class="scomment"><div class="scomment-avatar" style="background:#E8A317">OK</div><div class="scomment-content"><span class="scomment-name">Ollie King</span><p>ISSO! Tipo Twitch reactions, mas no estilo underground. Quero ver 🛹 voando na tela quando alguém manda um kickflip</p><span class="scomment-time">6h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div></div>
-        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
-      </div>
-    </div>
-
-    <!-- POST 4 -->
-    <div class="spost" data-tag="🛹 Geral">
-      <div class="spost-header">
-        <div class="spost-avatar" style="background:#E8A317;color:#000">DG</div>
-        <div class="spost-meta"><span class="spost-name">DJ Gold</span><span class="spost-time">1d atrás</span></div>
-        <span class="spost-tag">🛹 Geral</span>
-      </div>
-      <p class="spost-body">Projeto incrível mano, conectando a cultura skate com rap underground num só lugar. Isso é o que a internet precisava — um espaço pra galera se juntar e curtir sem frescura. Respeito total! 🙏</p>
-      <div class="spost-actions">
-        <button class="sact" onclick="toggleLike(this)">🔥 <span>31</span></button>
-        <button class="sact" onclick="toggleComments(this)">💬 <span>4</span></button>
-        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
-      </div>
-      <div class="spost-comments" style="display:none">
-        <div class="scomment"><div class="scomment-avatar" style="background:#FF2E2E">NN</div><div class="scomment-content"><span class="scomment-name">Neon Nina</span><p>Finalmente um lugar que entende a vibe! ❤️‍🔥</p><span class="scomment-time">22h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button><div class="scomment-replies"><div class="scomment reply"><div class="scomment-avatar" style="background:#E8A317;width:22px;height:22px;font-size:.5rem;color:#000">ZN</div><div class="scomment-content"><span class="scomment-name">Zen</span><p>Real, a estética tá impecável</p><span class="scomment-time">20h atrás</span></div></div></div></div></div>
-        <div class="scomment"><div class="scomment-avatar" style="background:#CC2936">BX</div><div class="scomment-content"><span class="scomment-name">BeatBox</span><p>Brrr pa pa ka! 🎤 (isso é um beatbox de aprovação)</p><span class="scomment-time">18h atrás</span></div></div>
-        <div class="scomment"><div class="scomment-avatar" style="background:#E84393">KF</div><div class="scomment-content"><span class="scomment-name">Kickflip</span><p>Quero mais shapes no skate builder! Mas já tá muito bom</p><span class="scomment-time">12h atrás</span></div></div>
-        <div class="scomment"><div class="scomment-avatar" style="background:#556B2F">SP</div><div class="scomment-content"><span class="scomment-name">Spray</span><p>O graffiti na parede me inspirou a fazer uns tags novos 🎨</p><span class="scomment-time">8h atrás</span></div></div>
-        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
-      </div>
-    </div>
-
+  <!-- The Mural Board -->
+  <div class="mural-board" id="muralBoard">
+    <!-- Stickers rendered here by JS -->
   </div>
-</main>
 </div>
 </div>
 
 <script src="js/characters.js"></script><script src="js/playlist.js"></script><script src="js/app.js"></script>
 <script>function switchTab(tab){document.querySelectorAll('.panel-tab').forEach(t=>t.classList.toggle('active',t.textContent.toLowerCase().includes(tab)));document.querySelectorAll('.panel-content').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+tab).classList.add('active')}</script>
 
-<!-- SKATE BUILDER ENGINE -->
+<!-- MURAL ENGINE -->
 <script>
-const skateState={deck:'#CC2936',wheels:'#333',grip:'#111',graphic:'flames',name:''};
-const deckOpts=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#556B2F','#111','#fff','#E84393','#FFD700','#1a1410'];
-const wheelOpts=['#333','#CC2936','#E8A317','#6B2D8B','#fff','#556B2F','#E84393','#FFD700'];
-const gripOpts=['#111','#CC2936','#1a1a2e','#2d1f17','#1a2e1a','#2e1a2e','#333'];
-const graphicOpts=['flames','skull','stripes','logo','clean','splatter','camo'];
+const MURAL_KEY='skateroom-mural';
+const stickerColors=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#556B2F','#E84393','#111','#1a3a1a'];
+let muralColor='#CC2936';
+let muralData=[];
+let muralAPI=false;
+
+function initMural(){
+  const cp=document.getElementById('muralColors');
+  if(cp&&!cp.hasChildNodes()){
+    stickerColors.forEach(c=>{
+      const d=document.createElement('div');d.className='mural-cpick'+(c===muralColor?' active':'');d.style.background=c;
+      d.onclick=()=>{muralColor=c;cp.querySelectorAll('.mural-cpick').forEach(x=>x.classList.remove('active'));d.classList.add('active')};
+      cp.appendChild(d);
+    });
+  }
+  const ta=document.getElementById('muralMsg');
+  if(ta){ta.oninput=()=>{const el=document.getElementById('muralCharCount');if(el)el.textContent=280-ta.value.length}}
+  loadMural();
+}
+
+function loadMural(){
+  const ctrl=new AbortController();
+  setTimeout(()=>ctrl.abort(),1200);
+  fetch('/api/community',{signal:ctrl.signal}).then(r=>r.json()).then(data=>{
+    muralAPI=true;
+    muralData=(data.posts||[]).map(p=>({id:p.id,name:p.name,msg:p.message,color:p.avatar||'#CC2936',likes:p.likes?p.likes.length:0,time:p.createdAt}));
+    renderMural();
+  }).catch(()=>{
+    try{muralData=JSON.parse(localStorage.getItem(MURAL_KEY)||'[]')}catch(e){muralData=[]}
+    if(muralData.length===0){
+      muralData=[
+        {id:1,name:'SkateBot 🤖',msg:'Bem-vindo ao Mural do Bonde! Cole seu recado aqui 🛹',color:'#6B2D8B',likes:5,time:Date.now()-86400000},
+        {id:2,name:'MC Red',msg:'Salve rapaziada! Quem aí curte um skate old school? 🔥',color:'#CC2936',likes:12,time:Date.now()-3600000*8},
+        {id:3,name:'SK8 Girl',msg:'Esse projeto tá demais! Parabéns pro dev 👏✨',color:'#E84393',likes:24,time:Date.now()-3600000*4},
+        {id:4,name:'DJ Gold',msg:'Quem quiser trocar ideia sobre rap 90s, cola aqui no mural! 🎧🎤',color:'#E8A317',likes:8,time:Date.now()-3600000*2},
+        {id:5,name:'Thrasher',msg:'Baker 3 é o melhor vídeo de skate já feito. Quem discorda tá errado 🛹💯',color:'#556B2F',likes:18,time:Date.now()-3600000},
+      ];
+      localStorage.setItem(MURAL_KEY,JSON.stringify(muralData));
+    }
+    renderMural();
+  });
+  if(typeof io!=='undefined'){try{const s=io();s.on('community-new-post',()=>loadMural());s.on('community-update-post',()=>loadMural())}catch(e){}}
+}
+
+function renderMural(){
+  const board=document.getElementById('muralBoard');if(!board)return;
+  const sorted=[...muralData].sort((a,b)=>b.time-a.time);
+  board.innerHTML=sorted.map(s=>{
+    const initials=(s.name||'??').replace(/[^a-zA-ZÀ-ú ]/g,'').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()||'?';
+    const rot=(Math.sin(s.id*7.3)*3.5).toFixed(1);
+    const ts=timeAgo(s.time);
+    return `<div class="sticker" style="--rot:${rot}deg;--color:${s.color}">
+      <div class="sticker-pin"></div>
+      <div class="sticker-head"><div class="sticker-av" style="background:${s.color}">${initials}</div><span class="sticker-name">${s.name}</span></div>
+      <p class="sticker-msg">${s.msg}</p>
+      <div class="sticker-foot"><span class="sticker-time">${ts}</span><button class="sticker-like" onclick="likeMural(${s.id})">🔥 ${s.likes||0}</button></div>
+    </div>`;
+  }).join('');
+  const ct=document.getElementById('muralCount');if(ct)ct.textContent=muralData.length;
+}
+
+function postSticker(){
+  const nameEl=document.getElementById('muralName');
+  const msgEl=document.getElementById('muralMsg');
+  const name=(nameEl?nameEl.value.trim():'')||'Anônimo';
+  const msg=msgEl?msgEl.value.trim():'';
+  if(!msg){msgEl.focus();return}
+  if(muralAPI){
+    fetch('/api/community/post',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,message:msg,tag:'🛹 Geral',avatar:muralColor})})
+    .then(()=>{msgEl.value='';document.getElementById('muralCharCount').textContent='280';loadMural()}).catch(()=>postLocal(name,msg,msgEl));
+  }else{postLocal(name,msg,msgEl)}
+}
+
+function postLocal(name,msg,msgEl){
+  muralData.push({id:Date.now(),name,msg,color:muralColor,likes:0,time:Date.now()});
+  localStorage.setItem(MURAL_KEY,JSON.stringify(muralData));
+  if(msgEl){msgEl.value='';document.getElementById('muralCharCount').textContent='280'}
+  renderMural();
+}
+
+function likeMural(id){
+  if(muralAPI){fetch('/api/community/post/'+id+'/like',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({uid:'u'+Math.random()})}).then(()=>loadMural()).catch(()=>{});return}
+  const s=muralData.find(x=>x.id===id);if(s){s.likes=(s.likes||0)+1}
+  localStorage.setItem(MURAL_KEY,JSON.stringify(muralData));renderMural();
+}
+
+function timeAgo(ts){const s=Math.floor((Date.now()-ts)/1000);if(s<60)return 'agora';if(s<3600)return Math.floor(s/60)+'min';if(s<86400)return Math.floor(s/3600)+'h';return Math.floor(s/86400)+'d'}
+
+const _origSP2=showPage;
+showPage=function(id){_origSP2(id);if(id==='community')initMural();if(id==='skatebuilder')setTimeout(initBuilder,100)};
+</script>
+<!-- SKATE BUILDER ENGINE — SKATE 3 STYLE + BADGE SYSTEM -->
+<script>
+const skateState={deck:'#CC2936',wheels:'#333',grip:'#111',graphic:'flames',sticker:'none',name:''};
+const deckOpts=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#556B2F','#111','#fff','#E84393','#FFD700','#1a1410','#0a4a2e','#8B0000'];
+const wheelOpts=['#333','#CC2936','#E8A317','#6B2D8B','#fff','#556B2F','#E84393','#FFD700','#0af','#f60'];
+const gripOpts=['#111','#CC2936','#1a1a2e','#2d1f17','#1a2e1a','#2e1a2e','#333','#0a2a0a'];
+const graphicOpts=['flames','skull','stripes','logo','clean','splatter','camo','thunder','rose'];
+const stickerOpts=['none','star','crown','fire','diamond','heart','bolt'];
 
 function initBuilder(){
   renderColorBtns('deckColors',deckOpts,(c)=>{skateState.deck=c;renderSkate()});
   renderColorBtns('wheelColors',wheelOpts,(c)=>{skateState.wheels=c;renderSkate()});
   renderColorBtns('gripColors',gripOpts,(c)=>{skateState.grip=c;renderSkate()});
-  const gb=document.getElementById('graphicBtns');
-  graphicOpts.forEach(g=>{const b=document.createElement('button');b.textContent=g.toUpperCase();b.style.cssText="font-family:'VT323',monospace;font-size:.8rem;padding:.3rem .6rem;background:var(--dark-bg);color:var(--cream);border:1px solid var(--grit);cursor:pointer";b.onclick=()=>{skateState.graphic=g;renderSkate()};gb.appendChild(b)});
+  const gb=document.getElementById('graphicBtns');if(gb)gb.innerHTML='';
+  graphicOpts.forEach(g=>{const b=document.createElement('button');b.className='sk3-opt';b.textContent=g.toUpperCase();b.onclick=()=>{document.querySelectorAll('#graphicBtns .sk3-opt').forEach(x=>x.classList.remove('active'));b.classList.add('active');skateState.graphic=g;renderSkate()};if(g===skateState.graphic)b.classList.add('active');gb.appendChild(b)});
+  const sb=document.getElementById('stickerBtns');if(sb)sb.innerHTML='';
+  const stickerEmojis={none:'❌',star:'⭐',crown:'👑',fire:'🔥',diamond:'💎',heart:'❤️',bolt:'⚡'};
+  stickerOpts.forEach(s=>{const b=document.createElement('button');b.className='sk3-opt';b.textContent=stickerEmojis[s];b.onclick=()=>{document.querySelectorAll('#stickerBtns .sk3-opt').forEach(x=>x.classList.remove('active'));b.classList.add('active');skateState.sticker=s;renderSkate()};if(s===skateState.sticker)b.classList.add('active');sb.appendChild(b)});
   renderSkate();
 }
 
 function renderColorBtns(id,colors,cb){
-  const el=document.getElementById(id);
-  colors.forEach(c=>{const b=document.createElement('div');b.style.cssText='width:28px;height:28px;border-radius:3px;cursor:pointer;border:2px solid var(--grit);transition:all .2s;background:'+c;b.onmouseover=()=>b.style.borderColor='var(--amber)';b.onmouseout=()=>b.style.borderColor='var(--grit)';b.onclick=()=>cb(c);el.appendChild(b)});
+  const el=document.getElementById(id);if(!el)return;el.innerHTML='';
+  colors.forEach(c=>{const b=document.createElement('div');b.className='sk3-color';b.style.background=c;if(c==='#fff')b.style.border='1px solid #444';b.onclick=()=>{el.querySelectorAll('.sk3-color').forEach(x=>x.classList.remove('active'));b.classList.add('active');cb(c)};el.appendChild(b)});
 }
 
 function renderSkate(){
   const c=document.getElementById('skateCanvas');if(!c)return;
-  const x=c.getContext('2d');const W=400,H=500;x.clearRect(0,0,W,H);
-  // Background
-  x.fillStyle='#0e0b08';x.fillRect(0,0,W,H);
-  // Watermark grid
-  x.strokeStyle='rgba(255,255,255,.02)';x.lineWidth=1;
-  for(let i=0;i<W;i+=20){x.beginPath();x.moveTo(i,0);x.lineTo(i,H);x.stroke()}
-  for(let i=0;i<H;i+=20){x.beginPath();x.moveTo(0,i);x.lineTo(W,i);x.stroke()}
-  // Title
-  x.fillStyle='#CC2936';x.font='bold 14px "Bebas Neue",sans-serif';x.letterSpacing='4px';x.textAlign='center';
-  x.fillText('S K A T E R O O M',W/2,30);
-  x.fillStyle='#E8A317';x.font='10px "VT323",monospace';x.fillText('CUSTOM DECK BUILDER',W/2,45);
+  const x=c.getContext('2d');const W=500,H=600;x.clearRect(0,0,W,H);
+  // Concrete wall background
+  x.fillStyle='#1a1816';x.fillRect(0,0,W,H);
+  const grd=x.createLinearGradient(0,0,0,H);grd.addColorStop(0,'#1e1a16');grd.addColorStop(0.6,'#141210');grd.addColorStop(1,'#0a0806');x.fillStyle=grd;x.fillRect(0,0,W,H);
+  // Subtle noise texture
+  x.fillStyle='rgba(255,255,255,.008)';for(let i=0;i<500;i++){x.fillRect(Math.random()*W,Math.random()*H,1,1)}
+  // Spotlight
+  const spot=x.createRadialGradient(W/2,150,20,W/2,150,300);spot.addColorStop(0,'rgba(255,255,255,.04)');spot.addColorStop(1,'transparent');x.fillStyle=spot;x.fillRect(0,0,W,H);
 
-  const cx=W/2,dy=70;
-  // Deck shape
+  const cx=W/2,dy=80;
   x.save();x.translate(cx,dy);
-  x.beginPath();x.moveTo(-45,0);x.quadraticCurveTo(-50,-20,-35,-30);x.lineTo(35,-30);x.quadraticCurveTo(50,-20,45,0);x.lineTo(45,300);x.quadraticCurveTo(50,330,30,340);x.lineTo(-30,340);x.quadraticCurveTo(-50,330,-45,300);x.closePath();
-  x.fillStyle=skateState.deck;x.fill();x.strokeStyle='rgba(0,0,0,.3)';x.lineWidth=2;x.stroke();
+  // Shadow on ground
+  x.fillStyle='rgba(0,0,0,.2)';x.beginPath();x.ellipse(5,380,55,12,0.1,0,Math.PI*2);x.fill();
+  // Board tilt
+  x.rotate(-0.08);
 
-  // Grip tape (top layer)
-  x.save();x.beginPath();x.moveTo(-42,5);x.lineTo(42,5);x.lineTo(42,295);x.lineTo(-42,295);x.closePath();x.clip();
-  x.fillStyle=skateState.grip;x.fillRect(-42,5,84,290);
-  // Grip texture
-  x.fillStyle='rgba(255,255,255,.03)';for(let i=0;i<300;i++){x.fillRect(Math.random()*84-42,5+Math.random()*290,1,1)}
+  // Deck outline glow
+  x.shadowColor=skateState.deck;x.shadowBlur=15;x.shadowOffsetX=0;x.shadowOffsetY=0;
+  // Deck shape — realistic popsicle
+  x.beginPath();x.moveTo(-48,10);x.bezierCurveTo(-52,-15,-38,-35,-2,-38);x.bezierCurveTo(34,-35,52,-15,48,10);x.lineTo(50,310);x.bezierCurveTo(54,340,38,360,2,363);x.bezierCurveTo(-34,360,-54,340,-50,310);x.closePath();
+  x.fillStyle=skateState.deck;x.fill();x.shadowBlur=0;
+  x.strokeStyle='rgba(0,0,0,.4)';x.lineWidth=2;x.stroke();
+  // Deck edge highlight
+  x.strokeStyle='rgba(255,255,255,.08)';x.lineWidth=1;x.beginPath();x.moveTo(-46,10);x.bezierCurveTo(-50,-13,-36,-33,0,-36);x.bezierCurveTo(32,-33,50,-13,46,10);x.stroke();
+
+  // Grip tape
+  x.save();x.beginPath();x.moveTo(-44,15);x.lineTo(44,15);x.lineTo(44,305);x.lineTo(-44,305);x.closePath();x.clip();
+  x.fillStyle=skateState.grip;x.fillRect(-44,15,88,290);
+  x.fillStyle='rgba(255,255,255,.02)';for(let i=0;i<400;i++){x.fillRect(Math.random()*88-44,15+Math.random()*290,1,1)}
   x.restore();
 
-  // Graphic on bottom (visible part)
-  drawGraphic(x,skateState.graphic,skateState.deck);
+  // Graphic
+  drawGraphic(x,skateState.graphic);
 
-  // Trucks
-  x.fillStyle='#888';x.fillRect(-30,310,60,8);x.fillRect(-30,-15,60,8);
-  x.fillStyle='#666';x.fillRect(-35,314,10,6);x.fillRect(25,314,10,6);x.fillRect(-35,-11,10,6);x.fillRect(25,-11,10,6);
+  // Sticker
+  if(skateState.sticker!=='none')drawSticker(x,skateState.sticker);
 
-  // Wheels
-  x.fillStyle=skateState.wheels;
-  [[-38,318,10],[32,318,10],[-38,-8,10],[32,-8,10]].forEach(([wx,wy,r])=>{
-    x.beginPath();x.arc(wx,wy,r,0,Math.PI*2);x.fill();
-    x.beginPath();x.arc(wx,wy,4,0,Math.PI*2);x.fillStyle='#555';x.fill();x.fillStyle=skateState.wheels;
+  // Trucks with detail
+  x.fillStyle='#7a7a7a';
+  // Front truck
+  x.fillRect(-32,-18,64,9);x.fillStyle='#666';x.fillRect(-38,-14,12,7);x.fillRect(26,-14,12,7);
+  x.fillStyle='#888';x.fillRect(-10,-20,20,4);
+  // Back truck
+  x.fillStyle='#7a7a7a';x.fillRect(-32,320,64,9);x.fillStyle='#666';x.fillRect(-38,322,12,7);x.fillRect(26,322,12,7);
+  x.fillStyle='#888';x.fillRect(-10,329,20,4);
+  // Truck bolts
+  x.fillStyle='#555';[[-20,-16],[16,-16],[-20,323],[16,323]].forEach(([bx,by])=>{x.beginPath();x.arc(bx,by,2,0,Math.PI*2);x.fill();x.beginPath();x.arc(bx+8,by,2,0,Math.PI*2);x.fill()});
+
+  // Wheels with 3D effect
+  [[-42,-12,12],[36,-12,12],[-42,324,12],[36,324,12]].forEach(([wx,wy,r])=>{
+    const wg=x.createRadialGradient(wx-2,wy-2,2,wx,wy,r);wg.addColorStop(0,skateState.wheels);wg.addColorStop(0.7,skateState.wheels);wg.addColorStop(1,'rgba(0,0,0,.3)');
+    x.fillStyle=wg;x.beginPath();x.arc(wx,wy,r,0,Math.PI*2);x.fill();
+    x.strokeStyle='rgba(0,0,0,.3)';x.lineWidth=1.5;x.stroke();
+    // Bearing
+    x.fillStyle='#444';x.beginPath();x.arc(wx,wy,5,0,Math.PI*2);x.fill();
+    x.fillStyle='#666';x.beginPath();x.arc(wx,wy,2,0,Math.PI*2);x.fill();
   });
 
   x.restore();
 
   // User name
-  if(skateState.name||document.getElementById('skaterName').value){
-    const n=skateState.name||document.getElementById('skaterName').value;
-    x.fillStyle='var(--amber)';x.fillStyle='#E8A317';x.font='bold 18px "Bebas Neue",sans-serif';x.textAlign='center';
-    x.fillText(n.toUpperCase(),W/2,H-55);
+  const n=(document.getElementById('skaterName')||{}).value||'';
+  if(n){
+    x.fillStyle='#E8A317';x.font='bold 22px "Bebas Neue",sans-serif';x.textAlign='center';x.letterSpacing='3px';
+    x.shadowColor='rgba(232,163,23,.3)';x.shadowBlur=10;
+    x.fillText(n.toUpperCase(),W/2,H-60);x.shadowBlur=0;
   }
-  // Badge footer
-  x.fillStyle='#CC2936';x.font='11px "Bebas Neue",sans-serif';x.textAlign='center';
-  x.fillText('SKATEROOM · BONDE ROOM · EST. 2026',W/2,H-30);
-  x.fillStyle='#444';x.font='9px "VT323",monospace';
-  x.fillText('skateroom.app · #SkateRoom',W/2,H-15);
+  // Footer badge
+  x.fillStyle='#CC2936';x.font='12px "Bebas Neue",sans-serif';x.textAlign='center';
+  x.fillText('SKATEROOM · GUETO PESTANA · EST. 2026',W/2,H-32);
+  x.fillStyle='#333';x.font='9px "VT323",monospace';
+  x.fillText('skateroom.app · #SkateRoom',W/2,H-16);
 }
 
-function drawGraphic(x,type,color){
-  const lighter=color;x.globalAlpha=.3;
+function drawGraphic(x,type){
+  x.globalAlpha=.35;
   if(type==='flames'){
-    x.fillStyle='#E8A317';
-    x.beginPath();x.moveTo(-30,280);x.quadraticCurveTo(-15,240,0,260);x.quadraticCurveTo(15,230,30,280);x.fill();
-    x.fillStyle='#CC2936';
-    x.beginPath();x.moveTo(-20,280);x.quadraticCurveTo(-5,250,5,270);x.quadraticCurveTo(15,245,20,280);x.fill();
+    x.fillStyle='#E8A317';x.beginPath();x.moveTo(-35,300);x.quadraticCurveTo(-18,240,0,265);x.quadraticCurveTo(18,230,35,300);x.fill();
+    x.fillStyle='#CC2936';x.beginPath();x.moveTo(-22,300);x.quadraticCurveTo(-5,250,5,275);x.quadraticCurveTo(18,245,22,300);x.fill();
+    x.fillStyle='#fff';x.globalAlpha=.1;x.beginPath();x.moveTo(-10,300);x.quadraticCurveTo(0,270,10,300);x.fill();
   }else if(type==='skull'){
-    x.fillStyle='#fff';x.beginPath();x.arc(0,260,18,0,Math.PI*2);x.fill();
-    x.fillStyle='#000';x.beginPath();x.arc(-7,256,4,0,Math.PI*2);x.fill();x.beginPath();x.arc(7,256,4,0,Math.PI*2);x.fill();
-    x.fillRect(-5,268,10,6);
+    x.fillStyle='#fff';x.beginPath();x.arc(0,260,22,0,Math.PI*2);x.fill();
+    x.fillStyle='#000';x.globalAlpha=.5;x.beginPath();x.arc(-8,255,5,0,Math.PI*2);x.fill();x.beginPath();x.arc(8,255,5,0,Math.PI*2);x.fill();
+    x.fillRect(-6,270,12,8);x.fillStyle='#fff';x.globalAlpha=.2;[[-3,271],[1,271],[5,271]].forEach(([sx,sy])=>x.fillRect(sx,sy,2,6));
   }else if(type==='stripes'){
-    for(let i=0;i<6;i++){x.fillStyle=i%2?'#E8A317':'#6B2D8B';x.fillRect(-40,50+i*45,80,20)}
+    for(let i=0;i<7;i++){x.fillStyle=i%2?'#E8A317':'#6B2D8B';x.fillRect(-42,40+i*42,84,18)}
   }else if(type==='logo'){
-    x.fillStyle='#fff';x.font='bold 20px "Bebas Neue",sans-serif';x.textAlign='center';x.fillText('SKATE',0,240);x.fillText('SOUND',0,265);
+    x.fillStyle='#fff';x.font='bold 26px "Bebas Neue",sans-serif';x.textAlign='center';
+    x.fillText('SKATE',0,240);x.fillText('ROOM',0,268);
+    x.strokeStyle='#E8A317';x.lineWidth=1;x.strokeRect(-30,218,60,58);
   }else if(type==='splatter'){
-    ['#CC2936','#E8A317','#6B2D8B','#fff'].forEach(c=>{x.fillStyle=c;for(let i=0;i<8;i++){x.beginPath();x.arc(Math.random()*60-30,100+Math.random()*200,Math.random()*8+2,0,Math.PI*2);x.fill()}});
+    ['#CC2936','#E8A317','#6B2D8B','#fff','#E84393'].forEach(c=>{x.fillStyle=c;for(let i=0;i<10;i++){x.beginPath();x.arc(Math.random()*70-35,80+Math.random()*220,Math.random()*10+2,0,Math.PI*2);x.fill()}});
   }else if(type==='camo'){
-    ['#2d4a1e','#4a6b2e','#1a3010','#556B2F'].forEach(c=>{x.fillStyle=c;for(let i=0;i<6;i++){x.fillRect(Math.random()*60-30,50+Math.random()*230,Math.random()*25+10,Math.random()*20+8)}});
+    ['#2d4a1e','#4a6b2e','#1a3010','#556B2F','#3a5a20'].forEach(c=>{x.fillStyle=c;for(let i=0;i<8;i++){x.beginPath();x.ellipse(Math.random()*60-30,60+Math.random()*240,Math.random()*18+8,Math.random()*12+5,Math.random()*3,0,Math.PI*2);x.fill()}});
+  }else if(type==='thunder'){
+    x.fillStyle='#FFD700';x.beginPath();x.moveTo(-5,160);x.lineTo(15,160);x.lineTo(5,210);x.lineTo(25,210);x.lineTo(-10,280);x.lineTo(5,230);x.lineTo(-15,230);x.closePath();x.fill();
+  }else if(type==='rose'){
+    x.fillStyle='#CC2936';for(let i=0;i<5;i++){x.beginPath();x.ellipse(Math.cos(i*1.26)*12,240+Math.sin(i*1.26)*12,10,14,i*1.26,0,Math.PI*2);x.fill()}
+    x.fillStyle='#2d6a1e';x.fillRect(-2,255,4,40);x.beginPath();x.ellipse(8,270,8,4,0.5,0,Math.PI*2);x.fill();
   }
   x.globalAlpha=1;
+}
+
+function drawSticker(x,type){
+  x.save();x.translate(25,80);x.globalAlpha=.5;x.font='28px sans-serif';x.textAlign='center';
+  const emojis={star:'⭐',crown:'👑',fire:'🔥',diamond:'💎',heart:'❤️',bolt:'⚡'};
+  x.fillText(emojis[type]||'',0,0);x.restore();
 }
 
 function randomSkate(){
@@ -582,135 +684,85 @@ function randomSkate(){
   skateState.wheels=wheelOpts[Math.floor(Math.random()*wheelOpts.length)];
   skateState.grip=gripOpts[Math.floor(Math.random()*gripOpts.length)];
   skateState.graphic=graphicOpts[Math.floor(Math.random()*graphicOpts.length)];
-  renderSkate();
+  skateState.sticker=stickerOpts[Math.floor(Math.random()*stickerOpts.length)];
+  initBuilder();
 }
 
 function downloadSkate(){
   const c=document.getElementById('skateCanvas');
   const a=document.createElement('a');a.download='skateroom-deck.png';a.href=c.toDataURL('image/png');a.click();
 }
-
 function shareSkate(){
   const c=document.getElementById('skateCanvas');
   c.toBlob(blob=>{
     if(navigator.share&&navigator.canShare){
       const file=new File([blob],'skateroom-deck.png',{type:'image/png'});
-      navigator.share({title:'Meu Skate - SkateRoom',text:'Criei meu shape customizado no SkateRoom! 🛹 #SkateRoom #BondeRoom',files:[file]}).catch(()=>downloadSkate());
-    }else{
-      downloadSkate();
-      alert('Imagem salva! Poste nas redes com a hashtag #SkateRoom 🛹');
-    }
+      navigator.share({title:'Meu Skate - SkateRoom',text:'Montei meu shape no SkateRoom! 🛹 #SkateRoom #BondeRoom',files:[file]}).catch(()=>downloadSkate());
+    }else{downloadSkate();alert('Imagem salva! Poste com #SkateRoom 🛹')}
   });
 }
 
-// Init builder when page shows
-const origShowPage=showPage;
-showPage=function(id){origShowPage(id);if(id==='skatebuilder')setTimeout(initBuilder,100)};
-
-// COMMUNITY — SOCIAL NETWORK ENGINE
-let communityTag='💡 Sugestão';
-function setCommunityTag(btn,tag){communityTag=tag;document.querySelectorAll('.stag').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-
-function postCommunity(){
-  const name=document.getElementById('communityName').value.trim()||'Anônimo';
-  const msg=document.getElementById('communityMsg').value.trim();
-  if(!msg)return;
-  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-  const colors=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#556B2F','#E84393'];
-  const color=colors[Math.floor(Math.random()*colors.length)];
-  const post=document.createElement('div');
-  post.className='spost new';post.dataset.tag=communityTag;
-  post.innerHTML=`<div class="spost-header"><div class="spost-avatar" style="background:${color}">${initials}</div><div class="spost-meta"><span class="spost-name">${name}</span><span class="spost-time">agora</span></div><span class="spost-tag">${communityTag}</span></div><p class="spost-body">${msg}</p><div class="spost-actions"><button class="sact" onclick="toggleLike(this)">🔥 <span>0</span></button><button class="sact" onclick="toggleComments(this)">💬 <span>0</span></button><button class="sact" onclick="sharePost()">↗ Compartilhar</button></div><div class="spost-comments" style="display:none"><div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div></div>`;
-  const feed=document.getElementById('communityFeed');
-  feed.insertBefore(post,feed.firstChild);
-  document.getElementById('communityMsg').value='';
-  updateStats();
+// === BADGE / INSÍGNIA SYSTEM ===
+function generateBadge(){
+  document.getElementById('badgeModal').style.display='flex';
+  const name=(document.getElementById('skaterName')||{}).value||'SKATER';
+  document.getElementById('badgeName').textContent=name.toUpperCase()+' · DECK MASTER';
+  const c=document.getElementById('badgeCanvas');const x=c.getContext('2d');
+  const W=400,H=400,cx=W/2,cy=H/2;x.clearRect(0,0,W,H);
+  // BG
+  x.fillStyle='#0e0b08';x.fillRect(0,0,W,H);
+  // Outer hexagon (like AWS badge)
+  drawHex(x,cx,cy,160,'#1a1612','#CC2936',3);
+  drawHex(x,cx,cy,148,'#141210','#E8A317',1.5);
+  drawHex(x,cx,cy,138,'#0e0b08',null,0);
+  // Inner glow
+  const ig=x.createRadialGradient(cx,cy,20,cx,cy,130);ig.addColorStop(0,'rgba(204,41,54,.08)');ig.addColorStop(1,'transparent');x.fillStyle=ig;x.fillRect(0,0,W,H);
+  // Mini skate in center
+  x.save();x.translate(cx,cy-25);x.rotate(-0.3);
+  x.beginPath();x.moveTo(-22,5);x.bezierCurveTo(-24,-8,-18,-16,0,-18);x.bezierCurveTo(16,-16,24,-8,22,5);x.lineTo(23,85);x.bezierCurveTo(25,95,18,102,0,103);x.bezierCurveTo(-16,102,-25,95,-23,85);x.closePath();
+  x.fillStyle=skateState.deck;x.fill();x.strokeStyle='rgba(255,255,255,.15)';x.lineWidth=1;x.stroke();
+  // Mini wheels
+  x.fillStyle=skateState.wheels;[[-20,-8],[18,-8],[-20,90],[18,90]].forEach(([wx,wy])=>{x.beginPath();x.arc(wx,wy,5,0,Math.PI*2);x.fill()});
+  // Mini trucks
+  x.fillStyle='#666';x.fillRect(-16,-12,32,4);x.fillRect(-16,88,32,4);
+  x.restore();
+  // Text
+  x.fillStyle='#CC2936';x.font='bold 16px "Bebas Neue",sans-serif';x.textAlign='center';
+  x.fillText('SKATEROOM',cx,cy+72);
+  x.fillStyle='#E8A317';x.font='10px "Bebas Neue",sans-serif';
+  x.fillText('CERTIFIED DECK BUILDER',cx,cy+88);
+  x.fillStyle='#fff';x.font='bold 14px "Bebas Neue",sans-serif';
+  x.fillText(name.toUpperCase(),cx,cy+108);
+  // Stars
+  x.fillStyle='#FFD700';x.font='12px sans-serif';
+  x.fillText('★ ★ ★ ★ ★',cx,cy+126);
+  // Bottom text
+  x.fillStyle='#444';x.font='8px "VT323",monospace';
+  x.fillText('GUETO PESTANA · 2026 · VERIFIED',cx,cy+145);
+  // Ribbon on top
+  x.fillStyle='#CC2936';x.beginPath();x.moveTo(cx-45,cy-150);x.lineTo(cx+45,cy-150);x.lineTo(cx+40,cy-138);x.lineTo(cx+45,cy-126);x.lineTo(cx-45,cy-126);x.lineTo(cx-40,cy-138);x.closePath();x.fill();
+  x.fillStyle='#fff';x.font='bold 9px "Bebas Neue",sans-serif';
+  x.fillText('🏆 DECK MASTER',cx,cy-134);
 }
 
-function toggleLike(btn){
-  const s=btn.querySelector('span');
-  if(btn.classList.contains('liked')){btn.classList.remove('liked');s.textContent=parseInt(s.textContent)-1}
-  else{btn.classList.add('liked');s.textContent=parseInt(s.textContent)+1}
-  updateStats();
+function drawHex(x,cx,cy,r,fill,stroke,lw){
+  x.beginPath();for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/6;x.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a))}x.closePath();
+  if(fill){x.fillStyle=fill;x.fill()}
+  if(stroke){x.strokeStyle=stroke;x.lineWidth=lw;x.stroke()}
 }
 
-function toggleComments(btn){
-  const post=btn.closest('.spost');
-  const comments=post.querySelector('.spost-comments');
-  const isOpen=comments.style.display!=='none';
-  comments.style.display=isOpen?'none':'block';
-  if(!isOpen){const inp=comments.querySelector('.scomment-input');if(inp)inp.focus()}
+function downloadBadge(){
+  const c=document.getElementById('badgeCanvas');
+  const a=document.createElement('a');a.download='skateroom-badge.png';a.href=c.toDataURL('image/png');a.click();
 }
-
-function addComment(input){
-  const text=input.value.trim();if(!text)return;
-  const name=document.getElementById('communityName').value.trim()||'Anônimo';
-  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-  const colors=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#E84393'];
-  const color=colors[Math.floor(Math.random()*colors.length)];
-  const wrap=input.closest('.spost-comments');
-  const inputWrap=wrap.querySelector('.scomment-input-wrap');
-  const comment=document.createElement('div');
-  comment.className='scomment new';
-  comment.innerHTML=`<div class="scomment-avatar" style="background:${color}">${initials}</div><div class="scomment-content"><span class="scomment-name">${name}</span><p>${text}</p><span class="scomment-time">agora</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div>`;
-  wrap.insertBefore(comment,inputWrap);
-  input.value='';
-  const post=wrap.closest('.spost');
-  const countBtn=post.querySelector('.spost-actions .sact:nth-child(2) span');
-  countBtn.textContent=parseInt(countBtn.textContent)+1;
-  updateStats();
-}
-
-function showReplyBox(btn){
-  const content=btn.closest('.scomment-content');
-  if(content.querySelector('.reply-box'))return;
-  const replyTo=content.querySelector('.scomment-name').textContent;
-  const box=document.createElement('div');
-  box.className='reply-box';
-  box.innerHTML=`<input type="text" class="scomment-input reply-input" placeholder="Responder ${replyTo}..." onkeydown="if(event.key==='Enter')submitReply(this)"><button class="scomment-send" onclick="submitReply(this.previousElementSibling)">→</button>`;
-  content.appendChild(box);
-  box.querySelector('input').focus();
-}
-
-function submitReply(input){
-  const text=input.value.trim();if(!text)return;
-  const name=document.getElementById('communityName').value.trim()||'Anônimo';
-  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-  const colors=['#CC2936','#E8A317','#6B2D8B','#E84393'];
-  const color=colors[Math.floor(Math.random()*colors.length)];
-  const commentContent=input.closest('.scomment-content');
-  let replies=commentContent.querySelector('.scomment-replies');
-  if(!replies){replies=document.createElement('div');replies.className='scomment-replies';commentContent.insertBefore(replies,input.closest('.reply-box'))}
-  const reply=document.createElement('div');
-  reply.className='scomment reply new';
-  reply.innerHTML=`<div class="scomment-avatar" style="background:${color};width:22px;height:22px;font-size:.5rem">${initials}</div><div class="scomment-content"><span class="scomment-name">${name}</span><p>${text}</p><span class="scomment-time">agora</span></div>`;
-  replies.appendChild(reply);
-  input.closest('.reply-box').remove();
-  const post=commentContent.closest('.spost');
-  const countBtn=post.querySelector('.spost-actions .sact:nth-child(2) span');
-  countBtn.textContent=parseInt(countBtn.textContent)+1;
-  updateStats();
-}
-
-function filterFeed(tag,btn){
-  document.querySelectorAll('.social-nav-item').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.spost').forEach(p=>{
-    if(tag==='all'||p.dataset.tag===tag){p.style.display=''}
-    else{p.style.display='none'}
+function shareBadge(){
+  const c=document.getElementById('badgeCanvas');
+  c.toBlob(blob=>{
+    if(navigator.share&&navigator.canShare){
+      const file=new File([blob],'skateroom-badge.png',{type:'image/png'});
+      navigator.share({title:'Insígnia SkateRoom',text:'Conquistei minha insígnia de Deck Master no SkateRoom! 🏆🛹 #SkateRoom',files:[file]}).catch(()=>downloadBadge());
+    }else{downloadBadge();alert('Insígnia salva! Poste com #SkateRoom 🏆')}
   });
-}
-
-function sharePost(){alert('Link copiado! Compartilhe com o bonde 🛹')}
-
-function updateStats(){
-  const posts=document.querySelectorAll('.spost').length;
-  let likes=0,comments=0;
-  document.querySelectorAll('.spost-actions .sact:first-child span').forEach(s=>likes+=parseInt(s.textContent)||0);
-  document.querySelectorAll('.spost-actions .sact:nth-child(2) span').forEach(s=>comments+=parseInt(s.textContent)||0);
-  const pe=document.getElementById('totalPosts');if(pe)pe.textContent=posts;
-  const le=document.getElementById('totalLikes');if(le)le.textContent=likes;
-  const ce=document.getElementById('totalComments');if(ce)ce.textContent=comments;
 }
 </script>
 
