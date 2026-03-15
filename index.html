@@ -3,339 +3,717 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SkateSound — Mid 90s Crew Room</title>
+<title>SkateRoom — Bonde Room</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛹</text></svg>">
 </head>
 <body>
 <div class="vhs-line"></div>
-<div class="loader" id="loader"><div class="loader-text">SKATESOUND</div><div class="loader-bar"><div class="loader-bar-fill" id="loaderFill"></div></div><p class="loader-sub">Loading beats...</p></div>
-<nav class="nav-bar"><a class="nav-logo" onclick="showPage('home')">SKATESOUND</a><ul class="nav-links" id="navLinks"><li><a class="active" data-page="home" onclick="showPage('home')">Home</a></li><li><a data-page="listen" onclick="showPage('listen')">Sala</a></li><li><a data-page="about" onclick="showPage('about')">Sobre</a></li><li><a data-page="news" onclick="showPage('news')">News</a></li></ul><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></nav>
+<div class="loader" id="loader"><div class="loader-text">SKATEROOM</div><div class="loader-bar"><div class="loader-bar-fill" id="loaderFill"></div></div><p class="loader-sub">Loading beats...</p></div>
+<nav class="nav-bar"><a class="nav-logo" onclick="showPage('home')">SKATEROOM</a><ul class="nav-links" id="navLinks"><li><a class="active" data-page="home" onclick="showPage('home')">Home</a></li><li><a data-page="listen" onclick="showPage('listen')">Sala</a></li><li><a data-page="skatebuilder" onclick="showPage('skatebuilder')">Skate</a></li><li><a data-page="community" onclick="showPage('community')">Bonde</a></li><li><a data-page="about" onclick="showPage('about')">Sobre</a></li><li><a data-page="news" onclick="showPage('news')">News</a></li></ul><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></nav>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
 <section class="hero"><div class="hero-bg"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
-<div class="sticker sticker--r" style="top:100px;left:4%;transform:rotate(-4deg)">🛹 MID 90s VIBES</div>
-<div class="sticker sticker--g" style="top:170px;right:5%;transform:rotate(3deg)">🎤 CREW ROOM</div>
-<div class="sticker sticker--p" style="bottom:150px;left:8%;transform:rotate(-6deg)">🔊 BOOM BAP</div>
-<div class="hero-content"><h1 class="hero-title">SKATE<br>SOUND</h1><p class="hero-sub">// Mid 90s Crew Room //</p><p class="hero-desc">Reúna a crew, entre na sala e ouçam beats juntos. Como nos anos 90 — som alto, amigos por perto, rimas no ar.</p><a class="btn-cta" onclick="showPage('listen')">🎧 ENTRAR NA SALA</a></div></section>
-
-<section class="features"><h2 class="section-title">🔥 Como Funciona</h2><div class="features-grid">
-<div class="feature-card"><div class="icon">🎭</div><h3>Escolha seu Player</h3><p>Personagens pixel art. Cada um com sua vibe.</p></div>
-<div class="feature-card"><div class="icon">🚪</div><h3>Entre na Sala</h3><p>Crie ou entre com código do amigo.</p></div>
-<div class="feature-card"><div class="icon">🎶</div><h3>Ouçam Juntos</h3><p>Beats boom bap tocam sincronizados pra crew toda.</p></div>
-<div class="feature-card"><div class="icon">💬</div><h3>Chat da Crew</h3><p>Conversa em tempo real enquanto curtem o som.</p></div>
+<div class="hero-content">
+<div class="hero-badge">EST. 2026 · GUETO PESTANA</div>
+<h1 class="hero-title">SKATE<span class="hero-title-alt">ROOM</span></h1>
+<div class="hero-tagline">BONDE ROOM</div>
+<p class="hero-desc">Reúna o bonde, entre na sala e assistam juntos.<br>Como nos anos 90 — som alto, amigos por perto, rimas no ar.</p>
+<div class="hero-buttons"><a class="btn-cta" onclick="showPage('listen')">🎧 ENTRAR NA SALA</a><a class="btn-cta btn-cta--outline" onclick="showPage('about')">SOBRE</a></div>
+<div class="hero-icons"><span>🛹</span><span>🎤</span><span>🎧</span><span>📼</span><span>🔊</span></div>
 </div></section>
-
+<section class="features"><h2 class="section-title">🔥 Como Funciona</h2><div class="features-grid">
+<div class="feature-card"><div class="icon">🎭</div><h3>Escolha seu Player</h3><p>21 personagens pixel art — skatistas, rappers, b-boys, graffiteiros.</p></div>
+<div class="feature-card"><div class="icon">🚪</div><h3>Entre na Sala</h3><p>Crie uma sala ou entre com o código do amigo.</p></div>
+<div class="feature-card"><div class="icon">📺</div><h3>Assistam Juntos</h3><p>Vídeos de skate passando na TV — sincronizados.</p></div>
+<div class="feature-card"><div class="icon">💬</div><h3>Chat do Bonde</h3><p>Conversa em tempo real enquanto curtem.</p></div>
+</div></section>
 <section class="char-section"><h2 class="section-title">🎭 Escolha seu Player</h2><p style="font-size:1.1rem;color:#555;margin-bottom:1.5rem">Selecione antes de entrar na sala</p><div class="char-grid" id="charGrid"></div></section>
-
-<section class="join-section"><div class="join-box"><h3>🚪 Entrar na Sala</h3><p>Cole o código do amigo ou crie uma nova</p><div class="join-input-row"><input type="text" class="join-input" id="joinCodeInput" placeholder="CÓDIGO DA SALA" maxlength="20"><button class="btn-cta" onclick="joinRoom()" style="font-size:.45rem;padding:.7rem 1rem">ENTRAR</button></div><div class="join-or">— ou —</div><button class="btn-cta btn-cta--gold" onclick="createRoom()" style="width:100%;justify-content:center">CRIAR NOVA SALA</button></div></section>
-
-<footer class="footer"><div class="footer-logo">SKATESOUND</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateSound — Mid 90s Crew Room</p></footer>
+<section class="join-section"><div class="join-box"><h3>🚪 Entrar na Sala</h3><p>Cole o código do amigo ou crie uma nova</p><div class="join-input-row"><input type="text" class="join-input" id="joinCodeInput" placeholder="CÓDIGO DA SALA" maxlength="20"><button class="btn-cta" onclick="joinRoom()" style="font-size:.9rem;padding:.6rem 1.2rem">ENTRAR</button></div><div class="join-or">— ou —</div><button class="btn-cta btn-cta--gold" onclick="createRoom()" style="width:100%;justify-content:center">CRIAR NOVA SALA</button></div></section>
+<footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom</p></footer>
 </div>
 
-<!-- CREW ROOM -->
-<div class="page" id="page-listen"><div class="crew-room"><div class="crew-bg"></div>
+<!-- BONDE ROOM -->
+<div class="page" id="page-listen">
+<div class="room-page">
+<div class="room-main">
+  <div class="room-svg">
+    <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="brick" width="28" height="14" patternUnits="userSpaceOnUse"><rect width="28" height="14" fill="#2a1e16"/><rect x="0" y="0" width="13" height="6" fill="#30221a" rx=".4"/><rect x="15" y="0" width="13" height="6" fill="#2d1f17" rx=".4"/><rect x="7" y="8" width="13" height="6" fill="#30221a" rx=".4"/><rect x="22" y="8" width="6" height="6" fill="#2d1f17" rx=".4"/><rect x="0" y="8" width="5" height="6" fill="#2d1f17" rx=".4"/></pattern>
+      <filter id="gl"><feGaussianBlur stdDeviation="5" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+      <linearGradient id="flr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#181410"/><stop offset="100%" stop-color="#0a0806"/></linearGradient>
+      <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#1a1028"/></linearGradient>
+    </defs>
 
-<!-- IMMERSIVE ROOM -->
-<div class="room-scene-wrap">
+    <!-- WALL --><rect width="1000" height="310" fill="#2a1e16"/><rect width="1000" height="310" fill="url(#brick)"/>
+    <!-- FLOOR --><rect y="310" width="1000" height="290" fill="url(#flr)"/><rect y="310" width="1000" height="1.5" fill="#3a3020" opacity=".3"/>
+    <line x1="0" y1="370" x2="1000" y2="370" stroke="#1a1510" stroke-width=".5" opacity=".1"/><line x1="0" y1="430" x2="1000" y2="430" stroke="#1a1510" stroke-width=".5" opacity=".08"/><line x1="0" y1="490" x2="1000" y2="490" stroke="#1a1510" stroke-width=".5" opacity=".06"/>
+    <!-- Carpet --><rect x="260" y="370" width="480" height="170" rx="4" fill="#1e1410" opacity=".3"/><rect x="263" y="373" width="474" height="164" rx="3" fill="none" stroke="#CC2936" stroke-width=".5" opacity=".07"/>
 
-<!-- SVG ROOM BACKGROUND — Mid 90s Crew Room -->
-<svg class="room-scene" viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-<!-- Back wall -->
-<rect x="0" y="0" width="960" height="300" fill="#1a1410"/>
-<rect x="0" y="0" width="960" height="300" fill="url(#wallTex)" opacity=".3"/>
-<!-- Wall texture pattern -->
-<defs><pattern id="wallTex" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="none"/><rect x="0" y="0" width="20" height="20" fill="#1e1812" opacity=".4"/><rect x="20" y="20" width="20" height="20" fill="#1e1812" opacity=".4"/></pattern></defs>
-<!-- Floor -->
-<rect x="0" y="300" width="960" height="140" fill="#0e0b08"/>
-<rect x="0" y="300" width="960" height="2" fill="#2a2520" opacity=".5"/>
-<!-- Wood floor lines -->
-<line x1="0" y1="340" x2="960" y2="340" stroke="#1a1610" stroke-width="1" opacity=".3"/>
-<line x1="0" y1="380" x2="960" y2="380" stroke="#1a1610" stroke-width="1" opacity=".3"/>
-<line x1="0" y1="420" x2="960" y2="420" stroke="#1a1610" stroke-width="1" opacity=".3"/>
+    <!-- === WINDOWS with night city view === -->
+    <!-- Left window --><rect x="20" y="30" width="100" height="140" rx="2" fill="#1a1612" stroke="#3a3020" stroke-width="2.5"/>
+    <rect x="25" y="35" width="90" height="130" rx="1" fill="url(#nightSky)"/>
+    <!-- Window cross bars --><line x1="70" y1="35" x2="70" y2="165" stroke="#3a3020" stroke-width="2"/><line x1="25" y1="100" x2="115" y2="100" stroke="#3a3020" stroke-width="2"/>
+    <!-- Moon --><circle cx="50" cy="55" r="6" fill="#E8D9A0" opacity=".6"/>
+    <!-- Stars --><circle cx="38" cy="45" r="1" fill="#fff" opacity=".4"/><circle cx="90" cy="50" r="1" fill="#fff" opacity=".3"/><circle cx="100" cy="70" r=".8" fill="#fff" opacity=".35"/><circle cx="60" cy="80" r=".8" fill="#fff" opacity=".25"/>
+    <!-- City silhouette --><rect x="25" y="120" width="12" height="45" fill="#151020" opacity=".7"/><rect x="40" y="110" width="8" height="55" fill="#151020" opacity=".6"/><rect x="52" y="125" width="15" height="40" fill="#151020" opacity=".7"/><rect x="75" y="115" width="10" height="50" fill="#151020" opacity=".6"/><rect x="90" y="130" width="14" height="35" fill="#151020" opacity=".7"/>
+    <!-- Tiny window lights --><rect x="28" y="125" width="2" height="2" fill="#E8A317" opacity=".4"/><rect x="32" y="132" width="2" height="2" fill="#E8A317" opacity=".3"/><rect x="43" y="118" width="2" height="2" fill="#FFD700" opacity=".4"/><rect x="78" y="120" width="2" height="2" fill="#E8A317" opacity=".35"/><rect x="93" y="135" width="2" height="2" fill="#FFD700" opacity=".3"/>
 
-<!-- POSTER 1 — "THRASHER" style -->
-<rect x="60" y="30" width="80" height="110" fill="#CC2936" rx="2"/>
-<rect x="63" y="33" width="74" height="104" fill="#1a0a08" rx="1"/>
-<text x="100" y="70" fill="#CC2936" font-family="'Bangers',cursive" font-size="14" text-anchor="middle">THRASHER</text>
-<text x="100" y="88" fill="#E8A317" font-family="'VT323',monospace" font-size="10" text-anchor="middle">SKATE & DESTROY</text>
-<rect x="75" y="95" width="50" height="35" fill="#CC2936" opacity=".3" rx="1"/>
+    <!-- Right window --><rect x="880" y="30" width="100" height="140" rx="2" fill="#1a1612" stroke="#3a3020" stroke-width="2.5"/>
+    <rect x="885" y="35" width="90" height="130" rx="1" fill="url(#nightSky)"/>
+    <line x1="930" y1="35" x2="930" y2="165" stroke="#3a3020" stroke-width="2"/><line x1="885" y1="100" x2="975" y2="100" stroke="#3a3020" stroke-width="2"/>
+    <circle cx="960" cy="55" r="4" fill="#E8D9A0" opacity=".3"/>
+    <circle cx="900" cy="48" r="1" fill="#fff" opacity=".3"/><circle cx="950" cy="65" r=".8" fill="#fff" opacity=".25"/>
+    <rect x="885" y="120" width="10" height="45" fill="#151020" opacity=".7"/><rect x="900" y="108" width="12" height="57" fill="#151020" opacity=".6"/><rect x="918" y="122" width="14" height="43" fill="#151020" opacity=".7"/><rect x="940" y="115" width="8" height="50" fill="#151020" opacity=".6"/><rect x="955" y="128" width="16" height="37" fill="#151020" opacity=".7"/>
+    <rect x="903" y="115" width="2" height="2" fill="#E8A317" opacity=".35"/><rect x="922" y="128" width="2" height="2" fill="#FFD700" opacity=".3"/><rect x="958" y="133" width="2" height="2" fill="#E8A317" opacity=".4"/>
 
-<!-- POSTER 2 — "WU-TANG" style -->
-<rect x="200" y="45" width="90" height="100" fill="#E8A317" rx="2"/>
-<rect x="203" y="48" width="84" height="94" fill="#111" rx="1"/>
-<text x="245" y="80" fill="#E8A317" font-family="'Bangers',cursive" font-size="12" text-anchor="middle">WU-TANG</text>
-<text x="245" y="95" fill="#FFD700" font-family="'Bangers',cursive" font-size="18" text-anchor="middle">36</text>
-<text x="245" y="115" fill="#E8A317" font-family="'VT323',monospace" font-size="9" text-anchor="middle">CHAMBERS</text>
+    <!-- === CEILING LIGHTS === -->
+    <!-- Hanging bulb left --><line x1="200" y1="0" x2="200" y2="18" stroke="#444" stroke-width="1"/><circle cx="200" cy="22" r="5" fill="#E8A317" opacity=".25" filter="url(#gl)"/><circle cx="200" cy="22" r="3" fill="#FFD700" opacity=".4"/>
+    <!-- Hanging bulb center --><line x1="500" y1="0" x2="500" y2="14" stroke="#444" stroke-width="1"/><circle cx="500" cy="18" r="6" fill="#CC2936" opacity=".2" filter="url(#gl)"/><circle cx="500" cy="18" r="3.5" fill="#FF2E2E" opacity=".35"/>
+    <!-- Hanging bulb right --><line x1="800" y1="0" x2="800" y2="18" stroke="#444" stroke-width="1"/><circle cx="800" cy="22" r="5" fill="#6B2D8B" opacity=".2" filter="url(#gl)"/><circle cx="800" cy="22" r="3" fill="#9B4DCA" opacity=".35"/>
+    <!-- Neon tube --><rect x="300" y="4" width="400" height="3" rx="1.5" fill="#CC2936" opacity=".25" filter="url(#gl)"/><rect x="300" y="4" width="400" height="3" rx="1.5" fill="#FF2E2E" opacity=".06"><animate attributeName="opacity" values=".03;.1;.03" dur="3s" repeatCount="indefinite"/></rect>
+    <!-- Light cones on floor --><ellipse cx="200" cy="310" rx="80" ry="15" fill="#E8A317" opacity=".012"/><ellipse cx="500" cy="310" rx="100" ry="18" fill="#CC2936" opacity=".01"/><ellipse cx="800" cy="310" rx="80" ry="15" fill="#6B2D8B" opacity=".01"/>
 
-<!-- POSTER 3 — "SKATESOUND" -->
-<rect x="680" y="35" width="85" height="105" fill="#6B2D8B" rx="2"/>
-<rect x="683" y="38" width="79" height="99" fill="#1a0a18" rx="1"/>
-<text x="722" y="72" fill="#CC2936" font-family="'Rubik Glitch',cursive" font-size="10" text-anchor="middle">SKATE</text>
-<text x="722" y="88" fill="#E8A317" font-family="'Rubik Glitch',cursive" font-size="10" text-anchor="middle">SOUND</text>
-<text x="722" y="110" fill="#6B2D8B" font-family="'VT323',monospace" font-size="8" text-anchor="middle">CREW ROOM '95</text>
+    <!-- === GRAFFITI WILDSTYLE left wall === -->
+    <g transform="translate(135,40)" opacity=".55">
+      <path d="M5,75 L15,50 Q20,35 30,45 L25,60 Q20,70 10,65Z" fill="#CC2936" opacity=".7"/>
+      <path d="M30,75 L38,35 L52,50 L48,35 L58,30 L42,75Z" fill="#E8A317" opacity=".7"/>
+      <path d="M55,75 L68,30 L80,75 L72,55 L62,55Z" fill="#6B2D8B" opacity=".7"/>
+      <path d="M82,35 L100,35 L98,43 L92,43 L90,75 L85,75 L83,43 L78,43Z" fill="#CC2936" opacity=".6"/>
+      <path d="M103,35 L122,35 L120,43 L112,43 L111,50 L120,50 L118,58 L110,58 L108,67 L125,67 L123,75 L100,75Z" fill="#E8A317" opacity=".6"/>
+      <line x1="15" y1="75" x2="15" y2="90" stroke="#CC2936" stroke-width="1.5" opacity=".35" stroke-linecap="round"/>
+      <line x1="68" y1="75" x2="68" y2="88" stroke="#6B2D8B" stroke-width="1.5" opacity=".35" stroke-linecap="round"/>
+      <line x1="115" y1="75" x2="115" y2="85" stroke="#E8A317" stroke-width="1.2" opacity=".3" stroke-linecap="round"/>
+      <text x="130" y="40" fill="#FFD700" font-size="9" opacity=".35">★</text>
+    </g>
+    <text x="140" y="185" fill="#E8A317" font-family="'Permanent Marker',cursive" font-size="16" opacity=".1" transform="rotate(-1 140 185)">COMPTON</text>
 
-<!-- Shelf on wall -->
-<rect x="400" y="100" width="200" height="6" fill="#2a1f14" rx="1"/>
-<rect x="400" y="100" width="200" height="2" fill="#3a2f24"/>
-<!-- Vinyl records on shelf -->
-<circle cx="430" cy="90" r="12" fill="#111" stroke="#333" stroke-width="1"/><circle cx="430" cy="90" r="4" fill="#222"/>
-<circle cx="460" cy="88" r="12" fill="#111" stroke="#333" stroke-width="1" transform="rotate(-10 460 88)"/><circle cx="460" cy="88" r="4" fill="#222"/>
-<!-- Spray can on shelf -->
-<rect x="500" y="82" width="10" height="18" rx="3" fill="#CC2936"/><rect x="503" y="78" width="4" height="6" rx="2" fill="#999"/>
-<rect x="530" y="84" width="10" height="16" rx="3" fill="#E8A317"/><rect x="533" y="80" width="4" height="6" rx="2" fill="#999"/>
+    <!-- N.W.A throw-up right --><g transform="translate(762,45)" opacity=".4">
+      <ellipse cx="18" cy="22" rx="18" ry="20" fill="#CC2936" opacity=".3" stroke="#CC2936" stroke-width="1.2"/>
+      <ellipse cx="50" cy="22" rx="18" ry="20" fill="#E8A317" opacity=".3" stroke="#E8A317" stroke-width="1.2"/>
+      <ellipse cx="82" cy="22" rx="18" ry="20" fill="#6B2D8B" opacity=".3" stroke="#6B2D8B" stroke-width="1.2"/>
+      <text x="5" y="28" fill="#fff" font-family="'Bangers',cursive" font-size="15" opacity=".55" letter-spacing="3">N.W.A</text>
+    </g>
 
-<!-- TV SCREEN (placeholder - real player is overlaid via CSS) -->
-<rect x="340" y="120" width="280" height="180" rx="6" fill="#111" stroke="#3a3530" stroke-width="3"/>
-<rect x="345" y="125" width="270" height="170" rx="4" fill="#000" id="tvScreen"/>
-<!-- TV stand -->
-<rect x="440" y="300" width="80" height="8" rx="2" fill="#2a1f14"/>
-<rect x="460" y="295" width="40" height="8" fill="#1e1812"/>
-<!-- TV power light -->
-<circle cx="575" cy="290" r="3" fill="#CC2936" opacity=".8">
-<animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/>
-</circle>
+    <!-- === ALBUM POSTERS (framed) === -->
+    <g transform="translate(140,195)"><rect x="-2" y="-2" width="40" height="52" fill="#333" rx="1"/><rect width="36" height="48" fill="#CC2936" rx="1"/><rect x="2" y="2" width="32" height="44" fill="#1a0a08"/><rect x="8" y="6" width="20" height="16" fill="#8B6F4E"/><rect x="11" y="11" width="3" height="2" fill="#111"/><rect x="18" y="11" width="3" height="2" fill="#111"/><rect x="12" y="22" width="10" height="1.5" fill="#FFD700"/><text x="18" y="38" fill="#CC2936" font-family="'Bangers',cursive" font-size="6" text-anchor="middle">2PAC</text></g>
+    <g transform="translate(195,200)"><rect x="-2" y="-2" width="40" height="50" fill="#333" rx="1"/><rect width="36" height="46" fill="#E8A317" rx="1"/><rect x="2" y="2" width="32" height="42" fill="#0a0806"/><rect x="8" y="4" width="20" height="16" fill="#5C3D2E"/><rect x="10" y="3" width="14" height="4" fill="#FFD700"/><text x="18" y="34" fill="#E8A317" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">B.I.G.</text></g>
+    <g transform="translate(250,197)"><rect x="-2" y="-2" width="38" height="50" fill="#333" rx="1"/><rect width="34" height="46" fill="#2A3A5C" rx="1"/><rect x="2" y="2" width="30" height="42" fill="#0a0a14"/><rect x="6" y="6" width="22" height="16" fill="#6B4423"/><rect x="10" y="12" width="3" height="2" fill="#111"/><rect x="17" y="12" width="3" height="2" fill="#111"/><text x="17" y="36" fill="#E8A317" font-family="'Bangers',cursive" font-size="7" text-anchor="middle">NAS</text></g>
 
-<!-- SOFA (left side) -->
-<rect x="30" y="310" width="250" height="60" rx="8" fill="#2a1f18"/>
-<rect x="35" y="290" width="240" height="25" rx="6" fill="#332a20"/>
-<!-- Sofa cushions -->
-<rect x="40" y="315" width="75" height="50" rx="5" fill="#3a2f24"/>
-<rect x="120" y="315" width="75" height="50" rx="5" fill="#352a1f"/>
-<rect x="200" y="315" width="75" height="50" rx="5" fill="#3a2f24"/>
-<!-- Sofa arm -->
-<rect x="25" y="295" width="15" height="75" rx="4" fill="#2a1f18"/>
-<rect x="280" y="295" width="15" height="75" rx="4" fill="#2a1f18"/>
+    <!-- Skate decks on nails --><g transform="translate(300,180)"><circle cx="4" cy="0" r="1.5" fill="#777"/><rect x="0" y="2" width="8" height="45" rx="4" fill="#CC2936"/><rect x="2" y="10" width="4" height="13" fill="#E8A317" opacity=".5"/><circle cx="4" cy="5" r="2" fill="#333"/><circle cx="4" cy="43" r="2" fill="#333"/></g>
+    <g transform="translate(318,184)"><circle cx="4" cy="0" r="1.5" fill="#777"/><rect x="0" y="2" width="8" height="42" rx="4" fill="#6B2D8B"/><circle cx="4" cy="5" r="2" fill="#333"/><circle cx="4" cy="40" r="2" fill="#333"/></g>
+    <g transform="translate(336,182)"><circle cx="4" cy="0" r="1.5" fill="#777"/><rect x="0" y="2" width="8" height="43" rx="4" fill="#111"/><rect x="3" y="5" width="2" height="34" fill="#E8A317" opacity=".4"/><circle cx="4" cy="5" r="2" fill="#333"/><circle cx="4" cy="41" r="2" fill="#333"/></g>
 
-<!-- SOFA RIGHT (smaller) -->
-<rect x="680" y="320" width="180" height="50" rx="8" fill="#2a1f18"/>
-<rect x="685" y="305" width="170" height="20" rx="5" fill="#332a20"/>
-<rect x="690" y="325" width="80" height="40" rx="5" fill="#3a2f24"/>
-<rect x="775" y="325" width="80" height="40" rx="5" fill="#352a1f"/>
+    <!-- Right wall posters --><g transform="translate(680,195)"><rect x="-2" y="-2" width="40" height="52" fill="#333" rx="1"/><rect width="36" height="48" fill="#E8A317" rx="1"/><rect x="2" y="2" width="32" height="44" fill="#111"/><rect x="7" y="8" width="4" height="14" fill="#E8A317"/><rect x="13" y="12" width="4" height="10" fill="#E8A317"/><rect x="19" y="8" width="4" height="14" fill="#E8A317"/><rect x="25" y="12" width="4" height="10" fill="#E8A317"/><rect x="9" y="22" width="18" height="2" fill="#E8A317"/><text x="18" y="40" fill="#E8A317" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">WU-TANG</text></g>
+    <g transform="translate(735,198)"><rect x="-2" y="-2" width="38" height="48" fill="#333" rx="1"/><rect width="34" height="44" fill="#111" rx="1" stroke="#E8A317" stroke-width=".5"/><rect x="2" y="2" width="30" height="40" fill="#0a0806"/><rect x="7" y="6" width="20" height="16" fill="#6B4423"/><path d="M5,9 C5,4 29,4 29,9" fill="none" stroke="#222" stroke-width="2"/><rect x="3" y="7" width="4" height="5" rx="1" fill="#222"/><rect x="27" y="7" width="4" height="5" rx="1" fill="#222"/><text x="17" y="34" fill="#CC2936" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">DR. DRE</text></g>
 
-<!-- SKATEBOARD (leaning on wall left) -->
-<rect x="320" y="220" width="12" height="80" rx="6" fill="#CC2936" transform="rotate(-12 326 260)"/>
-<circle cx="322" cy="218" r="4" fill="#333" stroke="#555" stroke-width="1" transform="rotate(-12 326 260)"/>
-<circle cx="328" cy="296" r="4" fill="#333" stroke="#555" stroke-width="1" transform="rotate(-12 326 260)"/>
+    <!-- Small "THRASHER" poster frame --><g transform="translate(660,45)"><rect x="-1" y="-1" width="30" height="38" fill="#333" rx="1"/><rect width="28" height="36" fill="#CC2936" rx="1"/><rect x="2" y="2" width="24" height="32" fill="#1a0a08"/><text x="14" y="16" fill="#CC2936" font-family="'Bangers',cursive" font-size="5" text-anchor="middle">THRASHER</text><text x="14" y="26" fill="#E8A317" font-family="'VT323',monospace" font-size="4" text-anchor="middle">MAG</text></g>
+    <!-- Small "SKATEROOM" poster --><g transform="translate(700,48)"><rect x="-1" y="-1" width="30" height="36" fill="#333" rx="1"/><rect width="28" height="34" fill="#6B2D8B" rx="1"/><rect x="2" y="2" width="24" height="30" fill="#1a0a18"/><text x="14" y="16" fill="#CC2936" font-family="'Rubik Glitch',cursive" font-size="4" text-anchor="middle">SKATE</text><text x="14" y="24" fill="#E8A317" font-family="'Rubik Glitch',cursive" font-size="4" text-anchor="middle">ROOM</text></g>
 
-<!-- SKATEBOARD 2 (on floor right) -->
-<rect x="620" y="370" width="70" height="12" rx="6" fill="#E8A317"/>
-<circle cx="635" cy="385" r="5" fill="#333" stroke="#555" stroke-width="1"/>
-<circle cx="675" cy="385" r="5" fill="#333" stroke="#555" stroke-width="1"/>
+    <!-- LIVE neon --><g filter="url(#gl)"><text x="740" y="32" fill="#FF2E2E" font-family="'Rubik Glitch',cursive" font-size="13" opacity=".4">● LIVE</text><text x="740" y="32" fill="#FF2E2E" font-family="'Rubik Glitch',cursive" font-size="13" opacity=".1"><animate attributeName="opacity" values=".04;.25;.04" dur="1.5s" repeatCount="indefinite"/></text></g>
 
-<!-- NEON LIGHT on ceiling -->
-<rect x="350" y="5" width="260" height="4" rx="2" fill="#CC2936" opacity=".6"/>
-<rect x="350" y="5" width="260" height="4" rx="2" fill="#CC2936" opacity=".2">
-<animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/>
-</rect>
+    <!-- Shelf above TV --><rect x="370" y="50" width="260" height="4" fill="#2a1f14"/><rect x="370" y="50" width="260" height="1.5" fill="#3a2f24"/>
+    <circle cx="385" cy="42" r="7" fill="#111" stroke="#333" stroke-width=".5"/><circle cx="385" cy="42" r="2.5" fill="#1a0a08"/>
+    <circle cx="403" cy="41" r="7" fill="#111" stroke="#333" stroke-width=".5"/><circle cx="403" cy="41" r="2.5" fill="#CC2936" opacity=".15"/>
+    <rect x="425" y="39" width="6" height="10" rx="2" fill="#CC2936"/><rect x="435" y="40" width="6" height="9" rx="2" fill="#E8A317"/><rect x="445" y="39" width="6" height="10" rx="2" fill="#6B2D8B"/>
+    <rect x="465" y="36" width="30" height="13" rx="2.5" fill="#1a1410" stroke="#333" stroke-width=".3"/><circle cx="475" cy="43" r="4.5" fill="#0a0806" stroke="#CC2936" stroke-width=".3"/><circle cx="489" cy="43" r="4.5" fill="#0a0806" stroke="#CC2936" stroke-width=".3"/>
+    <rect x="510" y="41" width="7" height="5" rx="1" fill="#E8A317" opacity=".4"/><rect x="522" y="41" width="7" height="5" rx="1" fill="#CC2936" opacity=".4"/><rect x="534" y="41" width="7" height="5" rx="1" fill="#6B2D8B" opacity=".4"/>
+    <!-- Framed photo on shelf --><rect x="560" y="32" width="16" height="20" rx="1" fill="#333"/><rect x="562" y="34" width="12" height="16" fill="#2A3A5C" opacity=".5"/>
+    <rect x="585" y="34" width="14" height="18" rx="1" fill="#333"/><rect x="587" y="36" width="10" height="14" fill="#CC2936" opacity=".3"/>
+    <!-- Plant --><rect x="612" y="40" width="8" height="10" rx="2" fill="#3a2a1e"/><rect x="614" y="30" width="2" height="12" fill="#2d5a1e"/><ellipse cx="615" cy="28" rx="5" ry="4" fill="#2d5a1e" opacity=".6"/><ellipse cx="618" cy="32" rx="4" ry="3" fill="#3a7a2e" opacity=".5"/>
 
-<!-- TABLE (center-left, with money and stuff) -->
-<rect x="100" y="370" width="120" height="10" rx="2" fill="#2a1f14"/>
-<rect x="105" y="380" width="4" height="50" fill="#1e1812"/>
-<rect x="211" y="380" width="4" height="50" fill="#1e1812"/>
-<!-- Money stacks on table -->
-<rect x="115" y="362" width="25" height="8" rx="1" fill="#2d6b35"/><rect x="117" y="364" width="21" height="4" fill="#3a8a45" opacity=".7"/>
-<rect x="120" y="355" width="20" height="7" rx="1" fill="#2d6b35" transform="rotate(-5 130 358)"/>
-<!-- Dollar bills scattered -->
-<rect x="145" y="365" width="12" height="6" rx="1" fill="#2d6b35" transform="rotate(15 151 368)"/>
-<rect x="155" y="360" width="12" height="6" rx="1" fill="#3a8a45" transform="rotate(-8 161 363)"/>
-<!-- Cups on table -->
-<rect x="170" y="360" width="10" height="12" rx="2" fill="#CC2936"/><rect x="171" y="358" width="8" height="3" rx="1" fill="#992222"/>
-<rect x="190" y="362" width="10" height="10" rx="2" fill="#6B2D8B"/><rect x="191" y="360" width="8" height="3" rx="1" fill="#5a2575"/>
-<!-- Ashtray -->
-<ellipse cx="210" cy="368" rx="8" ry="4" fill="#333" stroke="#555" stroke-width=".5"/>
-<line x1="206" y1="365" x2="203" y2="358" stroke="#999" stroke-width=".8" opacity=".4"/>
+    <!-- ====== BIGGER TV ====== -->
+    <!-- TV Cabinet --><rect x="355" y="278" width="290" height="14" rx="3" fill="#2a1f14"/><rect x="400" y="290" width="60" height="14" rx="2" fill="#1e1812"/><rect x="540" y="290" width="60" height="14" rx="2" fill="#1e1812"/>
+    <!-- TV frame (bigger: 280x230) --><rect x="358" y="55" width="284" height="226" rx="6" fill="#1a1612" stroke="#2a2420" stroke-width="3"/>
+    <!-- TV screen --><rect x="364" y="61" width="272" height="214" rx="3" fill="#000"/>
+    <!-- LED --><circle cx="610" cy="272" r="2.5" fill="#CC2936" opacity=".7"><animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/></circle>
+    <text x="500" y="288" fill="#333" font-family="'VT323',monospace" font-size="6" text-anchor="middle">TRINITRON</text>
+    <!-- Glow --><ellipse cx="500" cy="160" rx="160" ry="60" fill="#2A3A5C" opacity=".02"><animate attributeName="opacity" values=".01;.035;.01" dur="5s" repeatCount="indefinite"/></ellipse>
 
-<!-- DJ SETUP (right side, behind sofa) -->
-<!-- Turntable -->
-<rect x="830" y="250" width="80" height="50" rx="4" fill="#1a1410" stroke="#3a3530" stroke-width="1"/>
-<circle cx="855" cy="272" r="16" fill="#111" stroke="#2a2520" stroke-width="1"/>
-<circle cx="855" cy="272" r="6" fill="#1a1410"/><circle cx="855" cy="272" r="2" fill="#CC2936"/>
-<circle cx="890" cy="272" r="12" fill="#111" stroke="#2a2520" stroke-width="1"/>
-<circle cx="890" cy="272" r="4" fill="#1a1410"/><circle cx="890" cy="272" r="1.5" fill="#E8A317"/>
-<!-- Turntable arm -->
-<line x1="895" y1="256" x2="878" y2="270" stroke="#888" stroke-width="1.5"/>
-<circle cx="895" cy="255" r="2" fill="#888"/>
-<!-- Mixer -->
-<rect x="840" y="245" width="50" height="8" rx="2" fill="#222" stroke="#3a3530" stroke-width=".5"/>
-<rect x="848" y="246" width="3" height="5" rx="1" fill="#CC2936"/><rect x="856" y="246" width="3" height="5" rx="1" fill="#E8A317"/><rect x="864" y="246" width="3" height="5" rx="1" fill="#CC2936"/><rect x="872" y="246" width="3" height="5" rx="1" fill="#E8A317"/>
-<!-- DJ Character (pixel art, standing behind turntable) -->
-<g transform="translate(848, 195) scale(1.2)">
-<rect x="4" y="0" width="24" height="6" fill="#222"/>
-<rect x="2" y="2" width="28" height="8" fill="#222"/>
-<rect x="2" y="4" width="4" height="6" fill="#FFD700"/>
-<rect x="26" y="4" width="4" height="6" fill="#FFD700"/>
-<rect x="6" y="8" width="20" height="12" fill="#6B4423"/>
-<rect x="8" y="11" width="6" height="3" fill="#111"/>
-<rect x="18" y="11" width="6" height="3" fill="#111"/>
-<rect x="4" y="20" width="24" height="16" fill="#1a1a1a"/>
-<rect x="0" y="22" width="4" height="12" fill="#1a1a1a"/>
-<rect x="28" y="22" width="4" height="12" fill="#1a1a1a"/>
-</g>
+    <!-- ====== BIG SOFA centered facing TV ====== -->
+    <rect x="290" y="385" width="420" height="65" rx="10" fill="#3a2a1e"/>
+    <rect x="298" y="366" width="404" height="24" rx="7" fill="#4a3828"/>
+    <rect x="304" y="390" width="98" height="55" rx="6" fill="#4a3828"/><rect x="408" y="390" width="98" height="55" rx="6" fill="#42301e"/><rect x="512" y="390" width="98" height="55" rx="6" fill="#4a3828"/><rect x="614" y="390" width="90" height="55" rx="6" fill="#42301e"/>
+    <rect x="280" y="372" width="16" height="78" rx="5" fill="#3a2a1e"/><rect x="710" y="372" width="16" height="78" rx="5" fill="#3a2a1e"/>
+    <!-- Throw pillows --><rect x="312" y="374" width="20" height="15" rx="4" fill="#CC2936" opacity=".45"/><rect x="672" y="374" width="20" height="15" rx="4" fill="#6B2D8B" opacity=".45"/><rect x="492" y="374" width="18" height="13" rx="3" fill="#E8A317" opacity=".3"/>
 
-<!-- RAPPER WITH MIC (sitting on left sofa) -->
-<g transform="translate(80, 262) scale(1.6)">
-<!-- Cap -->
-<rect x="6" y="2" width="20" height="4" fill="#E8A317"/>
-<rect x="4" y="4" width="24" height="3" fill="#E8A317"/>
-<!-- Head -->
-<rect x="8" y="5" width="16" height="12" fill="#5C3D2E"/>
-<rect x="10" y="9" width="2" height="2" fill="#111"/>
-<rect x="20" y="9" width="2" height="2" fill="#111"/>
-<rect x="13" y="13" width="6" height="2" fill="#111"/>
-<!-- Gold chain -->
-<rect x="12" y="17" width="8" height="1" fill="#FFD700"/>
-<rect x="14" y="18" width="4" height="3" fill="#FFD700"/>
-<!-- Hoodie -->
-<rect x="4" y="17" width="24" height="14" fill="#6B2D8B"/>
-<!-- Arm holding mic -->
-<rect x="26" y="19" width="8" height="4" fill="#6B2D8B" transform="rotate(-30 30 21)"/>
-<rect x="0" y="20" width="4" height="10" fill="#6B2D8B"/>
-<!-- Mic -->
-<rect x="32" y="12" width="3" height="10" fill="#888"/>
-<circle cx="33.5" cy="11" r="3" fill="#333" stroke="#888" stroke-width=".5"/>
-</g>
+    <!-- Skateboard on floor --><rect x="470" y="470" width="50" height="8" rx="4" fill="#E8A317"/><circle cx="482" cy="480" r="3.5" fill="#333" stroke="#555" stroke-width=".4"/><circle cx="512" cy="480" r="3.5" fill="#333" stroke="#555" stroke-width=".4"/>
 
-<!-- GUY RECORDING (another on sofa with notepad) -->
-<g transform="translate(200, 270) scale(1.4)">
-<rect x="8" y="3" width="16" height="4" fill="#111"/>
-<rect x="10" y="5" width="12" height="12" fill="#DEBA9C"/>
-<rect x="12" y="9" width="2" height="2" fill="#111"/>
-<rect x="18" y="9" width="2" height="2" fill="#111"/>
-<rect x="6" y="17" width="20" height="14" fill="#CC2936"/>
-<rect x="9" y="20" width="14" height="3" fill="#992222"/>
-<rect x="2" y="18" width="4" height="9" fill="#DEBA9C"/>
-<rect x="26" y="18" width="4" height="9" fill="#DEBA9C"/>
-<!-- Notepad -->
-<rect x="26" y="22" width="8" height="10" rx="1" fill="#ddd"/>
-<line x1="28" y1="25" x2="32" y2="25" stroke="#333" stroke-width=".5"/>
-<line x1="28" y1="27" x2="32" y2="27" stroke="#333" stroke-width=".5"/>
-<line x1="28" y1="29" x2="31" y2="29" stroke="#333" stroke-width=".5"/>
-</g>
+    <!-- Smoke/haze --><g opacity=".02"><ellipse cx="300" cy="340" rx="60" ry="18" fill="#888"/><ellipse cx="700" cy="330" rx="50" ry="15" fill="#888"/></g>
 
-<!-- HOMIE STANDING (near boombox) -->
-<g transform="translate(340, 260) scale(1.5)">
-<rect x="8" y="4" width="16" height="3" fill="#E8A317"/>
-<rect x="10" y="5" width="12" height="12" fill="#8B6F4E"/>
-<rect x="12" y="10" width="2" height="2" fill="#111"/>
-<rect x="18" y="10" width="2" height="2" fill="#111"/>
-<rect x="14" y="17" width="4" height="1" fill="#FFD700"/>
-<rect x="6" y="17" width="20" height="14" fill="#111"/>
-<rect x="2" y="19" width="4" height="10" fill="#111"/>
-<rect x="26" y="19" width="4" height="10" fill="#111"/>
-<rect x="8" y="31" width="7" height="10" fill="#2A3A5C"/>
-<rect x="17" y="31" width="7" height="10" fill="#2A3A5C"/>
-<rect x="6" y="41" width="9" height="4" fill="#fff"/>
-<rect x="17" y="41" width="9" height="4" fill="#fff"/>
-</g>
+    <!-- Crew Characters sit here (JS places them on sofa) -->
+    <g id="crewCharacters"></g>
+    </svg>
+  </div>
 
-<!-- GIRL ON RIGHT SOFA -->
-<g transform="translate(720, 275) scale(1.4)">
-<rect x="8" y="2" width="16" height="6" fill="#E84393"/>
-<rect x="6" y="5" width="4" height="10" fill="#E84393"/>
-<rect x="22" y="5" width="4" height="10" fill="#E84393"/>
-<rect x="10" y="5" width="12" height="12" fill="#D4A574"/>
-<rect x="12" y="9" width="2" height="2" fill="#111"/>
-<rect x="18" y="9" width="2" height="2" fill="#111"/>
-<rect x="8" y="17" width="16" height="8" fill="#111"/>
-<rect x="4" y="18" width="4" height="8" fill="#D4A574"/>
-<rect x="24" y="18" width="4" height="8" fill="#D4A574"/>
-</g>
+  <!-- YouTube overlay — TV screen: x=364 y=61 w=272 h=214 in viewBox 1000x600 -->
+  <!-- Pct: left=36.4% top=10.17% width=27.2% height=35.67% -->
+  <div class="yt-overlay"><div id="ytPlayer"></div></div>
 
-<!-- SMOKE/HAZE effect -->
-<ellipse cx="160" cy="340" rx="60" ry="20" fill="#888" opacity=".02"/>
-<ellipse cx="480" cy="250" rx="100" ry="30" fill="#CC2936" opacity=".02"/>
-
-<!-- Light glow from boombox -->
-<ellipse cx="480" cy="280" rx="120" ry="40" fill="#CC2936" opacity=".04"/>
-
-<!-- Crew characters will be positioned here by JS -->
-<g id="crewCharacters"></g>
-</svg>
-
-<!-- YOUTUBE TELÃO — positioned over the SVG TV via CSS -->
-<div class="yt-container">
-<div id="ytPlayer"></div>
+  <div class="room-topbar"><div class="room-neon">🛹 BONDE ROOM</div><div class="room-code-badge" id="barRoomCode">GRIND-7742</div><div class="user-count"><span id="userCount">0</span> na sala</div><div class="room-code-share">SALA: <span id="roomCode">GRIND-7742</span></div></div>
+  <div class="room-controls"><div class="np-info"><div class="track-name" id="trackNameDisplay">Selecione uma faixa</div><div class="track-artist" id="artistDisplay"></div></div><div class="np-btns"><button class="ctrl-btn" onclick="prevTrack()">⏮</button><button class="ctrl-btn play-btn" id="playBtn" onclick="playTrack()">▶</button><button class="ctrl-btn" onclick="nextTrack()">⏭</button></div></div>
 </div>
 
-<!-- OVERLAY: Player Controls + Info -->
-<div class="room-overlay">
-<div class="room-overlay-top">
-<div class="room-neon">🛹 CREW ROOM</div>
-<div class="room-code-badge" id="barRoomCode">GRIND-7742</div>
-<div class="user-count"><span id="userCount">0</span> na sala</div>
-</div>
-
-<div class="room-overlay-bottom">
-<div class="now-playing-bar">
-<div class="np-info">
-<div class="track-name-display" id="trackNameDisplay">Selecione uma faixa</div>
-<div class="artist-display" id="artistDisplay"></div>
-</div>
-<div class="np-controls">
-<button class="ctrl-btn" onclick="prevTrack()">⏮</button>
-<button class="ctrl-btn play-btn" id="playBtn" onclick="playTrack()">▶</button>
-<button class="ctrl-btn" onclick="nextTrack()">⏭</button>
-</div>
-<div class="np-progress">
-<span id="currentTime">0:00</span>
-<div class="progress-wrap" id="progressWrap" onclick="seekTrack(event)"><div class="progress-bar" id="progressBar"></div></div>
-<span id="duration">0:00</span>
-</div>
+<div class="room-sidebar">
+  <div class="panel-tabs"><div class="panel-tab active" onclick="switchTab('chat')">💬 Chat</div><div class="panel-tab" onclick="switchTab('playlist')">🎵 Playlist</div></div>
+  <div class="panel-content active" id="tab-chat"><div class="chat-messages" id="chatMessages"><div class="chat-msg system"><div class="msg-user">SISTEMA</div><div class="msg-text">Bem-vindo ao Bonde Room! 🛹</div></div></div><div class="chat-input-row"><input type="text" class="chat-input" id="chatInput" placeholder="Digite..." onkeydown="handleChatKey(event)"><button class="chat-send" onclick="sendChat()">→</button></div></div>
+  <div class="panel-content" id="tab-playlist"><div class="playlist-list" id="playlistContainer"></div></div>
 </div>
 </div>
 </div>
 
-<!-- SIDE PANEL: Chat + Playlist -->
-<div class="side-panel">
-<div class="panel-tabs"><div class="panel-tab active" onclick="switchTab('chat')">💬 Chat</div><div class="panel-tab" onclick="switchTab('playlist')">🎵 Playlist</div></div>
-<div class="panel-content active" id="tab-chat"><div class="chat-messages" id="chatMessages"><div class="chat-msg system"><div class="msg-user">SISTEMA</div><div class="msg-text">Bem-vindo ao Crew Room! 🛹</div></div></div><div class="chat-input-row"><input type="text" class="chat-input" id="chatInput" placeholder="Digite..." onkeydown="handleChatKey(event)"><button class="chat-send" onclick="sendChat()">→</button></div></div>
-<div class="panel-content" id="tab-playlist"><div class="playlist-list" id="playlistContainer"></div></div>
+<!-- ABOUT --><div class="page" id="page-about"><div class="about-page" style="max-width:960px">
+
+<!-- HERO SECTION -->
+<div style="text-align:center;padding-top:1.5rem;margin-bottom:2.5rem">
+<span style="font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--amber);letter-spacing:5px;opacity:.6">01 — SOBRE O PROJETO</span>
+<h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);color:var(--neon-red);letter-spacing:4px;margin:.5rem 0">SKATEROOM</h1>
+<p style="font-size:1.15rem;color:#888;line-height:1.8;max-width:650px;margin:0 auto">Plataforma de <strong style="color:var(--cream)">watch party</strong> inspirada pelo filme Mid 90s e pela cultura de crew — onde música, skate e rap underground se encontram numa garagem virtual de Compton.</p>
 </div>
 
+<!-- WHAT IS IT -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.5rem"><h3 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);font-size:1.2rem;letter-spacing:2px;margin-bottom:.6rem">📺 O que é</h3><p style="color:#888;font-size:.95rem;line-height:1.7">Uma sala virtual onde amigos entram, escolhem personagens pixel art, sentam no sofá e assistem vídeos de skate juntos — tudo sincronizado em tempo real via WebSocket.</p></div>
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.5rem"><h3 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);font-size:1.2rem;letter-spacing:2px;margin-bottom:.6rem">🎯 O problema</h3><p style="color:#888;font-size:.95rem;line-height:1.7">Não existe um lugar com estética underground real onde a galera do skate e rap possa assistir vídeos juntos como se estivessem numa garagem. SkateRoom resolve isso.</p></div>
 </div>
-<div class="room-info-bar"><div class="room-code">SALA: <span id="roomCode">GRIND-7742</span></div><span style="font-size:.85rem;color:#444">Compartilhe com a crew</span></div>
-<!-- hidden elements for dancer -->
-<div style="display:none"><div id="dancerChar"></div><div id="trackStyle"></div><div id="ipodTrack"></div><div id="ipodArtist"></div><div id="ipodViz"></div></div>
-</div></div>
 
-<!-- ABOUT -->
-<div class="page" id="page-about"><div class="about-page">
-<div class="about-hero"><div class="about-text"><h2>🛹 Sobre o SkateSound</h2><p>Inspirado pelo filme Mid 90s e pela cultura de crew dos anos 90. Um lugar onde amigos se reúnem pra ouvir beats juntos — como se estivessem sentados no quarto com a caixa de som no talo.</p><p>Sem login, sem Spotify, sem complicação. Entra, escolhe teu personagem, e o som começa.</p></div>
-<div style="text-align:center"><svg width="220" height="220" viewBox="0 0 280 280"><rect x="40" y="180" width="200" height="20" rx="10" fill="#CC2936" stroke="#E8A317" stroke-width="1"/><circle cx="80" cy="210" r="12" fill="#222" stroke="#CC2936" stroke-width="1.5"/><circle cx="200" cy="210" r="12" fill="#222" stroke="#CC2936" stroke-width="1.5"/><rect x="75" y="120" width="130" height="60" rx="8" fill="#1a1410" stroke="#CC2936" stroke-width="1.5"/><circle cx="110" cy="150" r="18" fill="#110e0a" stroke="#CC2936" stroke-width="1"/><circle cx="170" cy="150" r="18" fill="#110e0a" stroke="#CC2936" stroke-width="1"/><text x="130" y="108" fill="#E8A317" font-size="22">♪</text><text x="155" y="93" fill="#CC2936" font-size="18">♫</text></svg></div></div>
-<div class="about-aesthetic"><h3>🎨 A Estética</h3><p>Neon vermelho, escuridão, pixel art, boom bap. Um crew room underground em LA, 1995. A música toca, os personagens dançam, o chat rola. Simples assim.</p></div>
-<div><h2 class="section-title">⚙️ Stack</h2><div class="tech-grid">
-<div class="tech-item"><div class="ticon">🌐</div><h4>HTML/CSS/JS</h4><p>Frontend puro</p></div>
-<div class="tech-item"><div class="ticon">🟢</div><h4>Node+Socket.io</h4><p>Sync tempo real</p></div>
-<div class="tech-item"><div class="ticon">🎵</div><h4>HTML5 Audio</h4><p>Player nativo</p></div>
-<div class="tech-item"><div class="ticon">☁️</div><h4>AWS EC2</h4><p>Servidor 24/7</p></div>
-<div class="tech-item"><div class="ticon">🐳</div><h4>Docker</h4><p>Container</p></div>
-<div class="tech-item"><div class="ticon">🎨</div><h4>SVG Pixel Art</h4><p>Habbo-style</p></div>
-</div></div>
-<div class="portfolio-box"><div class="portfolio-header"><img src="img/avatar.jpg" alt="Guilherme" class="portfolio-avatar"><div class="portfolio-info"><h3>Guilherme Moraes Franco</h3><p>@ognistie · Cloud · DevOps</p><p style="color:#555;margin-top:.3rem">12+ certs. Cloud, automação e projetos que conectam pessoas.</p></div></div><div class="portfolio-tags"><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">DevOps</span><span class="tag">Docker</span><span class="tag">Terraform</span><span class="tag">CI/CD</span></div><a href="https://github.com/ognistie" target="_blank" class="gh-link">→ github.com/ognistie</a></div>
-</div><footer class="footer"><div class="footer-logo">SKATESOUND</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateSound</p></footer></div>
+<!-- ARCHITECTURE -->
+<div style="margin-bottom:2.5rem">
+<span style="font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--amber);letter-spacing:5px;opacity:.6">02 — ARQUITETURA</span>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--neon-red);letter-spacing:3px;margin:.4rem 0 1.2rem">Stack Técnico & Arquitetura de Arquivos</h2>
 
-<!-- NEWS -->
-<div class="page" id="page-news"><div class="news-page">
-<div class="news-header"><h1>📡 TECH NEWS</h1><p class="news-date">Março 2026</p></div>
-<div class="news-ticker"><span class="ticker-inner">🔥 NVIDIA $2B NEBIUS • YANN LECUN $1B AMI LABS • GOOGLE CXL • ANTHROPIC CODE REVIEW • CHINA IA • APPLE MACBOOK NEO • RAM SHORTAGE 2026 🔥</span></div>
-<article class="news-card"><span class="news-tag">💰 INVEST</span><h3>Nvidia investe $2B na Nebius</h3><p>5GW+ de data center até 2030.</p><span class="news-source">TechStartups — Mar 2026</span></article>
-<article class="news-card"><span class="news-tag" style="background:var(--purple)">🧠 IA</span><h3>Yann LeCun $1B+ AMI Labs</h3><p>Maior seed round da Europa. World models.</p><span class="news-source">Financial Times — Mar 2026</span></article>
-<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🔧 HW</span><h3>Google+Nvidia apostam em CXL</h3><p>Alternativa para gargalo de memória IA.</p><span class="news-source">The Information — Mar 2026</span></article>
-<article class="news-card"><span class="news-tag" style="background:var(--purple)">🛡️ DEV</span><h3>Anthropic Code Review</h3><p>Inspeciona código IA antes da produção.</p><span class="news-source">TechCrunch — Mar 2026</span></article>
-<article class="news-card"><span class="news-tag">🌏 GEO</span><h3>China: IA no plano quinquenal</h3><p>IA, robótica, quantum como pilares.</p><span class="news-source">Reuters — Mar 2026</span></article>
-<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🤖 DEAL</span><h3>Murati × Nvidia: Vera Rubin</h3><p>1GW+ de chips de próxima geração.</p><span class="news-source">Bloomberg — Mar 2026</span></article>
-</div><footer class="footer"><div class="footer-logo">SKATESOUND</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateSound</p></footer></div>
+<!-- File tree -->
+<div style="background:#0a0806;border:1px solid var(--grit);padding:1.2rem;margin-bottom:1.5rem;font-family:'VT323',monospace;font-size:.95rem;color:#888;line-height:1.8">
+<span style="color:var(--amber)">SkateRoom/</span><br>
+├── <span style="color:var(--neon-red)">index.html</span> <span style="color:#444">— SPA principal (todas as páginas)</span><br>
+├── <span style="color:var(--amber)">css/style.css</span> <span style="color:#444">— Estilos, layout, animações, responsivo</span><br>
+├── <span style="color:var(--neon-red)">js/app.js</span> <span style="color:#444">— Lógica principal, YouTube API, Socket.io client</span><br>
+├── <span style="color:var(--amber)">js/characters.js</span> <span style="color:#444">— 12 personagens pixel art em SVG</span><br>
+├── <span style="color:var(--neon-red)">js/playlist.js</span> <span style="color:#444">— 22 vídeos de skate (YouTube IDs)</span><br>
+├── <span style="color:var(--amber)">server/index.js</span> <span style="color:#444">— Backend Node.js + Socket.io</span><br>
+├── <span style="color:var(--neon-red)">server/package.json</span> <span style="color:#444">— Dependências (express, socket.io, cors)</span><br>
+├── <span style="color:var(--amber)">Dockerfile</span> <span style="color:#444">— Container para deploy</span><br>
+└── <span style="color:var(--neon-red)">DEPLOY-AWS.md</span> <span style="color:#444">— Guia completo EC2</span>
+</div>
 
-<script src="js/characters.js"></script>
-<script src="js/playlist.js"></script>
-<script src="js/app.js"></script>
+<!-- Stack cards with commands -->
+<div style="display:grid;gap:1rem">
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.2rem;border-left:3px solid #E44D26"><div style="display:flex;justify-content:space-between;align-items:center"><h4 style="color:#E44D26;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px">🌐 HTML5 + SVG</h4><span style="font-family:'VT323',monospace;font-size:.75rem;color:#444">index.html · 57KB</span></div><p style="color:#888;font-size:.9rem;line-height:1.6;margin:.5rem 0">Single Page Application — todas as páginas (Home, Sala, Skate Builder, Bonde, Sobre, News) em um único HTML. Cenário da sala desenhado em <strong style="color:var(--cream)">SVG inline puro</strong>: parede de tijolos via <code style="color:var(--amber)">&lt;pattern&gt;</code>, graffiti via <code style="color:var(--amber)">&lt;path&gt;</code>, neon com <code style="color:var(--amber)">&lt;filter&gt;</code> + <code style="color:var(--amber)">&lt;animate&gt;</code>. Personagens são SVG com <code style="color:var(--amber)">image-rendering:pixelated</code>.</p><div style="background:#0a0806;padding:.5rem .8rem;margin-top:.5rem;font-family:'VT323',monospace;font-size:.8rem;color:#666;border-radius:3px"><span style="color:var(--amber)">Principais elementos:</span> &lt;svg viewBox="0 0 1000 600"&gt; · &lt;pattern&gt; bricks · &lt;filter&gt; glow · &lt;animate&gt; neon · &lt;foreignObject&gt; overlay</div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.2rem;border-left:3px solid #264DE4"><div style="display:flex;justify-content:space-between;align-items:center"><h4 style="color:#264DE4;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px">🎨 CSS3</h4><span style="font-family:'VT323',monospace;font-size:.75rem;color:#444">style.css · 17KB</span></div><p style="color:#888;font-size:.9rem;line-height:1.6;margin:.5rem 0"><strong style="color:var(--cream)">CSS Grid</strong> para layout da sala (<code style="color:var(--amber)">grid-template-columns:1fr 300px</code>). <strong style="color:var(--cream)">CSS Variables</strong> para paleta (--blood-red, --amber, --purple). YouTube overlay posicionado com <code style="color:var(--amber)">position:absolute</code> em porcentagem sobre o SVG. VHS scanline via <code style="color:var(--amber)">@keyframes vhsScan</code>.</p><div style="background:#0a0806;padding:.5rem .8rem;margin-top:.5rem;font-family:'VT323',monospace;font-size:.8rem;color:#666;border-radius:3px"><span style="color:var(--amber)">Lógica chave:</span> .yt-overlay { left:36.4%; top:10.17%; width:27.2%; height:35.67% } — posiciona YouTube exatamente sobre a TV do SVG</div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.2rem;border-left:3px solid #F7DF1E"><div style="display:flex;justify-content:space-between;align-items:center"><h4 style="color:#F7DF1E;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px">⚡ JavaScript (Vanilla)</h4><span style="font-family:'VT323',monospace;font-size:.75rem;color:#444">app.js · 11KB</span></div><p style="color:#888;font-size:.9rem;line-height:1.6;margin:.5rem 0">SPA navigation via <code style="color:var(--amber)">showPage()</code>. YouTube IFrame API com <code style="color:var(--amber)">onYouTubeIframeAPIReady</code>. Flag <strong style="color:var(--cream)">isSyncing</strong> impede loop infinito: quando recebe sync do server, bloqueia <code style="color:var(--amber)">onStateChange</code> por 2 segundos. Personagens posicionados no sofá via <code style="color:var(--amber)">createElementNS('http://www.w3.org/2000/svg','g')</code>.</p><div style="background:#0a0806;padding:.5rem .8rem;margin-top:.5rem;font-family:'VT323',monospace;font-size:.8rem;color:#666;border-radius:3px"><span style="color:var(--amber)">Anti-loop:</span> isSyncing=true → setTimeout(()=>{isSyncing=false},2000) — impede que onStateChange re-emita video-state pro server</div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.2rem;border-left:3px solid #FF0000"><div style="display:flex;justify-content:space-between;align-items:center"><h4 style="color:#FF0000;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px">📺 YouTube IFrame API</h4><span style="font-family:'VT323',monospace;font-size:.75rem;color:#444">Externo via CDN</span></div><p style="color:#888;font-size:.9rem;line-height:1.6;margin:.5rem 0">Player instanciado com <code style="color:var(--amber)">new YT.Player('ytPlayer')</code> usando playlist ID. Posicionado via CSS absoluto sobre a TV no SVG. Eventos: <code style="color:var(--amber)">onReady</code>, <code style="color:var(--amber)">onStateChange</code> (PLAYING/PAUSED), <code style="color:var(--amber)">onError</code> (skip automático). Métodos: <code style="color:var(--amber)">loadVideoById()</code>, <code style="color:var(--amber)">seekTo()</code>, <code style="color:var(--amber)">getCurrentTime()</code>.</p><div style="background:#0a0806;padding:.5rem .8rem;margin-top:.5rem;font-family:'VT323',monospace;font-size:.8rem;color:#666;border-radius:3px"><span style="color:var(--amber)">Sync:</span> ytPlayer.loadVideoById({videoId, startSeconds}) — carrega mesmo vídeo na mesma posição pra quem entra na sala</div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.2rem;border-left:3px solid #68A063"><div style="display:flex;justify-content:space-between;align-items:center"><h4 style="color:#68A063;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px">🟢 Node.js + Express</h4><span style="font-family:'VT323',monospace;font-size:.75rem;color:#444">server/index.js · 3KB</span></div><p style="color:#888;font-size:.9rem;line-height:1.6;margin:.5rem 0">Servidor HTTP com <code style="color:var(--amber)">express.static()</code> servindo o frontend. API <code style="color:var(--amber)">GET /api/health</code> para monitoramento. Objeto <code style="color:var(--amber)">rooms{}</code> armazena estado: users[], videoId, position, isPlaying, lastUpdate. Cálculo de posição: <code style="color:var(--amber)">pos += (Date.now() - lastUpdate) / 1000</code>.</p><div style="background:#0a0806;padding:.5rem .8rem;margin-top:.5rem;font-family:'VT323',monospace;font-size:.8rem;color:#666;border-radius:3px"><span style="color:var(--amber)">Comando:</span> npm install express socket.io cors · node index.js · pm2 start index.js --name skateroom</div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.2rem;border-left:3px solid #fff"><div style="display:flex;justify-content:space-between;align-items:center"><h4 style="color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px">🔄 Socket.io — WebSocket</h4><span style="font-family:'VT323',monospace;font-size:.75rem;color:#444">Bidirecional real-time</span></div><p style="color:#888;font-size:.9rem;line-height:1.6;margin:.5rem 0">Evento unificado <code style="color:var(--amber)">video-state</code> substitui play/pause/next separados. Usa <code style="color:var(--amber)">socket.to(roomCode)</code> (não <code style="color:#CC2936">io.to()</code>) para enviar APENAS para outros — <strong style="color:var(--cream)">nunca de volta pro sender</strong>. No <code style="color:var(--amber)">join-room</code>, server calcula posição atual e envia pro novo user.</p><div style="background:#0a0806;padding:.5rem .8rem;margin-top:.5rem;font-family:'VT323',monospace;font-size:.8rem;color:#666;border-radius:3px"><span style="color:var(--amber)">Eventos:</span> join-room → room-update · video-state → sync-video · chat-message (broadcast) · disconnect → leaveRoom()</div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1.2rem;border-left:3px solid #2496ED"><div style="display:flex;justify-content:space-between;align-items:center"><h4 style="color:#2496ED;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px">☁️ AWS EC2 + Docker</h4><span style="font-family:'VT323',monospace;font-size:.75rem;color:#444">Deploy 24/7</span></div><p style="color:#888;font-size:.9rem;line-height:1.6;margin:.5rem 0">EC2 Ubuntu 24.04 com <code style="color:var(--amber)">PM2</code> (auto-restart, startup). Nginx como reverse proxy com suporte WebSocket (<code style="color:var(--amber)">proxy_set_header Upgrade $http_upgrade</code>). Docker disponível via <code style="color:var(--amber)">Dockerfile</code> multi-stage. Certbot para HTTPS.</p><div style="background:#0a0806;padding:.5rem .8rem;margin-top:.5rem;font-family:'VT323',monospace;font-size:.8rem;color:#666;border-radius:3px"><span style="color:var(--amber)">Deploy:</span> git clone → cd server && npm i → pm2 start index.js → nginx reverse proxy → certbot --nginx</div></div>
+
+</div>
+</div>
+
+<!-- DEVELOPER PORTFOLIO -->
+<div style="margin-bottom:2rem">
+<span style="font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--amber);letter-spacing:5px;opacity:.6">03 — DESENVOLVEDOR</span>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--neon-red);letter-spacing:3px;margin:.4rem 0 1.2rem">Guilherme Moraes Franco</h2>
+</div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:2rem;margin-bottom:1.5rem">
+<div style="display:flex;gap:1.5rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap">
+<img src="img/avatar.jpg" alt="Guilherme" style="width:90px;height:90px;border-radius:50%;border:3px solid var(--blood-red);object-fit:cover">
+<div>
+<h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--neon-red);letter-spacing:2px">@ognistie</h3>
+<p style="color:var(--amber);font-size:1rem">Cloud Engineer · DevOps · Automação</p>
+<p style="color:#666;font-size:.9rem;margin-top:.3rem">Estagiário de TI na IT Universe · Estudante de Ciência da Computação</p>
+</div>
+</div>
+<p style="color:#888;font-size:.95rem;line-height:1.7;margin-bottom:1rem">Atuo com plataformas de computação em nuvem <strong style="color:var(--cream)">AWS e Microsoft Azure</strong>, programação em <strong style="color:var(--cream)">Python</strong> e sistemas <strong style="color:var(--cream)">Linux</strong>, com foco em automação, infraestrutura e suporte técnico. 12+ certificações Academicas. Apaixonado por tecnologia e aprendizado contínuo nas áreas de DevOps, Cloud Computing e infraestrutura.</p>
+
+<!-- Stats --><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.2rem;text-align:center">
+<div style="background:rgba(204,41,54,.06);padding:.8rem;border:1px solid rgba(204,41,54,.15)"><span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--neon-red)">12+</span><br><span style="font-size:.8rem;color:#555">Certificações Academicas</span></div>
+<div style="background:rgba(232,163,23,.06);padding:.8rem;border:1px solid rgba(232,163,23,.15)"><span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--amber)">4+</span><br><span style="font-size:.8rem;color:#555">Repositórios</span></div>
+<div style="background:rgba(107,45,139,.06);padding:.8rem;border:1px solid rgba(107,45,139,.15)"><span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--purple)">CC</span><br><span style="font-size:.8rem;color:#555">Ciência da Computação</span></div>
+</div>
+
+<!-- Tags --><div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem">
+<span class="tag">☁ AWS</span><span class="tag">☁ Azure</span><span class="tag">🐧 Linux</span><span class="tag">🐍 Python</span><span class="tag">⚙ DevOps</span><span class="tag">🐳 Docker</span><span class="tag">🔷 Terraform</span><span class="tag">🔄 CI/CD</span><span class="tag">🟢 Node.js</span><span class="tag">🔌 Socket.io</span><span class="tag">⚡ JavaScript</span><span class="tag">🌐 HTML/CSS</span><span class="tag">🖥 Help Desk</span>
+</div>
+
+<!-- Certifications --><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);font-size:1rem;letter-spacing:2px;margin-bottom:.6rem">CERTIFICAÇÕES ACADEMICAS</h4>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:1.2rem">
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔷 AZ-900 — Azure Fundamentals</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ AWS Cloud Practitioner - AWS Skill Build</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">⚙ DevOps — Alura x Santander</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🐧 Linux Config — Senai</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🐍 Python 3 Avançado — Udemy</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ IBM Cloud Fundamentals - IBM Skill Build</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔄 GitHub Fundamentals - Microsoft Learning</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ Cloud Architect — FIAP</div>
+</div>
+
+<!-- Links --><div style="display:flex;gap:1rem;flex-wrap:wrap">
+<a href="https://github.com/ognistie" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;color:var(--neon-red);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:.5rem 1rem;border:1px solid var(--grit);transition:all .3s" onmouseover="this.style.borderColor='var(--neon-red)'" onmouseout="this.style.borderColor='var(--grit)'">GitHub → @ognistie</a>
+<a href="https://ognistie.github.io/portfolio/" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;color:var(--amber);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:.5rem 1rem;border:1px solid var(--grit);transition:all .3s" onmouseover="this.style.borderColor='var(--amber)'" onmouseout="this.style.borderColor='var(--grit)'">Portfolio Completo →</a>
+<a href="https://github.com/ognistie/Minha-Playlist" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;color:var(--purple);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:.5rem 1rem;border:1px solid var(--grit);transition:all .3s" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--grit)'">Código do Projeto →</a>
+<a href="https://www.linkedin.com/in/guilherme-moraes-franco-b4b1a0353/" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;color:var(--cream);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:.5rem 1rem;border:1px solid var(--grit);transition:all .3s" onmouseover="this.style.borderColor='var(--cream)'" onmouseout="this.style.borderColor='var(--grit)'">LinkedIn →</a>
+<a href="mailto:og.guifranco@gmail.com" style="display:inline-flex;align-items:center;gap:.4rem;color:#888;text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:.5rem 1rem;border:1px solid var(--grit);transition:all .3s" onmouseover="this.style.borderColor='#888'" onmouseout="this.style.borderColor='var(--grit)'">✉ Email →</a>
+</div>
+</div>
+
+</div><footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom · Guilherme Moraes Franco · @ognistie</p></footer></div>
+<!-- NEWS --><div class="page" id="page-news"><div class="news-page" style="max-width:900px">
+<div class="news-header"><h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3rem);color:var(--neon-red);letter-spacing:6px">📡 TECH NEWS</h1><p style="font-size:1.1rem;color:var(--amber);margin-top:.4rem">Março 2026 — O que está rolando no mundo da tecnologia</p></div>
+<div style="background:var(--blood-red);color:var(--white);padding:.35rem;overflow:hidden;white-space:nowrap;margin-bottom:1.5rem;font-family:'VT323',monospace;font-size:.85rem"><span style="display:inline-block;animation:ticker 40s linear infinite">🔥 NVIDIA GTC 2026 • OPENAI $25B RECEITA • GOOGLE GEMINI 3.1 • APPLE SIRI IA 2026 • DEEPSEEK • AMD TURIN • ANTHROPIC WASHINGTON • META CUSTOM SILICON • SAMSUNG AI • ORACLE AI CLOUD 🔥</span></div>
+
+<article class="news-card"><span class="news-tag">🎮 NVIDIA</span><h3>Nvidia GTC 2026 — Jensen Huang apresenta o futuro da IA</h3><p>Conferência anual de 16 a 19 de março em San Jose. Anúncios sobre inferência, chips Vera Rubin, robótica e AI agents.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Analytics Insight — Mar 2026 · <a href="https://www.analyticsinsight.net/news/nvidia-gtc-2026-keynote-major-announcements-on-ai-gaming-cpus-and-computing" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">💰 RECEITA</span><h3>OpenAI ultrapassa $25B em receita anualizada</h3><p>Planeja IPO para final de 2026. Anthropic se aproxima de $19B. O mercado de IA é o setor de crescimento mais rápido da indústria.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Tech Startups — Mar 2026 · <a href="https://techstartups.com/2026/03/13/top-tech-news-today-march-13-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:var(--purple)">🧠 GOOGLE</span><h3>Google lança Gemini 3.1 Flash-Lite — 2.5x mais rápido</h3><p>Novo modelo: 2.5x mais rápido, $0.25/milhão de tokens. Corrida por IA acessível se intensifica.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Tech Startups — Mar 2026 · <a href="https://techstartups.com/2026/03/12/top-tech-news-today-march-12-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag">🍎 APPLE</span><h3>Apple anuncia nova Siri com IA — parceria com Google Gemini</h3><p>Siri reimaginada com modelo Gemini de 1.2T parâmetros, rodando no Apple Private Cloud. Lançamento com iOS 26.4.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Tech Startups — Mar 2026 · <a href="https://www.crescendo.ai/news/latest-ai-news-and-updates" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🤖 NVIDIA</span><h3>Nvidia investe $2B na Nebius — expansão de data centers</h3><p>US$2 bilhões, 8.3% de participação. Plano de 5+ GW de data center até 2030.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Bloomberg — Mar 2026 · <a href="https://techstartups.com/2026/03/12/top-tech-news-today-march-12-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:var(--purple)">🔬 STARTUP</span><h3>AMI Labs de Yann LeCun levanta $1B+ — maior seed da Europa</h3><p>Foco em "world models" — IA que entende o mundo físico. Maior rodada seed da história europeia.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Financial Times — Mar 2026 · <a href="https://techstartups.com/2026/03/10/top-tech-news-today-march-10-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag">🏭 MURATI</span><h3>Mira Murati fecha deal com Nvidia — chips Vera Rubin</h3><p>Thinking Machines: acordo multianual com acesso a 1+ GW de chips de próxima geração.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Reuters — Mar 2026 · <a href="https://techstartups.com/2026/03/11/top-tech-news-today-march-11-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">🇨🇳 CHINA</span><h3>China coloca IA no centro do plano quinquenal</h3><p>IA, robótica, quantum, biotech e 6G como pilares. Tratada como infraestrutura nacional.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Reuters — Mar 2026 · <a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:var(--purple)">🛡️ SEGURANÇA</span><h3>OpenAI adquire Promptfoo — segurança de AI agents</h3><p>Segurança de IA no stack enterprise. Superfície de ataque cresce com agents autônomos.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">TechCrunch — Mar 2026 · <a href="https://techstartups.com/2026/03/10/top-tech-news-today-march-10-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag">📊 ORACLE</span><h3>Oracle: demanda por IA sustenta crescimento até 2027</h3><p>Infraestrutura de IA gerando receita real. Oracle converte demanda de AI training e inference em bookings.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Reuters — Mar 2026 · <a href="https://techstartups.com/2026/03/11/top-tech-news-today-march-11-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:#CC2936">🔒 ZERO-DAY</span><h3>Google: metade dos zero-days de 2025 miraram empresas</h3><p>Hackers cada vez mais atacando sistemas enterprise internos. Uma vulnerabilidade pode comprometer toda organização.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">TechCrunch — Mar 2026 · <a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+<article class="news-card"><span class="news-tag" style="background:var(--amber);color:#000">📱 SAMSUNG</span><h3>Samsung busca parcerias com OpenAI e Perplexity para Galaxy</h3><p>Multi-modelo para se diferenciar. Guerra dos smartphones migrou de specs para experiência de IA.</p><span style="font-size:.8rem;color:var(--blood-red);margin-top:.4rem;display:block">Financial Times — Mar 2026 · <a href="https://techstartups.com/2026/03/09/top-tech-news-today-march-9-2026/" target="_blank" style="color:var(--amber)">Ler mais →</a></span></article>
+
+</div><footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom</p></footer></div>
+
+<!-- ==================== SKATE BUILDER ==================== -->
+<div class="page" id="page-skatebuilder">
+<div style="padding:70px 2rem 3rem;max-width:900px;margin:0 auto">
+<h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3rem);color:var(--neon-red);text-align:center;letter-spacing:5px;margin-bottom:.5rem">🛹 SKATE BUILDER</h1>
+<p style="text-align:center;color:#555;margin-bottom:2rem;font-size:1.1rem">Customize seu shape. Salve como badge e poste nas redes.</p>
+
+<div style="display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start" id="builderGrid">
+<!-- Preview -->
+<div style="text-align:center;background:var(--concrete);border:1px solid var(--grit);padding:2rem;position:relative">
+<div style="position:absolute;top:-12px;left:16px;font-family:'Bebas Neue',sans-serif;font-size:.8rem;background:var(--blood-red);color:white;padding:2px 12px;letter-spacing:2px">PREVIEW</div>
+<canvas id="skateCanvas" width="400" height="500" style="max-width:100%;background:#0e0b08;border-radius:4px"></canvas>
+<div style="margin-top:1rem;display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+<button class="btn-cta" onclick="downloadSkate()" style="font-size:.85rem;padding:.5rem 1.5rem">📸 SALVAR IMAGEM</button>
+<button class="btn-cta btn-cta--outline" onclick="shareSkate()" style="font-size:.85rem;padding:.5rem 1.5rem">📲 TIRE PRINT E POSTE NAS REDES</button>
+</div>
+</div>
+
+<!-- Controls -->
+<div style="display:flex;flex-direction:column;gap:1rem">
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🎨 Cor do Shape</h4><div id="deckColors" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🔴 Cor das Rodas</h4><div id="wheelColors" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🎯 Grip Tape</h4><div id="gripColors" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">🖼️ Graphic</h4><div id="graphicBtns" style="display:flex;gap:.4rem;flex-wrap:wrap"></div></div>
+
+<div style="background:var(--concrete);border:1px solid var(--grit);padding:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);letter-spacing:2px;margin-bottom:.6rem">✏️ Seu Nome</h4><input type="text" id="skaterName" placeholder="SEU NOME" maxlength="20" oninput="renderSkate()" style="width:100%;font-family:'VT323',monospace;font-size:1rem;background:var(--dark-bg);color:var(--amber);border:2px solid var(--grit);padding:.5rem;text-transform:uppercase;letter-spacing:2px;outline:none"></div>
+
+<button class="btn-cta btn-cta--gold" onclick="randomSkate()" style="width:100%;justify-content:center;font-size:.9rem">🎲 ALEATÓRIO</button>
+</div>
+</div>
+</div>
+<footer class="footer"><div class="footer-logo">SKATEROOM</div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('listen')">Sala</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('skatebuilder')">Skate</a><a onclick="showPage('community')">Bonde</a><a onclick="showPage('about')">Sobre</a><a onclick="showPage('news')">News</a></div><p class="footer-copy">&copy; 2026 SkateRoom</p></footer>
+</div>
+
+<!-- ==================== BONDE COMMUNITY — SOCIAL NETWORK ==================== -->
+<div class="page" id="page-community">
+<div class="social-layout">
+<!-- LEFT SIDEBAR -->
+<aside class="social-sidebar">
+  <div class="social-profile-card">
+    <div class="social-avatar" id="socialAvatar">🛹</div>
+    <input type="text" id="communityName" placeholder="Seu nome..." maxlength="25" class="social-name-input">
+    <span class="social-badge">MEMBRO DO BONDE</span>
+  </div>
+  <nav class="social-nav">
+    <a class="social-nav-item active" onclick="filterFeed('all',this)">🏠 Todos</a>
+    <a class="social-nav-item" onclick="filterFeed('💡 Sugestão',this)">💡 Sugestões</a>
+    <a class="social-nav-item" onclick="filterFeed('🔥 Feedback',this)">🔥 Feedbacks</a>
+    <a class="social-nav-item" onclick="filterFeed('🎨 Ideia',this)">🎨 Ideias</a>
+    <a class="social-nav-item" onclick="filterFeed('🐛 Bug',this)">🐛 Bugs</a>
+    <a class="social-nav-item" onclick="filterFeed('🛹 Geral',this)">🛹 Geral</a>
+  </nav>
+  <div class="social-stats">
+    <div class="social-stat"><span class="social-stat-num" id="totalPosts">4</span><span class="social-stat-label">Posts</span></div>
+    <div class="social-stat"><span class="social-stat-num" id="totalLikes">85</span><span class="social-stat-label">Likes</span></div>
+    <div class="social-stat"><span class="social-stat-num" id="totalComments">24</span><span class="social-stat-label">Comments</span></div>
+  </div>
+</aside>
+
+<!-- MAIN FEED -->
+<main class="social-feed">
+  <div class="social-header">
+    <h1>💬 BONDE</h1>
+    <p>A comunidade do SkateRoom</p>
+  </div>
+
+  <!-- Composer -->
+  <div class="social-composer">
+    <div class="composer-top">
+      <div class="composer-avatar">🛹</div>
+      <textarea id="communityMsg" placeholder="No que você tá pensando, parça?" rows="2" class="composer-input"></textarea>
+    </div>
+    <div class="composer-bottom">
+      <div class="composer-tags">
+        <button class="stag active" onclick="setCommunityTag(this,'💡 Sugestão')">💡 Sugestão</button>
+        <button class="stag" onclick="setCommunityTag(this,'🔥 Feedback')">🔥 Feedback</button>
+        <button class="stag" onclick="setCommunityTag(this,'🎨 Ideia')">🎨 Ideia</button>
+        <button class="stag" onclick="setCommunityTag(this,'🐛 Bug')">🐛 Bug</button>
+        <button class="stag" onclick="setCommunityTag(this,'🛹 Geral')">🛹 Geral</button>
+      </div>
+      <button class="composer-btn" onclick="postCommunity()">POSTAR</button>
+    </div>
+  </div>
+
+  <!-- Feed Posts -->
+  <div id="communityFeed">
+
+    <!-- POST 1 -->
+    <div class="spost" data-tag="💡 Sugestão">
+      <div class="spost-header">
+        <div class="spost-avatar" style="background:#CC2936">MR</div>
+        <div class="spost-meta"><span class="spost-name">MC Red</span><span class="spost-time">2h atrás</span></div>
+        <span class="spost-tag">💡 Sugestão</span>
+      </div>
+      <p class="spost-body">Seria massa poder trocar a playlist por uma própria, tipo colar link do YouTube e tocar pro bonde todo! Imagina cada um podendo adicionar um vídeo na fila.</p>
+      <div class="spost-actions">
+        <button class="sact" onclick="toggleLike(this)">🔥 <span>12</span></button>
+        <button class="sact" onclick="toggleComments(this)">💬 <span>2</span></button>
+        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
+      </div>
+      <div class="spost-comments" style="display:none">
+        <div class="scomment"><div class="scomment-avatar" style="background:#E8A317">DG</div><div class="scomment-content"><span class="scomment-name">DJ Gold</span><p>Isso ia ser brabo! Tipo um sistema de fila onde cada um coloca um vídeo</p><span class="scomment-time">1h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button><div class="scomment-replies"><div class="scomment reply"><div class="scomment-avatar" style="background:#6B2D8B;width:22px;height:22px;font-size:.5rem">BB</div><div class="scomment-content"><span class="scomment-name">B-Boy</span><p>Sim mano, tipo watch2gether mas com a vibe da sala</p><span class="scomment-time">45min atrás</span></div></div></div></div></div>
+        <div class="scomment"><div class="scomment-avatar" style="background:#E84393">SG</div><div class="scomment-content"><span class="scomment-name">SK8 Girl</span><p>Apoio total! 🔥</p><span class="scomment-time">30min atrás</span></div></div>
+        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="spost" data-tag="🔥 Feedback">
+      <div class="spost-header">
+        <div class="spost-avatar" style="background:#E84393">SG</div>
+        <div class="spost-meta"><span class="spost-name">SK8 Girl</span><span class="spost-time">5h atrás</span></div>
+        <span class="spost-tag">🔥 Feedback</span>
+      </div>
+      <p class="spost-body">A vibe da sala tá PERFEITA, parece que estou numa garagem em Compton nos anos 90. O chat sincronizado é muito bom! Todo mundo assistindo junto, é outra experiência. Parabéns pelo projeto 👏</p>
+      <div class="spost-actions">
+        <button class="sact" onclick="toggleLike(this)">🔥 <span>24</span></button>
+        <button class="sact" onclick="toggleComments(this)">💬 <span>3</span></button>
+        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
+      </div>
+      <div class="spost-comments" style="display:none">
+        <div class="scomment"><div class="scomment-avatar" style="background:#CC2936">MR</div><div class="scomment-content"><span class="scomment-name">MC Red</span><p>Tmj! A sala ficou braba mesmo 🔥</p><span class="scomment-time">4h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div></div>
+        <div class="scomment"><div class="scomment-avatar" style="background:#556B2F">SP</div><div class="scomment-content"><span class="scomment-name">Spray</span><p>Os grafites na parede são detalhados demais, amei</p><span class="scomment-time">3h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div></div>
+        <div class="scomment"><div class="scomment-avatar" style="background:#2A3A5C">LC</div><div class="scomment-content"><span class="scomment-name">Lil Chronic</span><p>West side vibes 💜</p><span class="scomment-time">2h atrás</span></div></div>
+        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
+      </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="spost" data-tag="🎨 Ideia">
+      <div class="spost-header">
+        <div class="spost-avatar" style="background:#111;border:1px solid #CC2936">TH</div>
+        <div class="spost-meta"><span class="spost-name">Thrasher</span><span class="spost-time">8h atrás</span></div>
+        <span class="spost-tag">🎨 Ideia</span>
+      </div>
+      <p class="spost-body">Bota uma opção de emoji reactions nos vídeos! Tipo quando rola um trick insano todo mundo manda 🔥🔥🔥 e aparece flutuando na tela. Ia ser muito louco pro hype do bonde.</p>
+      <div class="spost-actions">
+        <button class="sact" onclick="toggleLike(this)">🔥 <span>18</span></button>
+        <button class="sact" onclick="toggleComments(this)">💬 <span>1</span></button>
+        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
+      </div>
+      <div class="spost-comments" style="display:none">
+        <div class="scomment"><div class="scomment-avatar" style="background:#E8A317">OK</div><div class="scomment-content"><span class="scomment-name">Ollie King</span><p>ISSO! Tipo Twitch reactions, mas no estilo underground. Quero ver 🛹 voando na tela quando alguém manda um kickflip</p><span class="scomment-time">6h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div></div>
+        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
+      </div>
+    </div>
+
+    <!-- POST 4 -->
+    <div class="spost" data-tag="🛹 Geral">
+      <div class="spost-header">
+        <div class="spost-avatar" style="background:#E8A317;color:#000">DG</div>
+        <div class="spost-meta"><span class="spost-name">DJ Gold</span><span class="spost-time">1d atrás</span></div>
+        <span class="spost-tag">🛹 Geral</span>
+      </div>
+      <p class="spost-body">Projeto incrível mano, conectando a cultura skate com rap underground num só lugar. Isso é o que a internet precisava — um espaço pra galera se juntar e curtir sem frescura. Respeito total! 🙏</p>
+      <div class="spost-actions">
+        <button class="sact" onclick="toggleLike(this)">🔥 <span>31</span></button>
+        <button class="sact" onclick="toggleComments(this)">💬 <span>4</span></button>
+        <button class="sact" onclick="sharePost()">↗ Compartilhar</button>
+      </div>
+      <div class="spost-comments" style="display:none">
+        <div class="scomment"><div class="scomment-avatar" style="background:#FF2E2E">NN</div><div class="scomment-content"><span class="scomment-name">Neon Nina</span><p>Finalmente um lugar que entende a vibe! ❤️‍🔥</p><span class="scomment-time">22h atrás</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button><div class="scomment-replies"><div class="scomment reply"><div class="scomment-avatar" style="background:#E8A317;width:22px;height:22px;font-size:.5rem;color:#000">ZN</div><div class="scomment-content"><span class="scomment-name">Zen</span><p>Real, a estética tá impecável</p><span class="scomment-time">20h atrás</span></div></div></div></div></div>
+        <div class="scomment"><div class="scomment-avatar" style="background:#CC2936">BX</div><div class="scomment-content"><span class="scomment-name">BeatBox</span><p>Brrr pa pa ka! 🎤 (isso é um beatbox de aprovação)</p><span class="scomment-time">18h atrás</span></div></div>
+        <div class="scomment"><div class="scomment-avatar" style="background:#E84393">KF</div><div class="scomment-content"><span class="scomment-name">Kickflip</span><p>Quero mais shapes no skate builder! Mas já tá muito bom</p><span class="scomment-time">12h atrás</span></div></div>
+        <div class="scomment"><div class="scomment-avatar" style="background:#556B2F">SP</div><div class="scomment-content"><span class="scomment-name">Spray</span><p>O graffiti na parede me inspirou a fazer uns tags novos 🎨</p><span class="scomment-time">8h atrás</span></div></div>
+        <div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+</div>
+
+<script src="js/characters.js"></script><script src="js/playlist.js"></script><script src="js/app.js"></script>
+<script>function switchTab(tab){document.querySelectorAll('.panel-tab').forEach(t=>t.classList.toggle('active',t.textContent.toLowerCase().includes(tab)));document.querySelectorAll('.panel-content').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+tab).classList.add('active')}</script>
+
+<!-- SKATE BUILDER ENGINE -->
 <script>
-function switchTab(tab){
-  document.querySelectorAll('.panel-tab').forEach(t=>t.classList.toggle('active',t.textContent.toLowerCase().includes(tab)));
-  document.querySelectorAll('.panel-content').forEach(p=>p.classList.remove('active'));
-  document.getElementById('tab-'+tab).classList.add('active');
+const skateState={deck:'#CC2936',wheels:'#333',grip:'#111',graphic:'flames',name:''};
+const deckOpts=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#556B2F','#111','#fff','#E84393','#FFD700','#1a1410'];
+const wheelOpts=['#333','#CC2936','#E8A317','#6B2D8B','#fff','#556B2F','#E84393','#FFD700'];
+const gripOpts=['#111','#CC2936','#1a1a2e','#2d1f17','#1a2e1a','#2e1a2e','#333'];
+const graphicOpts=['flames','skull','stripes','logo','clean','splatter','camo'];
+
+function initBuilder(){
+  renderColorBtns('deckColors',deckOpts,(c)=>{skateState.deck=c;renderSkate()});
+  renderColorBtns('wheelColors',wheelOpts,(c)=>{skateState.wheels=c;renderSkate()});
+  renderColorBtns('gripColors',gripOpts,(c)=>{skateState.grip=c;renderSkate()});
+  const gb=document.getElementById('graphicBtns');
+  graphicOpts.forEach(g=>{const b=document.createElement('button');b.textContent=g.toUpperCase();b.style.cssText="font-family:'VT323',monospace;font-size:.8rem;padding:.3rem .6rem;background:var(--dark-bg);color:var(--cream);border:1px solid var(--grit);cursor:pointer";b.onclick=()=>{skateState.graphic=g;renderSkate()};gb.appendChild(b)});
+  renderSkate();
+}
+
+function renderColorBtns(id,colors,cb){
+  const el=document.getElementById(id);
+  colors.forEach(c=>{const b=document.createElement('div');b.style.cssText='width:28px;height:28px;border-radius:3px;cursor:pointer;border:2px solid var(--grit);transition:all .2s;background:'+c;b.onmouseover=()=>b.style.borderColor='var(--amber)';b.onmouseout=()=>b.style.borderColor='var(--grit)';b.onclick=()=>cb(c);el.appendChild(b)});
+}
+
+function renderSkate(){
+  const c=document.getElementById('skateCanvas');if(!c)return;
+  const x=c.getContext('2d');const W=400,H=500;x.clearRect(0,0,W,H);
+  // Background
+  x.fillStyle='#0e0b08';x.fillRect(0,0,W,H);
+  // Watermark grid
+  x.strokeStyle='rgba(255,255,255,.02)';x.lineWidth=1;
+  for(let i=0;i<W;i+=20){x.beginPath();x.moveTo(i,0);x.lineTo(i,H);x.stroke()}
+  for(let i=0;i<H;i+=20){x.beginPath();x.moveTo(0,i);x.lineTo(W,i);x.stroke()}
+  // Title
+  x.fillStyle='#CC2936';x.font='bold 14px "Bebas Neue",sans-serif';x.letterSpacing='4px';x.textAlign='center';
+  x.fillText('S K A T E R O O M',W/2,30);
+  x.fillStyle='#E8A317';x.font='10px "VT323",monospace';x.fillText('CUSTOM DECK BUILDER',W/2,45);
+
+  const cx=W/2,dy=70;
+  // Deck shape
+  x.save();x.translate(cx,dy);
+  x.beginPath();x.moveTo(-45,0);x.quadraticCurveTo(-50,-20,-35,-30);x.lineTo(35,-30);x.quadraticCurveTo(50,-20,45,0);x.lineTo(45,300);x.quadraticCurveTo(50,330,30,340);x.lineTo(-30,340);x.quadraticCurveTo(-50,330,-45,300);x.closePath();
+  x.fillStyle=skateState.deck;x.fill();x.strokeStyle='rgba(0,0,0,.3)';x.lineWidth=2;x.stroke();
+
+  // Grip tape (top layer)
+  x.save();x.beginPath();x.moveTo(-42,5);x.lineTo(42,5);x.lineTo(42,295);x.lineTo(-42,295);x.closePath();x.clip();
+  x.fillStyle=skateState.grip;x.fillRect(-42,5,84,290);
+  // Grip texture
+  x.fillStyle='rgba(255,255,255,.03)';for(let i=0;i<300;i++){x.fillRect(Math.random()*84-42,5+Math.random()*290,1,1)}
+  x.restore();
+
+  // Graphic on bottom (visible part)
+  drawGraphic(x,skateState.graphic,skateState.deck);
+
+  // Trucks
+  x.fillStyle='#888';x.fillRect(-30,310,60,8);x.fillRect(-30,-15,60,8);
+  x.fillStyle='#666';x.fillRect(-35,314,10,6);x.fillRect(25,314,10,6);x.fillRect(-35,-11,10,6);x.fillRect(25,-11,10,6);
+
+  // Wheels
+  x.fillStyle=skateState.wheels;
+  [[-38,318,10],[32,318,10],[-38,-8,10],[32,-8,10]].forEach(([wx,wy,r])=>{
+    x.beginPath();x.arc(wx,wy,r,0,Math.PI*2);x.fill();
+    x.beginPath();x.arc(wx,wy,4,0,Math.PI*2);x.fillStyle='#555';x.fill();x.fillStyle=skateState.wheels;
+  });
+
+  x.restore();
+
+  // User name
+  if(skateState.name||document.getElementById('skaterName').value){
+    const n=skateState.name||document.getElementById('skaterName').value;
+    x.fillStyle='var(--amber)';x.fillStyle='#E8A317';x.font='bold 18px "Bebas Neue",sans-serif';x.textAlign='center';
+    x.fillText(n.toUpperCase(),W/2,H-55);
+  }
+  // Badge footer
+  x.fillStyle='#CC2936';x.font='11px "Bebas Neue",sans-serif';x.textAlign='center';
+  x.fillText('SKATEROOM · BONDE ROOM · EST. 2026',W/2,H-30);
+  x.fillStyle='#444';x.font='9px "VT323",monospace';
+  x.fillText('skateroom.app · #SkateRoom',W/2,H-15);
+}
+
+function drawGraphic(x,type,color){
+  const lighter=color;x.globalAlpha=.3;
+  if(type==='flames'){
+    x.fillStyle='#E8A317';
+    x.beginPath();x.moveTo(-30,280);x.quadraticCurveTo(-15,240,0,260);x.quadraticCurveTo(15,230,30,280);x.fill();
+    x.fillStyle='#CC2936';
+    x.beginPath();x.moveTo(-20,280);x.quadraticCurveTo(-5,250,5,270);x.quadraticCurveTo(15,245,20,280);x.fill();
+  }else if(type==='skull'){
+    x.fillStyle='#fff';x.beginPath();x.arc(0,260,18,0,Math.PI*2);x.fill();
+    x.fillStyle='#000';x.beginPath();x.arc(-7,256,4,0,Math.PI*2);x.fill();x.beginPath();x.arc(7,256,4,0,Math.PI*2);x.fill();
+    x.fillRect(-5,268,10,6);
+  }else if(type==='stripes'){
+    for(let i=0;i<6;i++){x.fillStyle=i%2?'#E8A317':'#6B2D8B';x.fillRect(-40,50+i*45,80,20)}
+  }else if(type==='logo'){
+    x.fillStyle='#fff';x.font='bold 20px "Bebas Neue",sans-serif';x.textAlign='center';x.fillText('SKATE',0,240);x.fillText('SOUND',0,265);
+  }else if(type==='splatter'){
+    ['#CC2936','#E8A317','#6B2D8B','#fff'].forEach(c=>{x.fillStyle=c;for(let i=0;i<8;i++){x.beginPath();x.arc(Math.random()*60-30,100+Math.random()*200,Math.random()*8+2,0,Math.PI*2);x.fill()}});
+  }else if(type==='camo'){
+    ['#2d4a1e','#4a6b2e','#1a3010','#556B2F'].forEach(c=>{x.fillStyle=c;for(let i=0;i<6;i++){x.fillRect(Math.random()*60-30,50+Math.random()*230,Math.random()*25+10,Math.random()*20+8)}});
+  }
+  x.globalAlpha=1;
+}
+
+function randomSkate(){
+  skateState.deck=deckOpts[Math.floor(Math.random()*deckOpts.length)];
+  skateState.wheels=wheelOpts[Math.floor(Math.random()*wheelOpts.length)];
+  skateState.grip=gripOpts[Math.floor(Math.random()*gripOpts.length)];
+  skateState.graphic=graphicOpts[Math.floor(Math.random()*graphicOpts.length)];
+  renderSkate();
+}
+
+function downloadSkate(){
+  const c=document.getElementById('skateCanvas');
+  const a=document.createElement('a');a.download='skateroom-deck.png';a.href=c.toDataURL('image/png');a.click();
+}
+
+function shareSkate(){
+  const c=document.getElementById('skateCanvas');
+  c.toBlob(blob=>{
+    if(navigator.share&&navigator.canShare){
+      const file=new File([blob],'skateroom-deck.png',{type:'image/png'});
+      navigator.share({title:'Meu Skate - SkateRoom',text:'Criei meu shape customizado no SkateRoom! 🛹 #SkateRoom #BondeRoom',files:[file]}).catch(()=>downloadSkate());
+    }else{
+      downloadSkate();
+      alert('Imagem salva! Poste nas redes com a hashtag #SkateRoom 🛹');
+    }
+  });
+}
+
+// Init builder when page shows
+const origShowPage=showPage;
+showPage=function(id){origShowPage(id);if(id==='skatebuilder')setTimeout(initBuilder,100)};
+
+// COMMUNITY — SOCIAL NETWORK ENGINE
+let communityTag='💡 Sugestão';
+function setCommunityTag(btn,tag){communityTag=tag;document.querySelectorAll('.stag').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+
+function postCommunity(){
+  const name=document.getElementById('communityName').value.trim()||'Anônimo';
+  const msg=document.getElementById('communityMsg').value.trim();
+  if(!msg)return;
+  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const colors=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#556B2F','#E84393'];
+  const color=colors[Math.floor(Math.random()*colors.length)];
+  const post=document.createElement('div');
+  post.className='spost new';post.dataset.tag=communityTag;
+  post.innerHTML=`<div class="spost-header"><div class="spost-avatar" style="background:${color}">${initials}</div><div class="spost-meta"><span class="spost-name">${name}</span><span class="spost-time">agora</span></div><span class="spost-tag">${communityTag}</span></div><p class="spost-body">${msg}</p><div class="spost-actions"><button class="sact" onclick="toggleLike(this)">🔥 <span>0</span></button><button class="sact" onclick="toggleComments(this)">💬 <span>0</span></button><button class="sact" onclick="sharePost()">↗ Compartilhar</button></div><div class="spost-comments" style="display:none"><div class="scomment-input-wrap"><input type="text" class="scomment-input" placeholder="Escreva um comentário..." onkeydown="if(event.key==='Enter')addComment(this)"><button class="scomment-send" onclick="addComment(this.previousElementSibling)">→</button></div></div>`;
+  const feed=document.getElementById('communityFeed');
+  feed.insertBefore(post,feed.firstChild);
+  document.getElementById('communityMsg').value='';
+  updateStats();
+}
+
+function toggleLike(btn){
+  const s=btn.querySelector('span');
+  if(btn.classList.contains('liked')){btn.classList.remove('liked');s.textContent=parseInt(s.textContent)-1}
+  else{btn.classList.add('liked');s.textContent=parseInt(s.textContent)+1}
+  updateStats();
+}
+
+function toggleComments(btn){
+  const post=btn.closest('.spost');
+  const comments=post.querySelector('.spost-comments');
+  const isOpen=comments.style.display!=='none';
+  comments.style.display=isOpen?'none':'block';
+  if(!isOpen){const inp=comments.querySelector('.scomment-input');if(inp)inp.focus()}
+}
+
+function addComment(input){
+  const text=input.value.trim();if(!text)return;
+  const name=document.getElementById('communityName').value.trim()||'Anônimo';
+  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const colors=['#CC2936','#E8A317','#6B2D8B','#2A3A5C','#E84393'];
+  const color=colors[Math.floor(Math.random()*colors.length)];
+  const wrap=input.closest('.spost-comments');
+  const inputWrap=wrap.querySelector('.scomment-input-wrap');
+  const comment=document.createElement('div');
+  comment.className='scomment new';
+  comment.innerHTML=`<div class="scomment-avatar" style="background:${color}">${initials}</div><div class="scomment-content"><span class="scomment-name">${name}</span><p>${text}</p><span class="scomment-time">agora</span><button class="scomment-reply-btn" onclick="showReplyBox(this)">Responder</button></div>`;
+  wrap.insertBefore(comment,inputWrap);
+  input.value='';
+  const post=wrap.closest('.spost');
+  const countBtn=post.querySelector('.spost-actions .sact:nth-child(2) span');
+  countBtn.textContent=parseInt(countBtn.textContent)+1;
+  updateStats();
+}
+
+function showReplyBox(btn){
+  const content=btn.closest('.scomment-content');
+  if(content.querySelector('.reply-box'))return;
+  const replyTo=content.querySelector('.scomment-name').textContent;
+  const box=document.createElement('div');
+  box.className='reply-box';
+  box.innerHTML=`<input type="text" class="scomment-input reply-input" placeholder="Responder ${replyTo}..." onkeydown="if(event.key==='Enter')submitReply(this)"><button class="scomment-send" onclick="submitReply(this.previousElementSibling)">→</button>`;
+  content.appendChild(box);
+  box.querySelector('input').focus();
+}
+
+function submitReply(input){
+  const text=input.value.trim();if(!text)return;
+  const name=document.getElementById('communityName').value.trim()||'Anônimo';
+  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const colors=['#CC2936','#E8A317','#6B2D8B','#E84393'];
+  const color=colors[Math.floor(Math.random()*colors.length)];
+  const commentContent=input.closest('.scomment-content');
+  let replies=commentContent.querySelector('.scomment-replies');
+  if(!replies){replies=document.createElement('div');replies.className='scomment-replies';commentContent.insertBefore(replies,input.closest('.reply-box'))}
+  const reply=document.createElement('div');
+  reply.className='scomment reply new';
+  reply.innerHTML=`<div class="scomment-avatar" style="background:${color};width:22px;height:22px;font-size:.5rem">${initials}</div><div class="scomment-content"><span class="scomment-name">${name}</span><p>${text}</p><span class="scomment-time">agora</span></div>`;
+  replies.appendChild(reply);
+  input.closest('.reply-box').remove();
+  const post=commentContent.closest('.spost');
+  const countBtn=post.querySelector('.spost-actions .sact:nth-child(2) span');
+  countBtn.textContent=parseInt(countBtn.textContent)+1;
+  updateStats();
+}
+
+function filterFeed(tag,btn){
+  document.querySelectorAll('.social-nav-item').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.spost').forEach(p=>{
+    if(tag==='all'||p.dataset.tag===tag){p.style.display=''}
+    else{p.style.display='none'}
+  });
+}
+
+function sharePost(){alert('Link copiado! Compartilhe com o bonde 🛹')}
+
+function updateStats(){
+  const posts=document.querySelectorAll('.spost').length;
+  let likes=0,comments=0;
+  document.querySelectorAll('.spost-actions .sact:first-child span').forEach(s=>likes+=parseInt(s.textContent)||0);
+  document.querySelectorAll('.spost-actions .sact:nth-child(2) span').forEach(s=>comments+=parseInt(s.textContent)||0);
+  const pe=document.getElementById('totalPosts');if(pe)pe.textContent=posts;
+  const le=document.getElementById('totalLikes');if(le)le.textContent=likes;
+  const ce=document.getElementById('totalComments');if(ce)ce.textContent=comments;
 }
 </script>
-</body></html>
+
+<style>
+@media(max-width:768px){#builderGrid{grid-template-columns:1fr}}
+</style>
