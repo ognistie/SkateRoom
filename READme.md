@@ -18,7 +18,7 @@
 
 ## 📺 O que é o SkateRoom?
 
-**SkateRoom** é uma plataforma de **watch party em tempo real** onde amigos entram numa sala virtual, escolhem um personagem pixel art no estilo Habbo Hotel, sentam juntos num sofá e assistem vídeos de skate clássicos sincronizados — tudo rodando numa TV dentro de um cenário SVG interativo inspirado na cultura **skate e rap underground dos anos 90**.
+**SkateRoom** é uma plataforma de **watch party em tempo real** onde amigos entram numa sala virtual, escolhem um personagem pixel art, sentam juntos num sofá e assistem vídeos de skate clássicos sincronizados — tudo rodando numa TV dentro de um cenário SVG interativo inspirado na cultura **skate e rap underground dos anos 90**.
 
 O projeto foi construído do zero como um **estudo prático e aprofundado** de tecnologias web modernas, combinando frontend puro (HTML/CSS/JS), backend em tempo real (Node.js + Socket.io), APIs do YouTube, pixel art procedural, e deploy em cloud (AWS EC2).
 
