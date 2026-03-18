@@ -7,7 +7,7 @@
 </p>
 
 <h1 align="center">🛹 SKATE ROOM</h1>
-<p align="center"><strong>Watch party em tempo real com estética skate/rap 90s</strong></p>
+<p align="center"><strong>Watch party em tempo real com estética skate underground</strong></p>
 <p align="center">
   <a href="https://github.com/ognistie/Minha-Playlist">📂 Repositório</a> ·
   <a href="https://ognistie.github.io/portfolio/">🌐 Portfolio</a> ·
