@@ -139,72 +139,56 @@ function loadSocketIO(){
 
 // ============ USER LIST (SVG room) ============
 function updateUserList(users){
-  const g=document.getElementById('crewCharacters');if(!g)return;
-  // Seating positions: sofa cushions, red chairs, floor near table
-  const SEATS=[
-    // Sofa cushion seats (left side — on the cushions, not below)
-    {x:100,y:390,s:1.0},{x:140,y:390,s:1.0},{x:180,y:390,s:1.0},{x:220,y:390,s:1.0},{x:260,y:390,s:1.0},
-    // Red chair near center
-    {x:365,y:395,s:0.9},
-    // Near mural right side
-    {x:600,y:410,s:0.9},{x:660,y:405,s:0.9},
-    // Near arcade
-    {x:870,y:390,s:0.85},{x:920,y:395,s:0.85},
-    // Floor sitting
-    {x:300,y:430,s:0.8},{x:450,y:435,s:0.8},{x:550,y:430,s:0.8},{x:750,y:425,s:0.8},
-    // Near snack machine
-    {x:940,y:370,s:0.85},
-  ];
-  function seatForUser(uid,idx){
-    let hash=0;for(let i=0;i<uid.length;i++)hash=((hash<<5)-hash)+uid.charCodeAt(i);
-    return SEATS[Math.abs(hash+idx)%SEATS.length];
-  }
-  const existing=new Set();
-  g.querySelectorAll('[data-uid]').forEach(el=>existing.add(el.getAttribute('data-uid')));
-  g.querySelectorAll('[data-uid]').forEach(el=>{if(!users.find(u=>u.id===el.getAttribute('data-uid')))el.remove()});
-  users.forEach((u,i)=>{
-    if(existing.has(u.id)){
-      const el=g.querySelector('[data-uid="'+u.id+'"]');
-      if(el){const pos=seatForUser(u.id,i);el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale('+(pos.s||1)+')')}
-    }
+  const main=document.querySelector('.room-main');if(!main)return;
+  // Remove old char spots
+  main.querySelectorAll('.char-spot').forEach(el=>{
+    if(!users.find(u=>u.id===el.dataset.uid))el.remove();
   });
-  const newUsers=users.filter(u=>!existing.has(u.id));
-  newUsers.forEach(u=>{
-    const idx=users.indexOf(u);const pos=seatForUser(u.id,idx);
+  // Seat positions as % of room-main (matches background-size:100% 100%)
+  const SEATS=[
+    // Sofa cushions (left area)
+    {left:'7%',top:'75%',w:32,h:44},
+    {left:'11%',top:'75%',w:32,h:44},
+    {left:'15%',top:'75%',w:32,h:44},
+    {left:'19%',top:'75%',w:32,h:44},
+    {left:'23%',top:'75%',w:32,h:44},
+    // Red chair
+    {left:'30%',top:'76%',w:28,h:38},
+    // Near mural
+    {left:'52%',top:'80%',w:28,h:38},
+    {left:'58%',top:'78%',w:28,h:38},
+    // Near arcade
+    {left:'78%',top:'74%',w:26,h:36},
+    {left:'84%',top:'76%',w:26,h:36},
+    // Floor
+    {left:'26%',top:'82%',w:24,h:32},
+    {left:'42%',top:'84%',w:24,h:32},
+    {left:'66%',top:'82%',w:24,h:32},
+    {left:'72%',top:'84%',w:24,h:32},
+    // Near snack
+    {left:'90%',top:'72%',w:24,h:32},
+  ];
+  function seatIdx(uid,i){let h=0;for(let c=0;c<uid.length;c++)h=((h<<5)-h)+uid.charCodeAt(c);return Math.abs(h+i)%SEATS.length}
+
+  users.forEach((u,i)=>{
+    let el=main.querySelector('.char-spot[data-uid="'+u.id+'"]');
+    const seat=SEATS[seatIdx(u.id,i)];
     const ch=CHARACTERS.find(c=>c.id===u.character)||CHARACTERS[0];
-    walkToSofa(g,u,ch,pos);
+    if(!el){
+      el=document.createElement('div');
+      el.className='char-spot';el.dataset.uid=u.id;
+      el.innerHTML=ch.svg+'<div class="char-label">'+u.username+'</div>';
+      el.style.opacity='0';
+      main.appendChild(el);
+      // Animate in
+      setTimeout(()=>{el.style.opacity='1'},50);
+    }
+    el.style.left=seat.left;el.style.top=seat.top;
+    el.style.width=seat.w+'px';el.style.height=seat.h+'px';
   });
   const c=document.getElementById('userCount');if(c)c.textContent=users.length;
 }
 
-function walkToSofa(container,user,char,target){
-  const el=document.createElementNS('http://www.w3.org/2000/svg','g');
-  el.setAttribute('data-uid',user.id);
-  const sc=target.s||1;
-  const startX=500,startY=480;let curX=startX,curY=startY,frame=0;
-  el.setAttribute('transform','translate('+curX+','+curY+') scale('+sc+')');
-  const w0=(char.walkFrames&&char.walkFrames[0]||char.svg).replace(/<\/?svg[^>]*>/g,'');
-  const w1=(char.walkFrames&&char.walkFrames[1]||char.danceSvg||char.svg).replace(/<\/?svg[^>]*>/g,'');
-  const sit=(char.svg).replace(/<\/?svg[^>]*>/g,'');
-  el.innerHTML=w0;
-  const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
-  lbl.setAttribute('x','16');lbl.setAttribute('y','-4');lbl.setAttribute('fill',char.highlight?'#FFD700':'#f0c040');
-  lbl.setAttribute('font-family',"'Press Start 2P',monospace");lbl.setAttribute('font-size','4');
-  lbl.setAttribute('text-anchor','middle');lbl.textContent=user.username;
-  el.appendChild(lbl);container.appendChild(el);
-  const dx=target.x-startX,dy=target.y-startY;let step=0;
-  function animate(){
-    step++;const t=Math.min(step/30,1);
-    const ease=t<0.5?2*t*t:(1-Math.pow(-2*t+2,2)/2);
-    curX=startX+dx*ease;curY=startY+dy*ease;
-    el.setAttribute('transform','translate('+curX.toFixed(0)+','+curY.toFixed(0)+') scale('+sc+')');
-    frame++;const label=el.querySelector('text');
-    el.innerHTML=frame%8<4?w0:w1;el.appendChild(label);
-    if(t<1)requestAnimationFrame(animate);
-    else{el.innerHTML=sit;el.appendChild(label);el.setAttribute('transform','translate('+target.x+','+target.y+') scale('+sc+')')}
-  }
-  requestAnimationFrame(animate);
-}
 
 // ============ PAGE NAVIGATION ============
 function showPage(id){
@@ -295,3 +279,87 @@ function setText(id,t){const e=document.getElementById(id);if(e)e.textContent=t}
 function updatePlayState(){const b=document.getElementById('playBtn');if(b)b.textContent=isPlaying?'⏸':'▶'}
 document.addEventListener('DOMContentLoaded',()=>{const c=generateRoomCode();setText('roomCode',c);setText('barRoomCode',c)});
 document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.code==='Space'){e.preventDefault();playTrack()}if(e.code==='ArrowRight')nextTrack();if(e.code==='ArrowLeft')prevTrack()});
+
+// === ROOM INTERACTIVE FUNCTIONS ===
+function snackInteraction(){
+  const snacks=['🍕 Pizza!','🍔 Burger!','🌮 Taco!','🍟 Fries!','🥤 Soda!','🍩 Donut!','🍫 Chocolate!','☕ Coffee!','🍿 Popcorn!'];
+  const pick=snacks[Math.floor(Math.random()*snacks.length)];
+  addSystemMsg(pick+' Pegou um lanche da máquina!');
+  // Show floating emoji
+  const main=document.querySelector('.room-main');
+  const emoji=document.createElement('div');
+  emoji.style.cssText='position:absolute;z-index:20;right:5%;top:20%;font-size:2rem;pointer-events:none;transition:all 1.5s;opacity:1';
+  emoji.textContent=pick.split(' ')[0];
+  main.appendChild(emoji);
+  setTimeout(()=>{emoji.style.top='10%';emoji.style.opacity='0'},50);
+  setTimeout(()=>emoji.remove(),1600);
+}
+
+function copyRoomCode(){
+  const code=document.getElementById('barRoomCode')?.textContent||'';
+  if(code&&code!=='—'){
+    navigator.clipboard.writeText(code).then(()=>addSystemMsg('📋 Código copiado: '+code)).catch(()=>addSystemMsg('📋 Código: '+code));
+  }
+}
+
+function toggleFullscreen(){
+  const el=document.querySelector('.room-main');
+  if(!document.fullscreenElement)el.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+
+// Update room name on graffiti
+function updateRoomName(){
+  const overlay=document.getElementById('roomNameOverlay');
+  const code=document.getElementById('barRoomCode')?.textContent||'';
+  if(overlay&&code&&code!=='—')overlay.textContent='🛹 '+code;
+}
+// Call after room join
+const _origJoinServer=joinServerRoom;
+joinServerRoom=function(code){_origJoinServer(code);setTimeout(updateRoomName,200)};
+
+// Update char container reference
+const _origUpdateUserList=updateUserList;
+updateUserList=function(users){
+  const container=document.getElementById('charContainer');
+  const main=document.querySelector('.room-main');
+  if(!container||!main)return _origUpdateUserList(users);
+  // Clean old
+  container.querySelectorAll('.char-spot').forEach(el=>{
+    if(!users.find(u=>u.id===el.dataset.uid))el.remove();
+  });
+  const SEATS=[
+    {left:'7%',top:'74%',w:30,h:42},
+    {left:'11%',top:'74%',w:30,h:42},
+    {left:'15%',top:'74%',w:30,h:42},
+    {left:'19%',top:'74%',w:30,h:42},
+    {left:'23%',top:'74%',w:30,h:42},
+    {left:'30%',top:'73%',w:26,h:36},
+    {left:'52%',top:'78%',w:26,h:36},
+    {left:'58%',top:'76%',w:26,h:36},
+    {left:'78%',top:'72%',w:24,h:34},
+    {left:'84%',top:'74%',w:24,h:34},
+    {left:'26%',top:'82%',w:22,h:30},
+    {left:'42%',top:'84%',w:22,h:30},
+    {left:'66%',top:'80%',w:22,h:30},
+    {left:'72%',top:'82%',w:22,h:30},
+    {left:'90%',top:'68%',w:22,h:30},
+  ];
+  function sIdx(uid,i){let h=0;for(let c=0;c<uid.length;c++)h=((h<<5)-h)+uid.charCodeAt(c);return Math.abs(h+i)%SEATS.length}
+  users.forEach((u,i)=>{
+    let el=container.querySelector('.char-spot[data-uid="'+u.id+'"]');
+    const seat=SEATS[sIdx(u.id,i)];
+    const ch=CHARACTERS.find(c=>c.id===u.character)||CHARACTERS[0];
+    if(!el){
+      el=document.createElement('div');
+      el.className='char-spot';el.dataset.uid=u.id;
+      el.innerHTML=ch.svg+'<div class="char-label">'+u.username+'</div>';
+      el.style.opacity='0';
+      container.appendChild(el);
+      setTimeout(()=>{el.style.opacity='1'},50);
+    }
+    el.style.left=seat.left;el.style.top=seat.top;
+    el.style.width=seat.w+'px';el.style.height=seat.h+'px';
+  });
+  const c=document.getElementById('userCount');if(c)c.textContent=users.length;
+};
