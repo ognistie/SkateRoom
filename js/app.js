@@ -282,74 +282,63 @@ document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(
 
 // === ROOM INTERACTIVE FUNCTIONS ===
 function snackInteraction(){
-  const snacks=['🍕 Pizza!','🍔 Burger!','🌮 Taco!','🍟 Fries!','🥤 Soda!','🍩 Donut!','🍫 Chocolate!','☕ Coffee!','🍿 Popcorn!'];
-  const pick=snacks[Math.floor(Math.random()*snacks.length)];
-  addSystemMsg(pick+' Pegou um lanche da máquina!');
-  // Show floating emoji
-  const main=document.querySelector('.room-main');
-  const emoji=document.createElement('div');
-  emoji.style.cssText='position:absolute;z-index:20;right:5%;top:20%;font-size:2rem;pointer-events:none;transition:all 1.5s;opacity:1';
-  emoji.textContent=pick.split(' ')[0];
-  main.appendChild(emoji);
-  setTimeout(()=>{emoji.style.top='10%';emoji.style.opacity='0'},50);
-  setTimeout(()=>emoji.remove(),1600);
+  const snacks=['🍕 Pizza!','🍔 Burger!','🌮 Taco!','🍟 Fries!','🥤 Soda!','🍩 Donut!','🍫 Chocolate!','☕ Coffee!'];
+  addSystemMsg(snacks[Math.floor(Math.random()*snacks.length)]+' Pegou um lanche!');
 }
-
+function coinInteraction(){
+  const msgs=['🪙 +100 Coins!','🪙 +50 Coins!','🪙 Jackpot! +500!','🪙 +25 Coins','🪙 +200 Coins!'];
+  addSystemMsg(msgs[Math.floor(Math.random()*msgs.length)]);
+}
+function promptAddLink(){
+  const url=prompt('Cole o link do vídeo do YouTube:');
+  if(url)addSystemMsg('🔗 Link sugerido: '+url);
+}
 function copyRoomCode(){
   const code=document.getElementById('barRoomCode')?.textContent||'';
-  if(code&&code!=='—'){
-    navigator.clipboard.writeText(code).then(()=>addSystemMsg('📋 Código copiado: '+code)).catch(()=>addSystemMsg('📋 Código: '+code));
-  }
+  if(code&&code!=='—'){navigator.clipboard?.writeText(code);addSystemMsg('📋 Código copiado: '+code)}
 }
-
 function toggleFullscreen(){
-  const el=document.querySelector('.room-main');
-  if(!document.fullscreenElement)el.requestFullscreen?.();
+  if(!document.fullscreenElement)document.querySelector('.room-main')?.requestFullscreen?.();
   else document.exitFullscreen?.();
 }
-
-// Update room name on graffiti
 function updateRoomName(){
-  const overlay=document.getElementById('roomNameOverlay');
-  const code=document.getElementById('barRoomCode')?.textContent||'';
-  if(overlay&&code&&code!=='—')overlay.textContent='🛹 '+code;
+  const o=document.getElementById('roomNameOverlay');
+  const c=document.getElementById('barRoomCode')?.textContent||'';
+  if(o&&c&&c!=='—')o.textContent='🛹 '+c;
 }
-// Call after room join
-const _origJoinServer=joinServerRoom;
-joinServerRoom=function(code){_origJoinServer(code);setTimeout(updateRoomName,200)};
+const _origJSR=joinServerRoom;
+joinServerRoom=function(code){_origJSR(code);setTimeout(updateRoomName,200)};
 
-// Update char container reference
-const _origUpdateUserList=updateUserList;
+// Character placement (new image)
+const _origUUL=updateUserList;
 updateUserList=function(users){
   const container=document.getElementById('charContainer');
-  const main=document.querySelector('.room-main');
-  if(!container||!main)return _origUpdateUserList(users);
-  // Clean old
+  if(!container)return _origUUL(users);
   container.querySelectorAll('.char-spot').forEach(el=>{
     if(!users.find(u=>u.id===el.dataset.uid))el.remove();
   });
+  // Seats measured from image 1377x768
   const SEATS=[
-    // Sofa (5 spots) — measured: left 5.4-27.8%, top 75.3%
-    {left:'6%',top:'72%',w:28,h:38},
-    {left:'11%',top:'72%',w:28,h:38},
-    {left:'16%',top:'72%',w:28,h:38},
-    {left:'21%',top:'72%',w:28,h:38},
-    {left:'26%',top:'72%',w:28,h:38},
-    // Red chair — measured: left 35.2%, top 73.6%
-    {left:'35%',top:'71%',w:24,h:34},
-    // Near mural area
-    {left:'55%',top:'78%',w:24,h:34},
-    {left:'62%',top:'76%',w:24,h:34},
-    // Near arcade — measured: left ~88-93%, top ~60-70%
-    {left:'86%',top:'65%',w:22,h:30},
-    {left:'90%',top:'68%',w:22,h:30},
-    // Floor sitting
-    {left:'30%',top:'82%',w:20,h:28},
-    {left:'45%',top:'85%',w:20,h:28},
-    {left:'68%',top:'82%',w:20,h:28},
-    {left:'75%',top:'84%',w:20,h:28},
-    // Near snack
-    {left:'91%',top:'58%',w:20,h:28},
+    // Sofa (left ~3-24%, top ~55%)
+    {left:'4%',top:'52%',w:26,h:36},
+    {left:'9%',top:'52%',w:26,h:36},
+    {left:'14%',top:'52%',w:26,h:36},
+    {left:'19%',top:'52%',w:26,h:36},
+    {left:'24%',top:'52%',w:26,h:36},
+    // Near TV controls
+    {left:'32%',top:'58%',w:22,h:30},
+    // Near mural
+    {left:'55%',top:'72%',w:22,h:30},
+    {left:'62%',top:'70%',w:22,h:30},
+    // Near arcade/coin
+    {left:'76%',top:'65%',w:20,h:28},
+    {left:'82%',top:'68%',w:20,h:28},
+    // Floor
+    {left:'28%',top:'72%',w:20,h:28},
+    {left:'42%',top:'75%',w:20,h:28},
+    {left:'68%',top:'74%',w:20,h:28},
+    {left:'72%',top:'76%',w:20,h:28},
+    {left:'88%',top:'60%',w:18,h:26},
   ];
   function sIdx(uid,i){let h=0;for(let c=0;c<uid.length;c++)h=((h<<5)-h)+uid.charCodeAt(c);return Math.abs(h+i)%SEATS.length}
   users.forEach((u,i)=>{
@@ -357,11 +346,9 @@ updateUserList=function(users){
     const seat=SEATS[sIdx(u.id,i)];
     const ch=CHARACTERS.find(c=>c.id===u.character)||CHARACTERS[0];
     if(!el){
-      el=document.createElement('div');
-      el.className='char-spot';el.dataset.uid=u.id;
+      el=document.createElement('div');el.className='char-spot';el.dataset.uid=u.id;
       el.innerHTML=ch.svg+'<div class="char-label">'+u.username+'</div>';
-      el.style.opacity='0';
-      container.appendChild(el);
+      el.style.opacity='0';container.appendChild(el);
       setTimeout(()=>{el.style.opacity='1'},50);
     }
     el.style.left=seat.left;el.style.top=seat.top;

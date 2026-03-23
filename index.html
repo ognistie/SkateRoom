@@ -73,75 +73,90 @@
 </div>
 
 <!-- BONDE ROOM -->
-<!-- ==================== SALA — INTERACTIVE ROOM ==================== -->
+<!-- ==================== SALA — INTERACTIVE WATCH PARTY ROOM ==================== -->
 <div class="page" id="page-listen">
 <div class="room-page">
 <div class="room-main">
 
-  <!-- Gemini cover -->
-  <div class="gemini-cover"></div>
+  <!-- === YOUTUBE — inside TV screen === -->
+  <div class="yt-overlay"><div id="ytPlayer"></div></div>
 
-  <!-- === TV SCREEN — YouTube plays here === -->
-  <div class="yt-overlay">
-    <div id="ytPlayer"></div>
+  <!-- === INTERACTIVE HOTSPOTS mapped to image elements === -->
+
+  <!-- TV top icons (share/link) -->
+  <div class="room-hotspot hs-tvicons" title="Compartilhar">
+    <div class="hotspot-tooltip">📡 SKATE CHANNEL<br><span>Live Stream Feed</span></div>
   </div>
 
-  <!-- === INTERACTIVE HOTSPOTS — clickable areas mapped to image === -->
-
-  <!-- MURAL DA COMUNIDADE — click goes to Bonde page -->
-  <div class="room-hotspot hotspot-mural" onclick="showPage('community')" title="Mural da Comunidade">
-    <div class="hotspot-tooltip">📋 MURAL DO BONDE<br><span>Clique para ver</span></div>
+  <!-- CHAT LOG area below TV -->
+  <div class="room-hotspot hs-chatlog" onclick="document.getElementById('chatInput').focus()" title="Chat">
+    <div class="hotspot-tooltip">💬 CHAT LOG<br><span>Clique para digitar</span></div>
   </div>
 
-  <!-- ARCADE MACHINE — click goes to Skate Builder -->
-  <div class="room-hotspot hotspot-arcade" onclick="showPage('skatebuilder')" title="Skate Builder">
-    <div class="hotspot-tooltip">🕹️ SKATE BUILDER<br><span>Monte seu shape</span></div>
+  <!-- TV bottom buttons (playlist controls) -->
+  <div class="room-hotspot hs-tvbtns" title="Controles">
+    <div class="hotspot-tooltip">🎵 PLAYLIST<br><span>Controles do vídeo</span></div>
   </div>
 
-  <!-- SNACK MACHINE — fun interaction -->
-  <div class="room-hotspot hotspot-snack" onclick="snackInteraction()" title="Snack Machine">
-    <div class="hotspot-tooltip">🍫 SNACK<br><span>Pega um lanche</span></div>
+  <!-- COMUNIDADE board -->
+  <div class="room-hotspot hs-mural" onclick="showPage('community')" title="Comunidade">
+    <div class="hotspot-tooltip">📋 COMUNIDADE<br><span>Feedback e Sugestões</span></div>
   </div>
 
-  <!-- SOFA — shows who's sitting -->
-  <div class="room-hotspot hotspot-sofa" title="Sofá do Bonde">
+  <!-- SHOP NOW -->
+  <div class="room-hotspot hs-shop" onclick="showPage('skatebuilder')" title="Shop">
+    <div class="hotspot-tooltip">🛹 SHOP NOW<br><span>Monte seu shape</span></div>
+  </div>
+
+  <!-- Add Link Block (left wall) -->
+  <div class="room-hotspot hs-addlink" onclick="promptAddLink()" title="Adicionar Link">
+    <div class="hotspot-tooltip">🔗 ADD LINK<br><span>Sugira um vídeo</span></div>
+  </div>
+
+  <!-- MEMBERSHIP FORM -->
+  <div class="room-hotspot hs-membership" onclick="showPage('about')" title="Sobre">
+    <div class="hotspot-tooltip">📝 MEMBERSHIP<br><span>Sobre o projeto</span></div>
+  </div>
+
+  <!-- COIN machine -->
+  <div class="room-hotspot hs-coin" onclick="coinInteraction()" title="Coin">
+    <div class="hotspot-tooltip">🪙 COIN<br><span>Jogue uma moeda</span></div>
+  </div>
+
+  <!-- ARCADE -->
+  <div class="room-hotspot hs-arcade" onclick="showPage('skatebuilder')" title="Arcade">
+    <div class="hotspot-tooltip">🕹️ ARCADE<br><span>Skate Builder</span></div>
+  </div>
+
+  <!-- SOFA -->
+  <div class="room-hotspot hs-sofa" title="Sofá">
     <div class="hotspot-tooltip">🛋️ SOFÁ DO BONDE<br><span>Assista junto</span></div>
   </div>
 
-  <!-- GRAFFITI WALL (left) — shows room info -->
-  <div class="room-hotspot hotspot-graffiti" onclick="copyRoomCode()" title="Código da Sala">
-    <div class="hotspot-tooltip">🎨 GUETO PESTANA<br><span>Clique para copiar código</span></div>
+  <!-- Graffiti wall -->
+  <div class="room-hotspot hs-graffiti" onclick="copyRoomCode()" title="Copiar código">
+    <div class="hotspot-tooltip">🎨 GUETO PESTANA<br><span>Copiar código da sala</span></div>
   </div>
 
-  <!-- RED CHAIR — -->
-  <div class="room-hotspot hotspot-chair" title="Cadeira">
-    <div class="hotspot-tooltip">💺 VIP SEAT</div>
-  </div>
-
-  <!-- TV CONTROLS — below TV -->
-  <div class="room-hotspot hotspot-tvcontrols" title="Controles">
-    <div class="hotspot-tooltip">📺 CONTROLES DA TV</div>
-  </div>
-
-  <!-- === CHARACTERS — positioned on furniture === -->
+  <!-- Characters container -->
   <div id="charContainer"></div>
 
-  <!-- === ROOM NAME OVERLAY on graffiti === -->
+  <!-- Room name overlay -->
   <div class="room-name-overlay" id="roomNameOverlay"></div>
 
-  <!-- === TOP BAR === -->
+  <!-- HUD Top -->
   <div class="room-topbar">
     <span class="room-neon">🛹 BONDE ROOM</span>
     <span class="room-code-badge" id="roomCode">—</span>
     <span class="user-count"><span id="userCount">0</span> na sala</span>
     <div class="room-topbar-actions">
-      <button class="room-action-btn" onclick="copyRoomCode()" title="Copiar código">📋</button>
-      <button class="room-action-btn" onclick="toggleFullscreen()" title="Tela cheia">⛶</button>
+      <button class="room-action-btn" onclick="copyRoomCode()">📋</button>
+      <button class="room-action-btn" onclick="toggleFullscreen()">⛶</button>
     </div>
     <span class="room-code-share">SALA: <span id="barRoomCode">—</span></span>
   </div>
 
-  <!-- === PLAYER CONTROLS === -->
+  <!-- Player Controls -->
   <div class="room-controls">
     <div class="np-info"><div class="track-name" id="trackNameDisplay">Selecione uma faixa</div><div class="track-artist" id="artistDisplay">YouTube</div></div>
     <div class="np-btns"><button class="ctrl-btn" onclick="prevTrack()">⏮</button><button class="ctrl-btn play-btn" id="playBtn" onclick="playTrack()">▶</button><button class="ctrl-btn" onclick="nextTrack()">⏭</button></div>

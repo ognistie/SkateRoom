@@ -121,43 +121,41 @@ body{background:var(--dark);color:var(--cream);font-family:'Press Start 2P',mono
 .join-hints span{font-family:'VT323',monospace;font-size:10px;color:#666}
 .join-scene{display:none}
 
-/* === ROOM — Interactive image-based room === */
+/* === ROOM — Interactive Watch Party === */
 .room-page{display:grid;grid-template-columns:1fr 260px;height:calc(100vh - 44px);margin-top:44px}
 .room-main{position:relative;overflow:hidden;background:#0a0806;background-image:url('../img/room-bg.jpg');background-size:100% 100%;background-repeat:no-repeat}
-.room-bg-img{display:none}
-.room-chars{display:none}
-/* Gemini cover */
-.gemini-cover{position:absolute;z-index:6;bottom:2%;right:21%;width:28px;height:28px;background:#1a1410;border-radius:50%}
-/* YouTube overlay — EXACT TV screen position measured from image */
-.yt-overlay{position:absolute;z-index:5;left:10.5%;top:11.9%;width:35.2%;height:50.3%;background:transparent;overflow:hidden}
+.room-bg-img{display:none}.room-chars{display:none}
+/* YouTube — TV screen from image 1377x768 */
+.yt-overlay{position:absolute;z-index:5;left:12.7%;top:12.4%;width:25.8%;height:35.2%;overflow:hidden}
 .yt-overlay iframe,.yt-overlay #ytPlayer{width:100%!important;height:100%!important}
 
-/* === HOTSPOTS — invisible clickable areas over image elements === */
-.room-hotspot{position:absolute;z-index:7;cursor:pointer;border:2px solid transparent;transition:all .2s;border-radius:4px}
-.room-hotspot:hover{border-color:rgba(240,192,64,.4);background:rgba(240,192,64,.05);box-shadow:0 0 15px rgba(240,192,64,.15)}
-.room-hotspot:active{transform:scale(.98)}
-/* Tooltip */
-.hotspot-tooltip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(90,72,50,.95);border:2px solid #2a1a0a;padding:6px 10px;font-family:'Press Start 2P',monospace;font-size:6px;color:#f0c040;text-align:center;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;text-shadow:1px 1px 0 #000;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:20}
-.hotspot-tooltip span{color:#999;font-size:5px;display:block;margin-top:2px}
-.hotspot-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#2a1a0a}
+/* Hotspots */
+.room-hotspot{position:absolute;z-index:7;cursor:pointer;border:2px solid transparent;transition:all .2s;border-radius:3px}
+.room-hotspot:hover{border-color:rgba(240,192,64,.3);background:rgba(240,192,64,.04);box-shadow:0 0 10px rgba(240,192,64,.1)}
+.hotspot-tooltip{position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:rgba(50,35,18,.95);border:2px solid #2a1a0a;padding:4px 8px;font-family:'Press Start 2P',monospace;font-size:5px;color:#f0c040;text-align:center;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;text-shadow:1px 1px 0 #000;box-shadow:0 3px 8px rgba(0,0,0,.5);z-index:20}
+.hotspot-tooltip span{color:#888;font-size:4px;display:block;margin-top:1px}
+.hotspot-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#2a1a0a}
 .room-hotspot:hover .hotspot-tooltip{opacity:1}
 
-/* Hotspot positions — measured from image pixels */
-.hotspot-mural{left:50.8%;top:17.5%;width:39.1%;height:75.3%}
-.hotspot-arcade{left:93.8%;top:31.5%;width:5.9%;height:61.3%}
-.hotspot-snack{left:92.8%;top:9.6%;width:5.9%;height:20.1%}
-.hotspot-sofa{left:5.4%;top:75.3%;width:27.8%;height:14%}
-.hotspot-graffiti{left:0%;top:5.3%;width:8.8%;height:56%}
-.hotspot-chair{left:35.2%;top:73.6%;width:4.9%;height:12.3%}
-.hotspot-tvcontrols{left:10.5%;top:63%;width:35.2%;height:5%}
+/* Hotspot positions — measured from 1377x768 */
+.hs-tvicons{left:24.7%;top:3.3%;width:14.5%;height:4.6%}
+.hs-chatlog{left:20.3%;top:48.2%;width:18.2%;height:6.5%}
+.hs-tvbtns{left:20.3%;top:56%;width:18.2%;height:5.2%}
+.hs-mural{left:47.9%;top:13%;width:28.3%;height:56%}
+.hs-shop{left:66.8%;top:3.9%;width:10.2%;height:4.6%}
+.hs-addlink{left:1.5%;top:36.5%;width:7.3%;height:6.5%}
+.hs-membership{left:34.1%;top:64.5%;width:9.4%;height:4.6%}
+.hs-coin{left:77.7%;top:37.1%;width:4.4%;height:30.6%}
+.hs-arcade{left:80.6%;top:26%;width:5.1%;height:43%}
+.hs-sofa{left:2.9%;top:54.7%;width:24%;height:10.4%}
+.hs-graffiti{left:0%;top:5%;width:8%;height:50%}
 
-/* Room name overlay on graffiti */
-.room-name-overlay{position:absolute;z-index:4;left:1%;top:68%;font-family:'Press Start 2P',monospace;font-size:7px;color:rgba(240,192,64,.35);text-shadow:1px 1px 0 rgba(0,0,0,.5);letter-spacing:1px;pointer-events:none;writing-mode:horizontal-tb}
-
-/* Character spots (CSS divs) */
-.char-spot{position:absolute;z-index:8;image-rendering:pixelated;transition:all .5s ease}
+/* Room name */
+.room-name-overlay{position:absolute;z-index:4;left:1%;top:68%;font-family:'Press Start 2P',monospace;font-size:6px;color:rgba(240,192,64,.3);text-shadow:1px 1px 0 rgba(0,0,0,.5);pointer-events:none}
+/* Characters */
+.char-spot{position:absolute;z-index:8;image-rendering:pixelated;transition:all .4s ease}
 .char-spot svg{width:100%;height:100%;display:block}
-.char-spot .char-label{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:'Press Start 2P',monospace;font-size:5px;color:#f0c040;text-shadow:1px 1px 0 #000;white-space:nowrap;background:rgba(0,0,0,.6);padding:1px 4px;border-radius:2px}
+.char-spot .char-label{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-family:'Press Start 2P',monospace;font-size:4px;color:#f0c040;text-shadow:1px 1px 0 #000;white-space:nowrap;background:rgba(0,0,0,.5);padding:1px 3px;border-radius:2px}
 
 /* Top bar */
 .room-topbar{position:absolute;z-index:10;top:0;left:0;right:0;display:flex;align-items:center;gap:8px;padding:6px 10px;background:linear-gradient(180deg,rgba(10,8,6,.85) 0%,transparent 100%)}
