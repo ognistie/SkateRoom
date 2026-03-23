@@ -74,85 +74,203 @@
 
 <!-- BONDE ROOM -->
 <!-- ==================== SALA — INTERACTIVE WATCH PARTY ROOM ==================== -->
+<!-- ==================== SALA — SVG RICH ROOM ==================== -->
 <div class="page" id="page-listen">
 <div class="room-page">
 <div class="room-main">
+  <div class="room-svg">
+    <svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <defs>
+      <pattern id="brk" width="20" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#7a4a30"/><rect x="0" y="0" width="9" height="4" fill="#8a5a3a" rx=".3"/><rect x="11" y="0" width="9" height="4" fill="#7a4a30" rx=".3"/><rect x="5" y="6" width="9" height="4" fill="#8a5a3a" rx=".3"/><rect x="16" y="6" width="4" height="4" fill="#7a4a30" rx=".3"/><rect x="0" y="6" width="3" height="4" fill="#6a4228" rx=".3"/></pattern>
+      <pattern id="wd" width="60" height="12" patternUnits="userSpaceOnUse"><rect width="60" height="12" fill="#8a6a48"/><rect x="0" y="0" width="28" height="11" fill="#906e4c"/><rect x="32" y="0" width="28" height="11" fill="#7e6040"/></pattern>
+      <pattern id="cork" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#c4a060"/><circle cx="2" cy="3" r="1" fill="#b89050" opacity=".5"/><circle cx="6" cy="7" r="1" fill="#d4b070" opacity=".4"/></pattern>
+      <filter id="sh"><feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#000" flood-opacity=".4"/></filter>
+      <filter id="gl"><feGaussianBlur stdDeviation="4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+      <linearGradient id="wG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6a4a30"/><stop offset="100%" stop-color="#4a3220"/></linearGradient>
+      <linearGradient id="fG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8a6a48"/><stop offset="100%" stop-color="#6a5038"/></linearGradient>
+      <linearGradient id="sG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7a4030"/><stop offset="100%" stop-color="#5a2820"/></linearGradient>
+    </defs>
 
-  <!-- === YOUTUBE — inside TV screen === -->
+    <!-- === WALL === -->
+    <rect width="1200" height="340" fill="url(#wG)"/>
+    <rect width="1200" height="340" fill="url(#brk)" opacity=".6"/>
+    <!-- Top molding -->
+    <rect y="0" width="1200" height="6" fill="#4a3220"/>
+    <!-- Baseboard -->
+    <rect y="334" width="1200" height="8" fill="#3a2418"/>
+
+    <!-- === FLOOR === -->
+    <rect y="342" width="1200" height="258" fill="url(#fG)"/>
+    <rect y="342" width="1200" height="258" fill="url(#wd)" opacity=".25"/>
+
+    <!-- === CEILING LIGHTS === -->
+    <rect x="200" y="6" width="180" height="6" rx="3" fill="#ddd" opacity=".6"/><rect x="200" y="10" width="180" height="2" fill="#fff" opacity=".15"/>
+    <rect x="700" y="6" width="180" height="6" rx="3" fill="#ddd" opacity=".6"/><rect x="700" y="10" width="180" height="2" fill="#fff" opacity=".15"/>
+
+    <!-- === GRAFFITI ON WALL === -->
+    <g opacity=".35">
+      <text x="30" y="120" fill="#e04040" font-family="sans-serif" font-weight="900" font-size="55" transform="rotate(-5 30 120)">SAUDE</text>
+      <text x="25" y="200" fill="#40c040" font-family="sans-serif" font-weight="900" font-size="50" transform="rotate(3 25 200)">SKATE</text>
+      <text x="15" y="270" fill="#f0c040" font-family="sans-serif" font-weight="900" font-size="40" transform="rotate(-2 15 270)">GUETO</text>
+    </g>
+    <g opacity=".2">
+      <text x="620" y="45" fill="#aaa" font-family="sans-serif" font-weight="900" font-size="40" transform="rotate(-3 620 45)">DVKAZ</text>
+      <text x="700" y="75" fill="#888" font-family="sans-serif" font-weight="700" font-size="18">osu</text>
+      <text x="850" y="330" fill="#666" font-family="sans-serif" font-weight="900" font-size="28" transform="rotate(1 850 330)">KGQK</text>
+    </g>
+    <!-- Spray splashes -->
+    <g opacity=".08">
+      <circle cx="80" cy="150" r="35" fill="#e04040"/><circle cx="50" cy="250" r="25" fill="#40c040"/>
+      <circle cx="120" cy="280" r="20" fill="#f0c040"/><circle cx="650" cy="320" r="18" fill="#8040c0"/>
+      <circle cx="900" cy="310" r="15" fill="#40d0f0"/><circle cx="1000" cy="325" r="12" fill="#e04040"/>
+    </g>
+
+    <!-- === TV (large, left-center) === -->
+    <g filter="url(#sh)">
+      <!-- TV outer frame -->
+      <rect x="160" y="50" width="380" height="250" rx="8" fill="#333"/>
+      <rect x="163" y="53" width="374" height="244" rx="6" fill="#2a2a2a"/>
+      <!-- TV screen (BLACK — YouTube goes here) -->
+      <rect x="175" y="65" width="350" height="220" rx="3" fill="#0a0a10"/>
+      <!-- TV bezel bottom -->
+      <rect x="260" y="300" width="180" height="8" rx="3" fill="#444"/>
+      <!-- TV LED -->
+      <circle cx="520" cy="292" r="3" fill="#40e040" opacity=".6"><animate attributeName="opacity" values=".3;.8;.3" dur="2s" repeatCount="indefinite"/></circle>
+      <!-- TV stand -->
+      <rect x="280" y="308" width="140" height="10" rx="4" fill="#3a3a3a"/>
+      <rect x="310" y="318" width="30" height="20" fill="#333"/><rect x="360" y="318" width="30" height="20" fill="#333"/>
+    </g>
+    <!-- Consoles on TV stand -->
+    <rect x="290" y="340" width="40" height="10" rx="2" fill="#eee" opacity=".5"/><rect x="340" y="342" width="18" height="8" rx="1" fill="#333" opacity=".4"/>
+    <rect x="365" y="340" width="28" height="12" rx="2" fill="#1a1a2e" opacity=".5"/>
+
+    <!-- === SOFA === -->
+    <g filter="url(#sh)">
+      <!-- Back -->
+      <rect x="120" y="370" width="280" height="25" rx="6" fill="#8a4a30"/>
+      <!-- Seat -->
+      <rect x="115" y="390" width="290" height="55" rx="8" fill="url(#sG)"/>
+      <!-- Cushions -->
+      <rect x="122" y="395" width="65" height="42" rx="5" fill="#8a3a28"/><rect x="192" y="395" width="65" height="42" rx="5" fill="#7a3020"/>
+      <rect x="262" y="395" width="65" height="42" rx="5" fill="#8a3a28"/><rect x="332" y="395" width="65" height="42" rx="5" fill="#7a3020"/>
+      <!-- Arms -->
+      <rect x="100" y="375" width="20" height="70" rx="6" fill="#6a2820"/><rect x="400" y="375" width="20" height="70" rx="6" fill="#6a2820"/>
+      <!-- Throw pillow -->
+      <rect x="340" y="380" width="22" height="16" rx="4" fill="#e04040" opacity=".5" transform="rotate(8 351 388)"/>
+    </g>
+    <!-- Graffiti on sofa front -->
+    <text x="180" y="448" fill="#40c040" font-family="sans-serif" font-weight="900" font-size="18" opacity=".15">SKATE</text>
+    <!-- Splatter on floor -->
+    <circle cx="380" cy="490" r="12" fill="#f06020" opacity=".12"/><circle cx="420" cy="500" r="8" fill="#40d0f0" opacity=".1"/><circle cx="350" cy="505" r="6" fill="#f0c040" opacity=".1"/>
+
+    <!-- === RED CHAIR === -->
+    <rect x="440" y="405" width="28" height="35" rx="3" fill="#c03030" filter="url(#sh)"/>
+    <rect x="436" y="400" width="36" height="8" rx="3" fill="#a02020"/>
+    <rect x="442" y="440" width="6" height="18" fill="#333"/><rect x="458" y="440" width="6" height="18" fill="#333"/>
+
+    <!-- === MURAL DA COMUNIDADE === -->
+    <g filter="url(#sh)">
+      <!-- Frame -->
+      <rect x="520" y="55" width="420" height="280" rx="6" fill="#6a4a30"/>
+      <rect x="525" y="60" width="410" height="270" rx="4" fill="#5a3a20"/>
+      <!-- Cork board -->
+      <rect x="532" y="67" width="396" height="256" rx="3" fill="url(#cork)"/>
+      <!-- Title -->
+      <text x="730" y="95" fill="#e04040" font-family="sans-serif" font-weight="900" font-size="16" text-anchor="middle">MURAL DA COMUNIDADE</text>
+      <text x="730" y="112" fill="#333" font-family="sans-serif" font-weight="700" font-size="9" text-anchor="middle">— FEEDBACK E SUGESTÕES — VINTAGE SHRED —</text>
+      <!-- Papers/stickers on cork -->
+      <rect x="545" y="120" width="55" height="70" fill="#eee" transform="rotate(-3 570 155)" opacity=".7"/>
+      <text x="555" y="140" fill="#333" font-size="5" font-weight="bold">THRASHER</text>
+      <rect x="610" y="125" width="50" height="65" fill="#f5f0e0" transform="rotate(2 635 157)" opacity=".7"/>
+      <text x="618" y="143" fill="#333" font-size="4" font-weight="bold">TRANSWORLD</text>
+      <rect x="545" y="200" width="70" height="55" fill="#f0e8d0" transform="rotate(-1 580 227)" opacity=".7"/>
+      <text x="553" y="215" fill="#333" font-size="4.5" font-weight="bold">1990s LOCAL</text>
+      <text x="553" y="223" fill="#333" font-size="4">SKATE PARK</text>
+      <text x="553" y="231" fill="#333" font-size="4">COMPETITION</text>
+      <!-- Classic videos note -->
+      <rect x="680" y="180" width="80" height="60" fill="#f0e8c0" transform="rotate(1 720 210)" opacity=".8"/>
+      <text x="688" y="195" fill="#333" font-size="5" font-weight="bold">Classic Videos:</text>
+      <text x="688" y="205" fill="#555" font-size="4">• Hokus Pokus</text>
+      <text x="688" y="213" fill="#555" font-size="4">• Blind Video Days</text>
+      <text x="688" y="221" fill="#555" font-size="4">• Baker 3</text>
+      <!-- Santa Cruz sticker -->
+      <circle cx="780" cy="280" r="22" fill="#e04040" opacity=".6"/>
+      <text x="780" y="284" fill="#fff" font-size="6" font-weight="bold" text-anchor="middle">SANTA</text>
+      <text x="780" y="292" fill="#fff" font-size="6" font-weight="bold" text-anchor="middle">CRUZ</text>
+      <!-- NES controllers -->
+      <rect x="850" y="130" width="35" height="18" rx="4" fill="#bbb" opacity=".5"/><rect x="860" y="135" width="5" height="5" rx="1" fill="#333" opacity=".5"/>
+      <rect x="870" y="155" width="40" height="20" rx="4" fill="#aaa" opacity=".4"/>
+      <!-- Skateboards -->
+      <rect x="895" y="200" width="8" height="60" rx="4" fill="#c08030" opacity=".5" transform="rotate(5 899 230)"/>
+      <rect x="910" y="195" width="8" height="65" rx="4" fill="#4080c0" opacity=".5" transform="rotate(-3 914 228)"/>
+      <!-- Old school games text -->
+      <text x="860" y="128" fill="#333" font-size="5" font-weight="bold">Old-School</text>
+      <text x="860" y="136" fill="#333" font-size="4">skate Games</text>
+    </g>
+
+    <!-- === SNACK MACHINE === -->
+    <g filter="url(#sh)">
+      <rect x="985" y="80" width="55" height="110" rx="4" fill="#e04040"/>
+      <rect x="990" y="85" width="45" height="60" rx="2" fill="#111"/>
+      <text x="1012" y="78" fill="#f0c040" font-family="sans-serif" font-weight="900" font-size="10" text-anchor="middle">SNACK</text>
+      <!-- Products -->
+      <rect x="994" y="90" width="10" height="8" rx="1" fill="#f0c040" opacity=".6"/><rect x="1008" y="90" width="10" height="8" rx="1" fill="#40d0f0" opacity=".6"/>
+      <rect x="1022" y="90" width="10" height="8" rx="1" fill="#40c040" opacity=".6"/><rect x="994" y="102" width="10" height="8" rx="1" fill="#e84393" opacity=".6"/>
+      <rect x="1008" y="102" width="10" height="8" rx="1" fill="#fff" opacity=".5"/><rect x="1022" y="102" width="10" height="8" rx="1" fill="#f06020" opacity=".6"/>
+      <rect x="994" y="114" width="10" height="8" rx="1" fill="#8040c0" opacity=".6"/><rect x="1008" y="114" width="10" height="8" rx="1" fill="#c08030" opacity=".6"/>
+    </g>
+
+    <!-- === ARCADE MACHINE === -->
+    <g filter="url(#sh)" transform="translate(1070,150)">
+      <rect x="0" y="0" width="60" height="130" rx="4" fill="#2a3a8a"/>
+      <rect x="5" y="8" width="50" height="35" rx="2" fill="#111"/>
+      <!-- Screen content -->
+      <rect x="8" y="11" width="44" height="29" fill="#0a1a30"/>
+      <text x="30" y="28" fill="#40c040" font-size="5" text-anchor="middle">INSERT COIN</text>
+      <!-- Controls -->
+      <circle cx="18" cy="58" r="6" fill="#e04040"/><circle cx="42" cy="58" r="5" fill="#4040e0"/>
+      <rect x="15" y="70" width="30" height="4" rx="2" fill="#333"/>
+      <!-- Pixel art characters -->
+      <rect x="8" y="90" width="8" height="12" fill="#e04040" opacity=".5"/><rect x="20" y="88" width="8" height="14" fill="#40c040" opacity=".5"/>
+      <rect x="32" y="90" width="8" height="12" fill="#f0c040" opacity=".5"/><rect x="44" y="89" width="8" height="13" fill="#4080d0" opacity=".5"/>
+    </g>
+
+    <!-- === COIN text === -->
+    <text x="1100" y="148" fill="#f0c040" font-family="sans-serif" font-weight="900" font-size="12" text-anchor="middle">COIN</text>
+
+    <!-- === DECOR === -->
+    <!-- Skateboard leaning on wall right -->
+    <rect x="960" y="290" width="8" height="55" rx="4" fill="#4a3a2a" transform="rotate(-8 964 318)"/>
+    <circle cx="964" cy="295" r="3" fill="#555" opacity=".4"/><circle cx="964" cy="340" r="3" fill="#555" opacity=".4"/>
+    <!-- Second skateboard -->
+    <rect x="945" y="295" width="8" height="50" rx="4" fill="#e04040" transform="rotate(5 949 320)" opacity=".6"/>
+    <!-- Floor skateboard -->
+    <rect x="470" y="500" width="45" height="7" rx="3.5" fill="#f0c040" filter="url(#sh)"/><circle cx="480" cy="509" r="3" fill="#444"/><circle cx="505" cy="509" r="3" fill="#444"/>
+
+    <!-- === CHARACTERS === -->
+    <g id="crewCharacters"></g>
+    </svg>
+  </div>
+
+  <!-- YouTube overlay — TV screen at x=175 y=65 w=350 h=220 in viewBox 1200x600 -->
+  <!-- As %: left=14.58% top=10.83% width=29.17% height=36.67% -->
   <div class="yt-overlay"><div id="ytPlayer"></div></div>
 
-  <!-- === INTERACTIVE HOTSPOTS mapped to image elements === -->
+  <!-- Hotspot: Mural → Bonde page -->
+  <div class="room-hotspot hs-mural" onclick="showPage('community')"><div class="hotspot-tooltip">📋 COMUNIDADE<br><span>Feedback e Sugestões</span></div></div>
+  <!-- Hotspot: Snack -->
+  <div class="room-hotspot hs-snack" onclick="snackInteraction()"><div class="hotspot-tooltip">🍫 SNACK<br><span>Pega um lanche</span></div></div>
+  <!-- Hotspot: Arcade → Skate Builder -->
+  <div class="room-hotspot hs-arcade" onclick="showPage('skatebuilder')"><div class="hotspot-tooltip">🕹️ ARCADE<br><span>Skate Builder</span></div></div>
+  <!-- Hotspot: Sofa -->
+  <div class="room-hotspot hs-sofa"><div class="hotspot-tooltip">🛋️ SOFÁ DO BONDE</div></div>
 
-  <!-- TV top icons (share/link) -->
-  <div class="room-hotspot hs-tvicons" title="Compartilhar">
-    <div class="hotspot-tooltip">📡 SKATE CHANNEL<br><span>Live Stream Feed</span></div>
-  </div>
-
-  <!-- CHAT LOG area below TV -->
-  <div class="room-hotspot hs-chatlog" onclick="document.getElementById('chatInput').focus()" title="Chat">
-    <div class="hotspot-tooltip">💬 CHAT LOG<br><span>Clique para digitar</span></div>
-  </div>
-
-  <!-- TV bottom buttons (playlist controls) -->
-  <div class="room-hotspot hs-tvbtns" title="Controles">
-    <div class="hotspot-tooltip">🎵 PLAYLIST<br><span>Controles do vídeo</span></div>
-  </div>
-
-  <!-- COMUNIDADE board -->
-  <div class="room-hotspot hs-mural" onclick="showPage('community')" title="Comunidade">
-    <div class="hotspot-tooltip">📋 COMUNIDADE<br><span>Feedback e Sugestões</span></div>
-  </div>
-
-  <!-- SHOP NOW -->
-  <div class="room-hotspot hs-shop" onclick="showPage('skatebuilder')" title="Shop">
-    <div class="hotspot-tooltip">🛹 SHOP NOW<br><span>Monte seu shape</span></div>
-  </div>
-
-  <!-- Add Link Block (left wall) -->
-  <div class="room-hotspot hs-addlink" onclick="promptAddLink()" title="Adicionar Link">
-    <div class="hotspot-tooltip">🔗 ADD LINK<br><span>Sugira um vídeo</span></div>
-  </div>
-
-  <!-- MEMBERSHIP FORM -->
-  <div class="room-hotspot hs-membership" onclick="showPage('about')" title="Sobre">
-    <div class="hotspot-tooltip">📝 MEMBERSHIP<br><span>Sobre o projeto</span></div>
-  </div>
-
-  <!-- COIN machine -->
-  <div class="room-hotspot hs-coin" onclick="coinInteraction()" title="Coin">
-    <div class="hotspot-tooltip">🪙 COIN<br><span>Jogue uma moeda</span></div>
-  </div>
-
-  <!-- ARCADE -->
-  <div class="room-hotspot hs-arcade" onclick="showPage('skatebuilder')" title="Arcade">
-    <div class="hotspot-tooltip">🕹️ ARCADE<br><span>Skate Builder</span></div>
-  </div>
-
-  <!-- SOFA -->
-  <div class="room-hotspot hs-sofa" title="Sofá">
-    <div class="hotspot-tooltip">🛋️ SOFÁ DO BONDE<br><span>Assista junto</span></div>
-  </div>
-
-  <!-- Graffiti wall -->
-  <div class="room-hotspot hs-graffiti" onclick="copyRoomCode()" title="Copiar código">
-    <div class="hotspot-tooltip">🎨 GUETO PESTANA<br><span>Copiar código da sala</span></div>
-  </div>
-
-  <!-- Characters container -->
-  <div id="charContainer"></div>
-
-  <!-- Room name overlay -->
-  <div class="room-name-overlay" id="roomNameOverlay"></div>
-
-  <!-- HUD Top -->
+  <!-- Top bar -->
   <div class="room-topbar">
     <span class="room-neon">🛹 BONDE ROOM</span>
     <span class="room-code-badge" id="roomCode">—</span>
     <span class="user-count"><span id="userCount">0</span> na sala</span>
-    <div class="room-topbar-actions">
-      <button class="room-action-btn" onclick="copyRoomCode()">📋</button>
-      <button class="room-action-btn" onclick="toggleFullscreen()">⛶</button>
-    </div>
+    <div class="room-topbar-actions"><button class="room-action-btn" onclick="copyRoomCode()">📋</button><button class="room-action-btn" onclick="toggleFullscreen()">⛶</button></div>
     <span class="room-code-share">SALA: <span id="barRoomCode">—</span></span>
   </div>
 

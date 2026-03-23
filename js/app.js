@@ -317,28 +317,28 @@ updateUserList=function(users){
   container.querySelectorAll('.char-spot').forEach(el=>{
     if(!users.find(u=>u.id===el.dataset.uid))el.remove();
   });
-  // Seats measured from image 1377x768
+  // Seats — SVG viewBox 1200x600, as % of room-main
   const SEATS=[
-    // Sofa (left ~3-24%, top ~55%)
-    {left:'4%',top:'52%',w:26,h:36},
-    {left:'9%',top:'52%',w:26,h:36},
-    {left:'14%',top:'52%',w:26,h:36},
-    {left:'19%',top:'52%',w:26,h:36},
-    {left:'24%',top:'52%',w:26,h:36},
-    // Near TV controls
-    {left:'32%',top:'58%',w:22,h:30},
+    // Sofa: x=120-400, y=390 → left 10-33%, top 65%
+    {left:'10%',top:'62%',w:28,h:38},
+    {left:'14%',top:'62%',w:28,h:38},
+    {left:'18%',top:'62%',w:28,h:38},
+    {left:'22%',top:'62%',w:28,h:38},
+    {left:'26%',top:'62%',w:28,h:38},
+    // Red chair: x=440, y=405 → left 37%, top 67%
+    {left:'36%',top:'65%',w:24,h:34},
     // Near mural
-    {left:'55%',top:'72%',w:22,h:30},
-    {left:'62%',top:'70%',w:22,h:30},
-    // Near arcade/coin
-    {left:'76%',top:'65%',w:20,h:28},
-    {left:'82%',top:'68%',w:20,h:28},
+    {left:'50%',top:'72%',w:24,h:34},
+    {left:'56%',top:'70%',w:24,h:34},
+    // Near arcade
+    {left:'82%',top:'62%',w:22,h:30},
+    {left:'86%',top:'65%',w:22,h:30},
     // Floor
-    {left:'28%',top:'72%',w:20,h:28},
-    {left:'42%',top:'75%',w:20,h:28},
-    {left:'68%',top:'74%',w:20,h:28},
-    {left:'72%',top:'76%',w:20,h:28},
-    {left:'88%',top:'60%',w:18,h:26},
+    {left:'30%',top:'75%',w:22,h:30},
+    {left:'44%',top:'78%',w:22,h:30},
+    {left:'64%',top:'76%',w:22,h:30},
+    {left:'70%',top:'78%',w:22,h:30},
+    {left:'90%',top:'58%',w:20,h:28},
   ];
   function sIdx(uid,i){let h=0;for(let c=0;c<uid.length;c++)h=((h<<5)-h)+uid.charCodeAt(c);return Math.abs(h+i)%SEATS.length}
   users.forEach((u,i)=>{
