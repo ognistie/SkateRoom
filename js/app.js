@@ -140,22 +140,38 @@ function loadSocketIO(){
 // ============ USER LIST (SVG room) ============
 function updateUserList(users){
   const g=document.getElementById('crewCharacters');if(!g)return;
-  const SOFA=[
-    {x:120,y:388},{x:165,y:388},{x:210,y:388},{x:255,y:388},{x:300,y:388},
-    {x:140,y:388},{x:185,y:388},{x:230,y:388},{x:275,y:388},{x:320,y:388}
+  // Multiple seating spots around the room
+  const SEATS=[
+    // Sofa (left side)
+    {x:110,y:418},{x:155,y:418},{x:200,y:418},{x:245,y:418},{x:290,y:418},
+    // Red chair near TV
+    {x:375,y:425},
+    // Near mural / center
+    {x:580,y:435},{x:640,y:430},
+    // Near arcade (right)
+    {x:870,y:405},{x:920,y:415},
+    // Floor (sitting on ground)
+    {x:180,y:450},{x:350,y:455},{x:500,y:445},{x:750,y:448},
+    // Standing near snack machine
+    {x:945,y:385},
   ];
+  // Assign seats randomly but consistently per user ID
+  function seatForUser(uid,idx){
+    let hash=0;for(let i=0;i<uid.length;i++)hash=((hash<<5)-hash)+uid.charCodeAt(i);
+    return SEATS[Math.abs(hash+idx)%SEATS.length];
+  }
   const existing=new Set();
   g.querySelectorAll('[data-uid]').forEach(el=>existing.add(el.getAttribute('data-uid')));
   g.querySelectorAll('[data-uid]').forEach(el=>{if(!users.find(u=>u.id===el.getAttribute('data-uid')))el.remove()});
   users.forEach((u,i)=>{
     if(existing.has(u.id)){
       const el=g.querySelector('[data-uid="'+u.id+'"]');
-      if(el){const pos=SOFA[i%SOFA.length];el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale(1.4)')}
+      if(el){const pos=seatForUser(u.id,i);el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale(1.4)')}
     }
   });
   const newUsers=users.filter(u=>!existing.has(u.id));
   newUsers.forEach(u=>{
-    const idx=users.indexOf(u);const pos=SOFA[idx%SOFA.length];
+    const idx=users.indexOf(u);const pos=seatForUser(u.id,idx);
     const ch=CHARACTERS.find(c=>c.id===u.character)||CHARACTERS[0];
     walkToSofa(g,u,ch,pos);
   });
