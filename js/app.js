@@ -140,22 +140,21 @@ function loadSocketIO(){
 // ============ USER LIST (SVG room) ============
 function updateUserList(users){
   const g=document.getElementById('crewCharacters');if(!g)return;
-  // Multiple seating spots around the room
+  // Seating positions: sofa cushions, red chairs, floor near table
   const SEATS=[
-    // Sofa (left side)
-    {x:110,y:418},{x:155,y:418},{x:200,y:418},{x:245,y:418},{x:290,y:418},
-    // Red chair near TV
-    {x:375,y:425},
-    // Near mural / center
-    {x:580,y:435},{x:640,y:430},
-    // Near arcade (right)
-    {x:870,y:405},{x:920,y:415},
-    // Floor (sitting on ground)
-    {x:180,y:450},{x:350,y:455},{x:500,y:445},{x:750,y:448},
-    // Standing near snack machine
-    {x:945,y:385},
+    // Sofa cushion seats (left side — on the cushions, not below)
+    {x:100,y:390,s:1.0},{x:140,y:390,s:1.0},{x:180,y:390,s:1.0},{x:220,y:390,s:1.0},{x:260,y:390,s:1.0},
+    // Red chair near center
+    {x:365,y:395,s:0.9},
+    // Near mural right side
+    {x:600,y:410,s:0.9},{x:660,y:405,s:0.9},
+    // Near arcade
+    {x:870,y:390,s:0.85},{x:920,y:395,s:0.85},
+    // Floor sitting
+    {x:300,y:430,s:0.8},{x:450,y:435,s:0.8},{x:550,y:430,s:0.8},{x:750,y:425,s:0.8},
+    // Near snack machine
+    {x:940,y:370,s:0.85},
   ];
-  // Assign seats randomly but consistently per user ID
   function seatForUser(uid,idx){
     let hash=0;for(let i=0;i<uid.length;i++)hash=((hash<<5)-hash)+uid.charCodeAt(i);
     return SEATS[Math.abs(hash+idx)%SEATS.length];
@@ -166,7 +165,7 @@ function updateUserList(users){
   users.forEach((u,i)=>{
     if(existing.has(u.id)){
       const el=g.querySelector('[data-uid="'+u.id+'"]');
-      if(el){const pos=seatForUser(u.id,i);el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale(1.4)')}
+      if(el){const pos=seatForUser(u.id,i);el.setAttribute('transform','translate('+pos.x+','+pos.y+') scale('+(pos.s||1)+')')}
     }
   });
   const newUsers=users.filter(u=>!existing.has(u.id));
@@ -181,8 +180,9 @@ function updateUserList(users){
 function walkToSofa(container,user,char,target){
   const el=document.createElementNS('http://www.w3.org/2000/svg','g');
   el.setAttribute('data-uid',user.id);
+  const sc=target.s||1;
   const startX=500,startY=480;let curX=startX,curY=startY,frame=0;
-  el.setAttribute('transform','translate('+curX+','+curY+') scale(1.4)');
+  el.setAttribute('transform','translate('+curX+','+curY+') scale('+sc+')');
   const w0=(char.walkFrames&&char.walkFrames[0]||char.svg).replace(/<\/?svg[^>]*>/g,'');
   const w1=(char.walkFrames&&char.walkFrames[1]||char.danceSvg||char.svg).replace(/<\/?svg[^>]*>/g,'');
   const sit=(char.svg).replace(/<\/?svg[^>]*>/g,'');
@@ -197,11 +197,11 @@ function walkToSofa(container,user,char,target){
     step++;const t=Math.min(step/30,1);
     const ease=t<0.5?2*t*t:(1-Math.pow(-2*t+2,2)/2);
     curX=startX+dx*ease;curY=startY+dy*ease;
-    el.setAttribute('transform','translate('+curX.toFixed(0)+','+curY.toFixed(0)+') scale(1.4)');
+    el.setAttribute('transform','translate('+curX.toFixed(0)+','+curY.toFixed(0)+') scale('+sc+')');
     frame++;const label=el.querySelector('text');
     el.innerHTML=frame%8<4?w0:w1;el.appendChild(label);
     if(t<1)requestAnimationFrame(animate);
-    else{el.innerHTML=sit;el.appendChild(label);el.setAttribute('transform','translate('+target.x+','+target.y+') scale(1.4)')}
+    else{el.innerHTML=sit;el.appendChild(label);el.setAttribute('transform','translate('+target.x+','+target.y+') scale('+sc+')')}
   }
   requestAnimationFrame(animate);
 }
