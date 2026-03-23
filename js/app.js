@@ -140,7 +140,10 @@ function loadSocketIO(){
 // ============ USER LIST (SVG room) ============
 function updateUserList(users){
   const g=document.getElementById('crewCharacters');if(!g)return;
-  const SOFA=[{x:255,y:310},{x:310,y:310},{x:365,y:310},{x:420,y:310},{x:475,y:310},{x:530,y:310},{x:585,y:310},{x:640,y:310},{x:695,y:310},{x:745,y:310}];
+  const SOFA=[
+    {x:150,y:365},{x:190,y:365},{x:230,y:365},{x:270,y:365},{x:310,y:365},
+    {x:170,y:365},{x:210,y:365},{x:250,y:365},{x:290,y:365},{x:330,y:365}
+  ];
   const existing=new Set();
   g.querySelectorAll('[data-uid]').forEach(el=>existing.add(el.getAttribute('data-uid')));
   g.querySelectorAll('[data-uid]').forEach(el=>{if(!users.find(u=>u.id===el.getAttribute('data-uid')))el.remove()});
