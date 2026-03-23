@@ -329,21 +329,27 @@ updateUserList=function(users){
     if(!users.find(u=>u.id===el.dataset.uid))el.remove();
   });
   const SEATS=[
-    {left:'7%',top:'74%',w:30,h:42},
-    {left:'11%',top:'74%',w:30,h:42},
-    {left:'15%',top:'74%',w:30,h:42},
-    {left:'19%',top:'74%',w:30,h:42},
-    {left:'23%',top:'74%',w:30,h:42},
-    {left:'30%',top:'73%',w:26,h:36},
-    {left:'52%',top:'78%',w:26,h:36},
-    {left:'58%',top:'76%',w:26,h:36},
-    {left:'78%',top:'72%',w:24,h:34},
-    {left:'84%',top:'74%',w:24,h:34},
-    {left:'26%',top:'82%',w:22,h:30},
-    {left:'42%',top:'84%',w:22,h:30},
-    {left:'66%',top:'80%',w:22,h:30},
-    {left:'72%',top:'82%',w:22,h:30},
+    // Sofa (5 spots) — measured: left 5.4-27.8%, top 75.3%
+    {left:'6%',top:'72%',w:28,h:38},
+    {left:'11%',top:'72%',w:28,h:38},
+    {left:'16%',top:'72%',w:28,h:38},
+    {left:'21%',top:'72%',w:28,h:38},
+    {left:'26%',top:'72%',w:28,h:38},
+    // Red chair — measured: left 35.2%, top 73.6%
+    {left:'35%',top:'71%',w:24,h:34},
+    // Near mural area
+    {left:'55%',top:'78%',w:24,h:34},
+    {left:'62%',top:'76%',w:24,h:34},
+    // Near arcade — measured: left ~88-93%, top ~60-70%
+    {left:'86%',top:'65%',w:22,h:30},
     {left:'90%',top:'68%',w:22,h:30},
+    // Floor sitting
+    {left:'30%',top:'82%',w:20,h:28},
+    {left:'45%',top:'85%',w:20,h:28},
+    {left:'68%',top:'82%',w:20,h:28},
+    {left:'75%',top:'84%',w:20,h:28},
+    // Near snack
+    {left:'91%',top:'58%',w:20,h:28},
   ];
   function sIdx(uid,i){let h=0;for(let c=0;c<uid.length;c++)h=((h<<5)-h)+uid.charCodeAt(c);return Math.abs(h+i)%SEATS.length}
   users.forEach((u,i)=>{
