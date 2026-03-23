@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SkateRoom</title>
+<title>SkateRoom — Bonde Room</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛹</text></svg>">
 </head>
@@ -18,13 +18,13 @@
 <div class="hero-content">
 <div class="hero-badge">EST. 2026 · GUETO PESTANA</div>
 <h1 class="hero-title">SKATE<span class="hero-title-alt">ROOM</span></h1>
-<div class="hero-tagline"></div>
+<div class="hero-tagline">BONDE ROOM</div>
 <p class="hero-desc">Reúna o bonde, entre na sala e assistam juntos.<br>Como nos anos 90 — som alto, amigos por perto, rimas no ar.</p>
-<div class="hero-buttons"><a class="btn-cta btn-cta--outline" onclick="showPage('about')">SOBRE</a></div>
+<div class="hero-buttons"><a class="btn-cta" onclick="showPage('listen')">🎧 ENTRAR NA SALA</a><a class="btn-cta btn-cta--outline" onclick="showPage('about')">SOBRE</a></div>
 <div class="hero-icons"><span>🛹</span><span>🎤</span><span>🎧</span><span>📼</span><span>🔊</span></div>
 </div></section>
 <section class="features"><h2 class="section-title">🔥 Como Funciona</h2><div class="features-grid">
-<div class="feature-card"><div class="icon">🎭</div><h3>Escolha seu Player</h3><p>20+ personagens pixel art — skatistas, rappers, b-boys, graffiteiros.</p></div>
+<div class="feature-card"><div class="icon">🎭</div><h3>Escolha seu Player</h3><p>12 personagens pixel art — skatistas, rappers, b-boys, graffiteiros.</p></div>
 <div class="feature-card"><div class="icon">🚪</div><h3>Entre na Sala</h3><p>Crie uma sala ou entre com o código do amigo.</p></div>
 <div class="feature-card"><div class="icon">📺</div><h3>Assistam Juntos</h3><p>Vídeos de skate passando na TV — sincronizados.</p></div>
 <div class="feature-card"><div class="icon">💬</div><h3>Chat do Bonde</h3><p>Conversa em tempo real enquanto curtem.</p></div>
@@ -40,7 +40,7 @@
     <!-- Concrete floor --><rect y="120" width="600" height="80" fill="url(#jFlr)"/>
     <!-- Graffiti wall --><rect width="600" height="120" fill="#1e1812"/>
     <text x="30" y="60" fill="#CC2936" font-family="'Permanent Marker',cursive" font-size="32" opacity=".08">SKATEROOM</text>
-    <text x="200" y="100" fill="#E8A317" font-family="'Permanent Marker',cursive" font-size="22" opacity=".06">GUETO PESTANA</text>
+    <text x="200" y="100" fill="#E8A317" font-family="'Permanent Marker',cursive" font-size="22" opacity=".06">BONDE ROOM</text>
     <!-- Neon arrow --><g opacity=".15" filter="url(#jgl)"><path d="M280,30 L300,15 L300,22 L340,22 L340,38 L300,38 L300,45Z" fill="#CC2936"/></g>
     <g opacity=".15" filter="url(#jgl)"><path d="M280,30 L300,15 L300,22 L340,22 L340,38 L300,38 L300,45Z" fill="#FF2E2E"><animate attributeName="opacity" values=".05;.2;.05" dur="1.5s" repeatCount="indefinite"/></path></g>
     <!-- Skaters --><g transform="translate(50,70) scale(1.5)"><rect x="10" y="3" width="12" height="10" fill="#D4A574"/><rect x="8" y="0" width="16" height="5" fill="#CC2936"/><rect x="12" y="8" width="2" height="2" fill="#111"/><rect x="16" y="8" width="2" height="2" fill="#111"/><rect x="6" y="13" width="20" height="10" fill="#111"/><rect x="8" y="23" width="6" height="8" fill="#2A3A5C"/><rect x="16" y="23" width="6" height="8" fill="#2A3A5C"/></g>
@@ -211,7 +211,7 @@
 <div style="text-align:center;padding-top:1.5rem;margin-bottom:2.5rem">
 <span style="font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--amber);letter-spacing:5px;opacity:.6">01 — SOBRE O PROJETO</span>
 <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);color:var(--neon-red);letter-spacing:4px;margin:.5rem 0">SKATEROOM</h1>
-<p style="font-size:1.15rem;color:#888;line-height:1.8;max-width:650px;margin:0 auto">Plataforma de <strong style="color:var(--cream)">watch party</strong> inspirada pelo filme Mid 90s e pela cultura de skate underground  — onde música, skate e rap underground se encontram numa garagem virtual de Compton.</p>
+<p style="font-size:1.15rem;color:#888;line-height:1.8;max-width:650px;margin:0 auto">Plataforma de <strong style="color:var(--cream)">watch party</strong> inspirada pelo filme Mid 90s e pela cultura de crew — onde música, skate e rap underground se encontram numa garagem virtual de Compton.</p>
 </div>
 
 <!-- WHAT IS IT -->
@@ -231,7 +231,7 @@
 ├── <span style="color:var(--neon-red)">index.html</span> <span style="color:#444">— SPA principal (todas as páginas)</span><br>
 ├── <span style="color:var(--amber)">css/style.css</span> <span style="color:#444">— Estilos, layout, animações, responsivo</span><br>
 ├── <span style="color:var(--neon-red)">js/app.js</span> <span style="color:#444">— Lógica principal, YouTube API, Socket.io client</span><br>
-├── <span style="color:var(--amber)">js/characters.js</span> <span style="color:#444">— 20+ personagens pixel art em SVG</span><br>
+├── <span style="color:var(--amber)">js/characters.js</span> <span style="color:#444">— 12 personagens pixel art em SVG</span><br>
 ├── <span style="color:var(--neon-red)">js/playlist.js</span> <span style="color:#444">— 22 vídeos de skate (YouTube IDs)</span><br>
 ├── <span style="color:var(--amber)">server/index.js</span> <span style="color:#444">— Backend Node.js + Socket.io</span><br>
 ├── <span style="color:var(--neon-red)">server/package.json</span> <span style="color:#444">— Dependências (express, socket.io, cors)</span><br>
@@ -270,14 +270,14 @@
 <img src="img/avatar.jpg" alt="Guilherme" style="width:90px;height:90px;border-radius:50%;border:3px solid var(--blood-red);object-fit:cover">
 <div>
 <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--neon-red);letter-spacing:2px">@ognistie</h3>
-<p style="color:var(--amber);font-size:1rem">Cloud · IA · Automação</p>
+<p style="color:var(--amber);font-size:1rem">Cloud Engineer · DevOps · Automação</p>
 <p style="color:#666;font-size:.9rem;margin-top:.3rem">Estagiário de TI na IT Universe · Estudante de Ciência da Computação</p>
 </div>
 </div>
-<p style="color:#888;font-size:.95rem;line-height:1.7;margin-bottom:1rem">Atuo com plataformas de computação em nuvem <strong style="color:var(--cream)">AWS e Microsoft Azure</strong>, programação em <strong style="color:var(--cream)">Python</strong> e sistemas <strong style="color:var(--cream)">Linux</strong>, com foco em automação, infraestrutura e suporte técnico. 12+ certificações Academicas. Apaixonado por tecnologia e aprendizado contínuo nas áreas de DevOps, Cloud Computing e infraestrutura.</p>
+<p style="color:#888;font-size:.95rem;line-height:1.7;margin-bottom:1rem">Atuo com plataformas de computação em nuvem <strong style="color:var(--cream)">AWS e Microsoft Azure</strong>, programação em <strong style="color:var(--cream)">Python</strong> e sistemas <strong style="color:var(--cream)">Linux</strong>, com foco em automação, infraestrutura e suporte técnico. 12+ certificações. Apaixonado por tecnologia e aprendizado contínuo nas áreas de DevOps, Cloud Computing e infraestrutura.</p>
 
 <!-- Stats --><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.2rem;text-align:center">
-<div style="background:rgba(204,41,54,.06);padding:.8rem;border:1px solid rgba(204,41,54,.15)"><span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--neon-red)">12+</span><br><span style="font-size:.8rem;color:#555">Certificações Academicas</span></div>
+<div style="background:rgba(204,41,54,.06);padding:.8rem;border:1px solid rgba(204,41,54,.15)"><span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--neon-red)">12+</span><br><span style="font-size:.8rem;color:#555">Certificações</span></div>
 <div style="background:rgba(232,163,23,.06);padding:.8rem;border:1px solid rgba(232,163,23,.15)"><span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--amber)">4+</span><br><span style="font-size:.8rem;color:#555">Repositórios</span></div>
 <div style="background:rgba(107,45,139,.06);padding:.8rem;border:1px solid rgba(107,45,139,.15)"><span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--purple)">CC</span><br><span style="font-size:.8rem;color:#555">Ciência da Computação</span></div>
 </div>
@@ -288,13 +288,13 @@
 
 <!-- Certifications --><h4 style="font-family:'Bebas Neue',sans-serif;color:var(--amber);font-size:1rem;letter-spacing:2px;margin-bottom:.6rem">CERTIFICAÇÕES</h4>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:1.2rem">
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔷 AZ-900 — Azure Fundamentals & Senai</div>
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ AWS Cloud Practitioner - AWS Skill Build & Senai</div>
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">⚙ DevOps — Alura x Santander Academy</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔷 AZ-900 — Azure Fundamentals</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ AWS Cloud Practitioner</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">⚙ DevOps Essentials — 4Linux</div>
 <div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🐧 Linux Config — Senai</div>
 <div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🐍 Python 3 Avançado — Udemy</div>
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ IBM Cloud Fundamentals - IBM Skill Build</div>
-<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔄 GitHub Fundamentals - Microsoft Learning</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ IBM Cloud Fundamentals</div>
+<div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">🔄 GitHub Fundamentals</div>
 <div style="background:rgba(255,255,255,.02);padding:.5rem .7rem;border:1px solid var(--grit);font-size:.85rem;color:#888">☁ Cloud Architect — FIAP</div>
 </div>
 
@@ -639,7 +639,7 @@ function renderSkate(){
   }
   // Footer badge
   x.fillStyle='#CC2936';x.font='12px "Bebas Neue",sans-serif';x.textAlign='center';
-  x.fillText('SKATEROOM · GUETO PESTANA · EST. 2026',W/2,H-32);
+  x.fillText('SKATEROOM · BONDE ROOM · EST. 2026',W/2,H-32);
   x.fillStyle='#333';x.font='9px "VT323",monospace';
   x.fillText('skateroom.app · #SkateRoom',W/2,H-16);
 }
